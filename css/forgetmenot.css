@@ -171,7 +171,7 @@ h1 {
 .todoList li .delete {
     float: right;
 }
-.todoList li.createNew {
+.todoList #createNew {
     text-align: center;
     border: 2px solid #92CAE4;
     width: 31%;
@@ -179,7 +179,6 @@ h1 {
     bottom: 30px;
     cursor: pointer;
 }
-
 
 footer {
     position: fixed;
