@@ -179,6 +179,14 @@ h1 {
     bottom: 30px;
     cursor: pointer;
 }
+.ui-mobile .todoList #createNew {
+    text-align: auto;
+    border: auto;
+    width: auto;
+    position: auto;
+    bottom: auto;
+    cursor: auto;
+}
 
 footer {
     position: fixed;
