@@ -73,7 +73,7 @@ $(document).ready(function() {
         el: $("#todoApp"),
         
         events: {
-            //"tap #createNew"          :       "test",
+            //"dblclick"          :       "test",
             "click #createNew"  :       "createNew"
         },
         
