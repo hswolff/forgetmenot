@@ -4,10 +4,10 @@ $(document).ready(function() {
         //Default Attributes
         defaults: {
             content: "new empty todo",
-            parent: 0,
-            folder: false,
-            order: 0,
-            done: false
+            parent: "0",
+            indent: "0",
+            order: "0",
+            complete: false
         },
         
         initialize: function() {
