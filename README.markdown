@@ -32,7 +32,6 @@ Dependencies
 *  Backbone.js
 *  Underscore.js
 *  jQuery
-*  jQuery Mobile
 
 
 Credits
