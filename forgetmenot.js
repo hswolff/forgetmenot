@@ -34,11 +34,11 @@ $(document).ready(function() {
         events: {
             "click"                 :       "edit",
             "click div.save"        :       "save",
-            "click div.delete"      :       "delete"
+            "click div.delete"      :       "deleteTodo"
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'delete');
+            _.bindAll(this, 'render', 'edit', 'deleteTodo');
             this.render();
         },
         
@@ -61,7 +61,7 @@ $(document).ready(function() {
             this.$("span").text(newVal);
         },
         
-        delete: function() {
+        deleteTodo: function() {
             this.model.destroy();
             this.remove();
         }
