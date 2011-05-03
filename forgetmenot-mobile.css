@@ -22,3 +22,11 @@ h1 {
     height: 20px;
     cursor: pointer;
 }
+
+.todoList li .save,
+.todoList li .delete {
+    width: 30%;
+    text-align: center;
+    cursor: pointer;
+    display:none;
+}
