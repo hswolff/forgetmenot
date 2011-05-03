@@ -1,3 +1,14 @@
 h1 {
     color: red;
 }
+
+.container {
+    background: #fff;
+    margin: 0 6%;
+    padding: 10px;
+    position: relative;
+    min-height: 100%;
+    border: 1px solid #B8DCFF;
+    border-top: none;
+    border-bottom: none;
+}
