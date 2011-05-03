@@ -12,3 +12,13 @@ h1 {
     border-top: none;
     border-bottom: none;
 }
+
+.todoList li.createNew {
+    text-align: center;
+    border: 2px solid #92CAE4;
+    width: 75%;
+    position: initial;
+    bottom: auto;
+    height: 20px;
+    cursor: pointer;
+}
