@@ -34,11 +34,12 @@ $(document).ready(function() {
         events: {
             "click"                 :       "edit",
             "click div.save"        :       "save",
-            "click div.delete"      :       "deleteTodo"
+            "click div.delete"      :       "deleteTodo",
+            "keypress input"  :       "updateOnEnter"
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'edit', 'deleteTodo');
+            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save');
             this.render();
         },
         
@@ -50,6 +51,8 @@ $(document).ready(function() {
         edit: function() {
             this.$("span").hide();
             this.$("input, div").show();
+            this.$("input").focus();
+            this.$("input").bind('blur', this.save);
             //return false;
         },
         
@@ -64,6 +67,10 @@ $(document).ready(function() {
         deleteTodo: function() {
             this.model.destroy();
             this.remove();
+        },
+        
+        updateOnEnter: function(e) {
+          if (e.keyCode == 13) this.save();
         }
     });
 
