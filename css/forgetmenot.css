@@ -136,6 +136,13 @@ body {
 h1 {
     font-size: 24px;
 }
+header .createNew {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid #92CAE4;
+    cursor: pointer;
+}
 
 .todoList {
     margin: 30px 0;
@@ -167,9 +174,10 @@ h1 {
     position: absolute;
     display: none;
     width: 32px; height: 32px;
-    right: 20px;
+    right: 36px;
     top: 13px;
     cursor: pointer;
+    //background:#000;
 }
 .todoList li.createNew {
     text-align: center;
