@@ -1,0 +1,32 @@
+h1 {
+    color: red;
+}
+
+.container {
+    background: #fff;
+    margin: 0 6%;
+    padding: 10px;
+    position: relative;
+    min-height: 100%;
+    border: 1px solid #B8DCFF;
+    border-top: none;
+    border-bottom: none;
+}
+
+.todoList li.createNew {
+    text-align: center;
+    border: 2px solid #92CAE4;
+    width: 75%;
+    position: initial;
+    bottom: auto;
+    height: 20px;
+    cursor: pointer;
+}
+
+.todoList li .save,
+.todoList li .delete {
+    width: 30%;
+    text-align: center;
+    cursor: pointer;
+    display:none;
+}
