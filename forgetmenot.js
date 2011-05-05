@@ -42,6 +42,8 @@ $(document).ready(function() {
             _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
             this.el.id += this.model.get("id");
             this.render();
+            // Give reverse access to a model's view by setting its 'this' to a new attribute on the model
+            this.model.view = this;
         },
         
         render: function() {
