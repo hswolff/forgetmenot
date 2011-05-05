@@ -142,34 +142,34 @@ h1 {
     list-style: none;
 }
 .todoList li {
-    padding: 5px;
-    width: 95%;
+    padding: 10px;
+    width: 90%;
     margin: 0 auto;
     clear: both;
     border-top: 1px solid #CCC;
+    position: relative;
 }
 .todoList li input {
-    padding: 6px;
-    display: none;
-    width: 96%;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    width: 92%;
+}
+.todoList li input:hover {
+    background: url(../images/edit32.png) no-repeat 100% 0;
 }
 .todoList li input:focus {
     outline: 0 none;
     border-color:#666;
+    background: url(../images/delete32.png) no-repeat 100% 0;
 }
-.todoList li .save,
 .todoList li .delete {
-    width: 40%;
-    text-align: center;
+    position: absolute;
+    display: none;
+    width: 32px; height: 32px;
+    right: 20px;
+    top: 13px;
     cursor: pointer;
-    display:none;
-}
-.todoList li .save { 
-    float: left;
-    margin: 0 10px 0 0;
-}
-.todoList li .delete {
-    float: right;
 }
 .todoList li.createNew {
     text-align: center;

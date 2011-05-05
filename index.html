@@ -24,25 +24,16 @@
 </head>
 <body>
 
-    <div class="container">
-
-    	<h1>Forgetmenot ToDo List</h1>
-    	<span>A ToDo List for the common forgetful-but-not-me-not.</span>
-
-    	<ul class="todoList" id="todoApp">
-			<li id="createNew" class="info todo createNew">Create New ToDo</li>
-    	<!--
-			<li id="todo-1" class="todo">harrys page</li> 
-
-			<li id="todo-2" class="todo">saved</li>
-    		
-    		<li id="todo-3" class="todo current">buy an airplane
-    		    <input type="text" value="Buy an airplane">
-    		    <div class="save success">Save</div>
-    		    <div class="delete error">Delete</div>
-    		</li>
-		-->
-
+    <div class="container" id="todoApp">
+		<header>
+	    	<h1>Forgetmenot ToDo List</h1>
+	    	<span>A ToDo List for the common forgetful-but-not-me-not.</span>
+			<div id="createNew" class="info todo createNew">
+				<img src="images/new.png" value="Create New" />
+			</div>
+		</header>
+    	<ul class="todoList" id="todoItemsList">
+			<!-- #todoApp items go here -->
     	</ul>
 
     	<footer>
@@ -55,10 +46,8 @@
     <!-- Templates -->
 
     <script type="text/template" id="item-template">
-			<span><%= content %></span>
-            <input type="text" value="<%= content %>">
-            <div class="save success">Save</div>
-		    <div class="delete error">Delete</div>
+            <input type="text" value="<%= content %>" disabled="disabled">
+			<div class="delete">&nbsp;</div>
     </script>
 
 

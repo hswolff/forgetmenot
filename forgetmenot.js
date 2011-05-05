@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     window.TodoView = Backbone.View.extend({
         tagName: "li",
-        id: "todo-",
+        id: "todo-" + this.model,
         className: "todo",
         template: _.template($('#item-template').html()),
         
@@ -35,33 +35,31 @@ $(document).ready(function() {
             "click"                 :       "edit",
             "click div.save"        :       "save",
             "click div.delete"      :       "deleteTodo",
-            "keypress input"  :       "updateOnEnter"
+            "keypress input"        :       "updateOnEnter"
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save');
+            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
             this.render();
         },
         
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
+            this.input = this.$("input");
+            this.input.bind('blur', this.save);
             return this;
         },
         
         edit: function() {
-            this.$("span").hide();
-            this.$("input, div").show();
-            this.$("input").focus();
-            this.$("input").bind('blur', this.save);
+            this.$("input").removeAttr("disabled").focus();
+            this.$(".delete").show();
             //return false;
         },
         
         save: function() {
             var newVal = this.$("input").val();
             this.model.save({content: newVal});
-            this.$("span").show();
-            this.$("input, div").hide();
-            this.$("span").text(newVal);
+            this.$("input").attr("disabled", "disabled");
         },
         
         deleteTodo: function() {
@@ -70,7 +68,10 @@ $(document).ready(function() {
         },
         
         updateOnEnter: function(e) {
-          if (e.keyCode == 13) this.save();
+          if (e.keyCode == 13) {
+              this.save();
+              this.input.blur();
+          }
         }
     });
 
@@ -92,13 +93,12 @@ $(document).ready(function() {
         
         createNew: function() {
             var todo = Todos.create();
-            var view = new TodoView({model:todo});
-            $(this.el).append(view.render().el);
+            this.addOne(todo);
         },
         
         addOne: function(todo) {
             var view = new TodoView({model:todo});
-            $(this.el).append(view.render().el);
+            this.$("#todoItemsList").append(view.render().el);
         },
         
         addAll: function() {
