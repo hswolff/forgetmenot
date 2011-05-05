@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     window.TodoView = Backbone.View.extend({
         tagName: "li",
-        id: "todo-" + this.model,
+        id: "todo-",
         className: "todo",
         template: _.template($('#item-template').html()),
         
@@ -40,6 +40,7 @@ $(document).ready(function() {
         
         initialize: function() {
             _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
+            this.el.id += this.model.get("id");
             this.render();
         },
         
