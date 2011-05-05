@@ -10,13 +10,17 @@
     <link rel="stylesheet" href="forgetmenot.css?v=1">
 	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="forgetmenot-mobile.css?v=1">
     
-    <script src="js/json2.js"></script>
-    <script src="js/jquery-1.5.2.min.js"></script>
-    <script src="js/underscore-min.js"></script>
-    <script src="js/backbone.js"></script>
-    <script src="js/backbone-localstorage.js"></script>
-    
-    <script src="forgetmenot.js"></script>
+	<script src="js/head.load.min.js"></script>
+	<script type="text/javascript">
+	head.js(
+		{json2: "js/json2.js"},
+		{jquery152: "js/jquery-1.5.2.min.js"},
+		{underscore: "js/underscore-min.js"},
+		{backbone: "js/backbone.js"},
+		{backbonels: "js/backbone-localstorage.js"},
+		{forgetmenot: "forgetmenot.js"}
+	);
+	</script>
 
 </head>
 <body>
