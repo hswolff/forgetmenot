@@ -96,12 +96,13 @@ $(document).ready(function() {
         
         createNew: function() {
             var todo = Todos.create();
-            this.addOne(todo);
+            this.addOne(todo).edit();
         },
         
         addOne: function(todo) {
             var view = new TodoView({model:todo});
             this.$("#todoItemsList").append(view.render().el);
+            return view;
         },
         
         addAll: function() {
