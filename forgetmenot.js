@@ -49,7 +49,7 @@ $(document).ready(function() {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.input = this.$("input");
-            this.input.bind('focusout', this.save);
+            this.input.bind('blur', this.save);
             return this;
         },
         
