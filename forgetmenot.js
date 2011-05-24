@@ -54,15 +54,14 @@ $(document).ready(function() {
         },
         
         edit: function() {
-            this.$("input").removeAttr("disabled").focus();
+            this.input.removeAttr("disabled").focus();
             this.$(".delete").show();
             //return false;
         },
         
         save: function() {
-            var newVal = this.$("input").val();
-            this.model.save({content: newVal});
-            this.$("input").attr("disabled", "disabled");
+            this.model.save({ content: this.input.val() });
+            this.input.attr("disabled", "disabled");
         },
         
         deleteTodo: function() {
