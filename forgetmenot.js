@@ -35,7 +35,8 @@ $(document).ready(function() {
             "click"                 :       "edit",
             "click div.save"        :       "save",
             "click div.delete"      :       "deleteTodo",
-            "keypress input"        :       "updateOnEnter"
+            "keypress input"        :       "updateOnEnter",
+            "keydown input"        :        "reOrderOnTab"
         },
         
         initialize: function() {
@@ -73,6 +74,16 @@ $(document).ready(function() {
           if (e.keyCode == 13) {
               this.save();
               this.input.blur();
+          }
+        },
+        
+        reOrderOnTab: function(e) {
+          if (e.keyCode == 9) {
+              console.log('tab4');
+              $(this.el).css('left', function(index) {
+                  return index + 50;
+              });
+              e.preventDefault();
           }
         }
     });
