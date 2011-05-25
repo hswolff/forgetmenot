@@ -19,7 +19,15 @@ $(document).ready(function() {
     
     window.TodoList = Backbone.Collection.extend({
         model: Todo,
-        localStorage: new Store("forgetmenot")
+        localStorage: new Store("forgetmenot"),
+        
+        nextOrder: function() {
+            if (this.length === 0) {
+                return 1;
+            } else {
+                return this.last().get('order') + 1;
+            }
+        }
     });
     
     window.Todos = new TodoList;
@@ -36,14 +44,15 @@ $(document).ready(function() {
             "click div.save"        :       "save",
             "click div.delete"      :       "deleteTodo",
             "keypress input"        :       "updateOnEnter",
-            "keydown input"        :        "reOrderOnTab"
+            "keydown input"         :       "reOrderOnTab"
         },
         
         initialize: function() {
             _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
             this.el.id += this.model.get("id");
             this.render();
-            // Give reverse access to a model's view by setting its 'this' to a new attribute on the model
+            // Give reverse access to a model's view by setting its 'this' 
+            // to a new attribute on the model
             this.model.view = this;
         },
         
@@ -105,7 +114,9 @@ $(document).ready(function() {
         },
         
         createNew: function() {
-            var todo = Todos.create();
+            var todo = Todos.create({
+                order: Todos.nextOrder()
+            });
             this.addOne(todo).edit();
         },
         
