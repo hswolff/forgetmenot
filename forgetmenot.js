@@ -27,12 +27,17 @@ $(document).ready(function() {
             } else {
                 return this.last().get('order') + 1;
             }
+        },
+        
+        comparator: function(todo) {
+          return todo.get('order');
         }
     });
     
     window.Todos = new TodoList;
 
 
+    // Each Individual Todo Item View
     window.TodoView = Backbone.View.extend({
         tagName: "li",
         id: "todo-",
@@ -110,6 +115,7 @@ $(document).ready(function() {
         initialize: function() {
             _.bindAll(this, 'createNew', 'addOne', 'addAll');
             Todos.bind('refresh', this.addAll);
+            Todos.bind('remove', this.orderOnDelete);
             Todos.fetch();
         },
         
@@ -128,6 +134,16 @@ $(document).ready(function() {
         
         addAll: function() {
             Todos.each(this.addOne);
+        },
+
+        orderOnDelete: function(todo) {
+            var order = 0;
+            _.each(Todos.models, function(todo) {
+                order++;
+                todo.set({ order: order});
+                todo.save();
+            });
+            Todos.refresh();
         },
         
         test: function() {
