@@ -17,7 +17,7 @@
 		{underscore: "js/underscore-min.js"},
 		{backbone: "js/backbone.js"},
 		{backbonels: "js/backbone-localstorage.js"},
-		{forgetmenot: "forgetmenot.js"}
+		{forgetmenot: "forgetmenot.js?v=0.1111"}
 	);
 	</script>
 
@@ -53,18 +53,12 @@
 					<div class="content">dummy todo item</div>
 				</div>
 				<div class="edit">
-					<input type="checkbox" class="check">
 		            <input type="text" value="dummy todo item">
 					<div class="delete">&nbsp;</div>
 				</div>
 			 </li>
-			<br/>
 			
-			<li id="todo-41eccf00-0c2f-e40c-4fcb-6ae7f5c228df" class="todo">
-				<input type="checkbox" class="check">
-	            <input type="text" value="old todo list html" disabled="disabled">
-				<div class="delete">&nbsp;</div>
-			 </li>
+
     	</ul>
 
     	<footer>
@@ -76,10 +70,14 @@
 
     <!-- Templates -->
 
-    <script type="text/template" id="item-template"><%= order %>
-			<input type="checkbox" class="check" <%= done ? 'checked="checked"' : '' %> />
-            <input type="text" value="<%= content %>" disabled="disabled">
-			<div class="delete">&nbsp;</div>
+    <script type="text/template" id="item-template">
+		<div class="display">
+			<input type="checkbox" class="done" <%= done ? 'checked="checked"' : '' %>>
+			<div class="content"><%= content %></div>
+		</div>
+		<div class="edit">
+	        <input type="text" value="<%= content %>">
+		</div>
     </script>
 
 
