@@ -138,6 +138,7 @@ body {
 header h1 {
     font-size: 28px;
     text-align: center;
+    font-style: italic;
 }
 header .createNew {
     width: 100%;
@@ -159,18 +160,46 @@ nav {
         display:none;
     }
     nav h2 {
-        font-size: 18px;
+        font-size: 20px;
         margin: 4px;
     }
     nav ul {
-        
+        font-size: 16px;
     }
         nav ul li {
-            
+            padding: 10px 0;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        nav ul li.active {
+            color: #000;
+            font-weight: bold;
+        }
+        nav ul li:hover,
+        nav ul li:hover a,
+        nav ul li:hover a:visited {
+            color: #000;
+            font-weight: bold;
+        }
+        nav ul li:hover a,
+        nav ul li:hover a:visited {
+            text-decoration: underline;
         }
         nav ul li:before {
-            content: '>> ';
+            content: '\00bb  ';
         }
+            nav ul li a,
+            nav ul li a:visited {
+                text-decoration: none;
+                color: #282828;
+            }
+            nav ul li.active a,
+            nav ul li.active a:visited {
+                text-decoration: none;
+                color: #000;
+            }
+            
+
 nav.hide {
     width: 20px;
     left: -21px;
