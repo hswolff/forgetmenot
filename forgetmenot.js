@@ -7,7 +7,7 @@ $(document).ready(function() {
             parent: "0",
             indent: "0",
             order: "0",
-            complete: false
+            done: false
         },
         
         initialize: function() {
