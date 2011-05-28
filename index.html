@@ -34,7 +34,7 @@
 		<nav class="">
 			<div class="full">
 				<h2>lists &#x2192;</h2>
-				<ul id="fmnLists">
+				<ul id="fmn-lists">
 					<li class="active"><a href="">today</a></li>
 					<li><a href="">soon</a></li>
 					<li><a href="">later</a></li>
@@ -44,8 +44,27 @@
 				<h2><a href="">l<br/>i<br/>s<br/>t<br/>s</a></h2>
 			</div>
 		</nav>
-    	<ul class="todoList" id="todoItemsList">
+		
+    	<ul class="todoList fmn-todos" id="todoItemsList">
 			<!-- #todoApp items go here -->
+			<li id="blah" class="todo">
+				<div class="display">
+					<input type="checkbox" class="done">
+					<div class="content">dummy todo item</div>
+				</div>
+				<div class="edit">
+					<input type="checkbox" class="check">
+		            <input type="text" value="dummy todo item">
+					<div class="delete">&nbsp;</div>
+				</div>
+			 </li>
+			<br/>
+			
+			<li id="todo-41eccf00-0c2f-e40c-4fcb-6ae7f5c228df" class="todo">
+				<input type="checkbox" class="check">
+	            <input type="text" value="old todo list html" disabled="disabled">
+				<div class="delete">&nbsp;</div>
+			 </li>
     	</ul>
 
     	<footer>

@@ -88,29 +88,11 @@ a:hover { color: #036; }
 
 
 /* forms.css from blueprint */
-label {font-weight:bold;}
-fieldset {padding:0 1.4em 1.4em 1.4em;margin:0 0 1.5em 0;border:1px solid #ccc;}
-legend {font-weight:bold;font-size:1.2em;margin-top:-0.2em;margin-bottom:1em;}
-fieldset, #IE8#HACK {padding-top:1.4em;}
-legend, #IE8#HACK {margin-top:0;margin-bottom:0;}
 input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
 input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus {border-color:#666;}
 select {background-color:#fff;border-width:1px;border-style:solid;}
 input[type=text], input[type=password], input.text, input.title, textarea, select {margin:0.5em 0;}
-input.text, input.title {width:300px;padding:5px;}
-input.title {font-size:1.5em;}
-textarea {width:390px;height:250px;padding:5px;}
-form.inline {line-height:3;}
-form.inline p {margin-bottom:0;}
-.error, .alert, .notice, .success, .info {padding:0.8em;margin-bottom:1em;border:2px solid #ddd;}
-.error, .alert {background:#fbe3e4;color:#8a1f11;border-color:#fbc2c4;}
-.notice {background:#fff6bf;color:#514721;border-color:#ffd324;}
-.success {background:#e6efc2;color:#264409;border-color:#c6d880;}
-.info {background:#d5edf8;color:#205791;border-color:#92cae4;}
-.error a, .alert a {color:#8a1f11;}
-.notice a {color:#514721;}
-.success a {color:#264409;}
-.info a {color:#205791;}
+
 
 
 
@@ -198,7 +180,6 @@ nav {
                 text-decoration: none;
                 color: #000;
             }
-            
 
 nav.hide {
     width: 20px;
@@ -212,6 +193,46 @@ nav.hide {
     }
 
 
+ul.fmn-todos {
+    list-style: none;
+    margin: 30px auto 0;
+    width: 500px;
+}
+.fmn-todos .todo {
+    font-size: 22px;
+
+}
+    .fmn-todos .todo .display {
+        border-bottom: 1px solid #B3B3B3;
+        padding: 0 0 10px 0;
+    }
+        .fmn-todos .todo .display .done {
+            float: left;
+            margin: 7px 20px 0 0;
+        }
+        .fmn-todos .todo .display .content {
+            
+        }
+
+    .fmn-todos .todo .edit {
+        display: none;
+        visibility: hidden;
+    }
+    
+.fmn-todos .todo.editing {
+    
+}
+    .fmn-todos .todo.editing .display {
+        display: none;
+        visibility: hidden;
+    }
+    .fmn-todos .todo.editing .edit {
+        display: block;
+        visibility: visible;
+    }
+
+
+/**
 .todoList {
     margin: 30px 0;
     list-style: none;
@@ -255,6 +276,7 @@ nav.hide {
     bottom: 30px;
     cursor: pointer;
 }
+**/
 
 
 footer {
