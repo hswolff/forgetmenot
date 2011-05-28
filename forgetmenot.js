@@ -45,10 +45,10 @@ $(document).ready(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "click"                 :       "edit",
+            "dblclick .display .content"       :       "edit",
+            "keypress .edit input"              :       "updateOnEnter",
             "click div.save"        :       "save",
             "click div.delete"      :       "deleteTodo",
-            "keypress input"        :       "updateOnEnter",
             "keydown input"         :       "reOrderOnTab"
         },
         
@@ -64,13 +64,13 @@ $(document).ready(function() {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.input = this.$("input");
-            this.input.bind('blur', this.save);
+            //this.input.bind('blur', this.save);
             return this;
         },
         
         edit: function() {
-            this.input.removeAttr("disabled").focus();
-            this.$(".delete").show();
+            $(this.el).addClass("editing");
+            this.input.focus();
             //return false;
         },
         
