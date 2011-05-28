@@ -45,7 +45,8 @@
 
     <!-- Templates -->
 
-    <script type="text/template" id="item-template">
+    <script type="text/template" id="item-template"><%= order %>
+			<input type="checkbox" class="check" <%= done ? 'checked="checked"' : '' %> />
             <input type="text" value="<%= content %>" disabled="disabled">
 			<div class="delete">&nbsp;</div>
     </script>
