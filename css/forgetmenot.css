@@ -119,22 +119,25 @@ html, body {
 }
 
 body {
-    background-color:#def;
+    background-color:#282828;
+    font-family: 'Times New Roman';
 }
 
 .container {
-    background: #fff;
-    margin: 0 33%;
+    background: #DCDCDC;
+    width: 500px;
+    margin: 0 auto;
     padding: 10px;
     position: relative;
     min-height: 100%;
-    border: 1px solid #B8DCFF;
+    border: 1px solid #505050;
     border-top: none;
     border-bottom: none;
 }
 
-h1 {
-    font-size: 24px;
+header h1 {
+    font-size: 28px;
+    text-align: center;
 }
 header .createNew {
     width: 100%;
@@ -143,6 +146,42 @@ header .createNew {
     border: 1px solid #92CAE4;
     cursor: pointer;
 }
+
+nav {
+    position: absolute;
+    left: -161px;
+    width: 160px;
+    background: #DCDCDC;
+    border: 1px solid #505050;
+    border-right: none;
+}
+    nav .compact {
+        display:none;
+    }
+    nav h2 {
+        font-size: 18px;
+        margin: 4px;
+    }
+    nav ul {
+        
+    }
+        nav ul li {
+            
+        }
+        nav ul li:before {
+            content: '>> ';
+        }
+nav.hide {
+    width: 20px;
+    left: -21px;
+}
+    nav.hide .full {
+        display: none;
+    }
+    nav.hide .compact {
+        display: block;
+    }
+
 
 .todoList {
     margin: 30px 0;
