@@ -200,7 +200,7 @@ ul.fmn-todos {
 }
 .fmn-todos .todo {
     font-size: 22px;
-
+    margin: 15px 0 0;
 }
     .fmn-todos .todo .display {
         border-bottom: 1px solid #B3B3B3;
