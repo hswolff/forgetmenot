@@ -76,7 +76,6 @@ $(document).ready(function() {
         
         save: function() {
             this.model.save({ content: this.input.val() });
-            this.input.attr("disabled", "disabled");
         },
         
         deleteTodo: function() {
