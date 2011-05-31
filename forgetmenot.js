@@ -53,7 +53,7 @@ $(document).ready(function() {
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'close', 'updateOnEnter');
+            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
             this.model.bind('change', this.render);
             this.el.id += this.model.get("id");
             // Give reverse access to a model's view by setting its 'this' 
@@ -69,16 +69,15 @@ $(document).ready(function() {
         },
         
         edit: function() {
+            var content = this.model.get('content');
             $(this.el).addClass("editing");
+            this.input.val(content);
             this.input.focus();
             //return false;
         },
         
         save: function() {
             this.model.save({ content: this.input.val() });
-        },
-        
-        close: function() {
             $(this.el).removeClass("editing");
         },
         
@@ -90,7 +89,6 @@ $(document).ready(function() {
         updateOnEnter: function(e) {
           if (e.keyCode == 13) {
               this.save();
-              this.close();
           }
         },
         
