@@ -55,18 +55,6 @@
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
 			<!-- #todoApp items go here -->
-			<li id="blah" class="todo">
-				<div class="display">
-					<input type="checkbox" class="done">
-					<div class="content">dummy todo item</div>
-				</div>
-				<div class="edit">
-		            <input type="text" value="dummy todo item">
-					<div class="delete">&nbsp;</div>
-				</div>
-			 </li>
-			
-
     	</ul>
 
     	<footer>
@@ -79,7 +67,7 @@
     <!-- Templates -->
 
     <script type="text/template" id="item-template">
-		<div class="display">
+		<div class="display"><%= order %>
 			<input type="checkbox" class="done" <%= done ? 'checked="checked"' : '' %>>
 			<div class="content"><%= content %></div>
 			<div class="delete">&nbsp;</div>

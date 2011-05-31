@@ -52,7 +52,7 @@ $(document).ready(function() {
             "dblclick .display .content"       :      	"edit",
             "keypress .edit input"             :      	"updateOnEnter",
 			"click .done"					   : 		"toggleDone",
-            "click .delete"					   : 	    "deleteTodo",
+            "click .display .delete"					   : 	    "deleteTodo",
             "keydown input"         :       "reOrderOnTab"
         },
         
@@ -122,20 +122,22 @@ $(document).ready(function() {
         initialize: function() {
             _.bindAll(this, 'createNew', 'addOne', 'addAll');
             Todos.bind('refresh', this.addAll);
-            Todos.bind('remove', this.orderOnDelete);
+            Todos.bind('refresh', this.resetOrder);
             Todos.fetch();
         },
         
         createNew: function() {
-            var todo = Todos.create({
-                order: Todos.nextOrder()
-            });
-            this.addOne(todo).edit();
+            var todo = Todos.create();
+            this.addOne(todo, "prepend").edit();
         },
         
-        addOne: function(todo) {
+        addOne: function(todo, order) {
             var view = new TodoView({model:todo});
-            this.$("#todoItemsList").append(view.render().el);
+			if (order == 'prepend') {
+				this.$("#todoItemsList").prepend(view.render().el);
+			} else {
+				this.$("#todoItemsList").append(view.render().el);
+			}
             return view;
         },
         
@@ -143,14 +145,14 @@ $(document).ready(function() {
             Todos.each(this.addOne);
         },
 
-        orderOnDelete: function(todo) {
+        resetOrder: function(todo) {
             var order = 0;
             _.each(Todos.models, function(todo) {
                 order++;
                 todo.set({ order: order});
                 todo.save();
             });
-            Todos.refresh();
+            //Todos.refresh();
         },
         
         test: function() {
