@@ -37,7 +37,7 @@ hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin:
 input, select { vertical-align: middle; }
 
 body { font:13px/1.231 sans-serif; *font-size:small; } 
-select, input, textarea, button { font:99% sans-serif; }
+
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
 html { overflow-y: scroll; }
@@ -90,8 +90,6 @@ a:hover { color: #036; }
 /* forms.css from blueprint */
 input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
 input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus {border-color:#666;}
-select {background-color:#fff;border-width:1px;border-style:solid;}
-input[type=text], input[type=password], input.text, input.title, textarea, select {margin:0.5em 0;}
 
 
 
@@ -103,6 +101,10 @@ html, body {
 body {
     background-color:#282828;
     font-family: 'Times New Roman';
+}
+
+select, input, textarea, button { 
+    font-size:20px;
 }
 
 .container {
@@ -211,7 +213,7 @@ ul.fmn-todos {
             margin: 7px 20px 0 0;
         }
         .fmn-todos .todo .display .content {
-            
+
         }
 
     .fmn-todos .todo .edit {
@@ -229,7 +231,15 @@ ul.fmn-todos {
     .fmn-todos .todo.editing .edit {
         display: block;
         visibility: visible;
+        border-bottom: 1px solid #B3B3B3;
+        padding: 0 0 4px 0;
     }
+        .fmn-todos .todo.editing .edit .input {
+            padding: 0 0 10px 32px;
+            width: 470px;
+            outline: none;
+            font-size: 18px;
+        }
 
 
 /**
