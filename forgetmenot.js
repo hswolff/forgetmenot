@@ -14,7 +14,11 @@ $(document).ready(function() {
             if (!this.get("content")) {
               this.set({"content": this.defaults.content});
             }
-        }
+        },
+
+		done: function() {
+			this.save({done: !this.get("done")});
+		}
     });
     
     window.TodoList = Backbone.Collection.extend({
@@ -45,9 +49,9 @@ $(document).ready(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "dblclick .display .content"       :       "edit",
-            "keypress .edit input"              :       "updateOnEnter",
-            "click div.save"        :       "save",
+            "dblclick .display .content"       :      	"edit",
+            "keypress .edit input"             :      	"updateOnEnter",
+			"click .done"					   : 		"toggleDone",
             "click div.delete"      :       "deleteTodo",
             "keydown input"         :       "reOrderOnTab"
         },
@@ -91,6 +95,10 @@ $(document).ready(function() {
               this.save();
           }
         },
+
+		toggleDone: function() {
+			this.model.done();
+		},
         
         reOrderOnTab: function(e) {
           if (e.keyCode == 9) {
