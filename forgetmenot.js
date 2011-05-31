@@ -53,9 +53,9 @@ $(document).ready(function() {
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
+            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'close', 'updateOnEnter');
+            this.model.bind('change', this.render);
             this.el.id += this.model.get("id");
-            this.render();
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
             this.model.view = this;
@@ -63,7 +63,7 @@ $(document).ready(function() {
         
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
-            this.input = this.$("input");
+            this.input = this.$(".input");
             //this.input.bind('blur', this.save);
             return this;
         },
@@ -78,6 +78,10 @@ $(document).ready(function() {
             this.model.save({ content: this.input.val() });
         },
         
+        close: function() {
+            $(this.el).removeClass("editing");
+        },
+        
         deleteTodo: function() {
             this.model.destroy();
             this.remove();
@@ -86,7 +90,7 @@ $(document).ready(function() {
         updateOnEnter: function(e) {
           if (e.keyCode == 13) {
               this.save();
-              this.input.blur();
+              this.close();
           }
         },
         
