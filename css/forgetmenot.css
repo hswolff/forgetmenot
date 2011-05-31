@@ -208,6 +208,9 @@ ul.fmn-todos {
         border-bottom: 1px solid #B3B3B3;
         padding: 0 0 10px 0;
     }
+	.fmn-todos .todo .display:hover {
+		background: url(../images/delete32.png) no-repeat 100% 0;
+	}
         .fmn-todos .todo .display .done {
             float: left;
             margin: 7px 20px 0 0;
@@ -215,6 +218,14 @@ ul.fmn-todos {
         .fmn-todos .todo .display .content {
 
         }
+		.fmn-todos .todo .display .delete {
+			float: right;
+		    display: block;
+		    width: 32px; height: 32px;
+		    cursor: pointer;
+			position: relative;
+			top: -30px;
+		}
 
     .fmn-todos .todo .edit {
         display: none;

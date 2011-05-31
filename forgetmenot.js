@@ -52,7 +52,7 @@ $(document).ready(function() {
             "dblclick .display .content"       :      	"edit",
             "keypress .edit input"             :      	"updateOnEnter",
 			"click .done"					   : 		"toggleDone",
-            "click div.delete"      :       "deleteTodo",
+            "click .delete"					   : 	    "deleteTodo",
             "keydown input"         :       "reOrderOnTab"
         },
         
