@@ -127,7 +127,9 @@ $(document).ready(function() {
         },
         
         createNew: function() {
-            var todo = Todos.create();
+            var todo = Todos.create({
+				content: ''
+			});
             this.addOne(todo, "prepend").edit();
         },
         
