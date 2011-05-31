@@ -111,8 +111,6 @@ $(document).ready(function() {
         }
     });
 
-    //window.todoview = new TodoView({model: todo});
-
     window.TodoApp = Backbone.View.extend({
         el: $("#todoApp"),
         
