@@ -49,15 +49,15 @@ $(document).ready(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "dblclick .display .content"       :      	"edit",
-            "keypress .edit input"             :      	"updateOnEnter",
-			"click .done"					   : 		"toggleDone",
+            "dblclick .display .content"        :      	"edit",
+            "keypress .edit input"              :      	"updateOnEnter",
+			"click input.done"  			    : 		"toggleDone",
             "click .display .delete"					   : 	    "deleteTodo",
             "keydown input"         :       "reOrderOnTab"
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'edit', 'deleteTodo', 'save', 'updateOnEnter');
+            _.bindAll(this, 'render', 'deleteTodo', 'save', 'updateOnEnter');
             this.model.bind('change', this.render);
             this.el.id += this.model.get("id");
             // Give reverse access to a model's view by setting its 'this' 
@@ -68,7 +68,7 @@ $(document).ready(function() {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.input = this.$(".input");
-            //this.input.bind('blur', this.save);
+            this.input.bind('blur', this.save);
             return this;
         },
         
