@@ -53,7 +53,7 @@ $(document).ready(function() {
             "keypress .edit input"              :      	"updateOnEnter",
 			"click input.done"  			    : 		"toggleDone",
             "click .display .delete"					   : 	    "deleteTodo",
-            "keydown input"         :       "reOrderOnTab"
+            "keydown .edit input"         :       "reOrderOnTab"
         },
         
         initialize: function() {
@@ -102,8 +102,8 @@ $(document).ready(function() {
         
         reOrderOnTab: function(e) {
           if (e.keyCode == 9) {
-              console.log('tab4');
-              $(this.el).css('left', function(index) {
+              console.log('tabbb');
+              $(this.el).css('padding-left', function(index) {
                   return index + 50;
               });
               e.preventDefault();
