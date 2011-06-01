@@ -50,6 +50,7 @@ $(document).ready(function() {
         
         events: {
             "dblclick .display .content"        :      	"edit",
+            "click .display .content:hover"        :      	"edit",
             "keypress .edit input"              :      	"updateOnEnter",
 			"click input.done"  			    : 		"toggleDone",
             "click .display .delete"					   : 	    "deleteTodo",
