@@ -135,6 +135,8 @@ header .createNew {
 }
 
 nav {
+    /* disable for now */
+    display:none;
     position: absolute;
     left: -161px;
     width: 160px;
