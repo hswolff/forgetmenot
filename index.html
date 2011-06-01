@@ -67,7 +67,7 @@
     <!-- Templates -->
 
     <script type="text/template" id="item-template">
-		<div class="display">
+		<div class="display <%= done ? 'done' : '' %>">
 			<input type="checkbox" class="done" <%= done ? 'checked="checked"' : '' %>>
 			<div class="content"><%= content %></div>
 			<div class="delete">&nbsp;</div>

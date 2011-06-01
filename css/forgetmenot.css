@@ -210,6 +210,9 @@ ul.fmn-todos {
         border-bottom: 1px solid #B3B3B3;
         padding: 0 0 10px 0;
     }
+    .fmn-todos .todo .display.done .content {
+        text-decoration: line-through;
+    }
 	.fmn-todos .todo .display:hover {
 		background: url(../images/delete32.png) no-repeat 100% 0;
 	}
