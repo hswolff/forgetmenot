@@ -1,32 +1,47 @@
-h1 {
+header h1 {
+    font-size: 28px;
     color: red;
+    text-align: center;
+    font-style: italic;
+}
+
+header .createNew {
+	width: 32px;
+	height: 32px;
+    text-align: center;
+    cursor: pointer;
+	position: relative;
+	float: right;
+	top: -32px;
 }
 
 .container {
-    background: #fff;
-    margin: 0 6%;
+    background: #DCDCDC;
+    width: 95%;
+    margin: 0 auto;
     padding: 10px;
     position: relative;
     min-height: 100%;
-    border: 1px solid #B8DCFF;
+    border: 1px solid #505050;
     border-top: none;
     border-bottom: none;
 }
 
-.todoList li.createNew {
-    text-align: center;
-    border: 2px solid #92CAE4;
-    width: 75%;
-    position: initial;
-    bottom: auto;
-    height: 20px;
-    cursor: pointer;
+ul.fmn-todos {
+    list-style: none;
+    margin: 30px auto 0;
+    width: 90%;
 }
 
-.todoList li .save,
-.todoList li .delete {
-    width: 30%;
-    text-align: center;
-    cursor: pointer;
-    display:none;
+
+.fmn-todos .todo.editing .edit .input {
+    padding: 0 0 10px 32px;
+    width: 85%;
+    outline: none;
+    font-size: 18px;
+}
+
+
+footer {
+    display: none;
 }
