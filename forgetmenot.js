@@ -5,7 +5,7 @@ $(document).ready(function() {
         defaults: {
             content: "new empty todo",
             parent: "0",
-            indent: "0",
+            indent: 0,
             order: "0",
             done: false
         },
@@ -34,10 +34,7 @@ $(document).ready(function() {
         },
 
 		thoseWithParentOf: function(parentId) {
-			//console.log(parentId);
 			return _.select(this.models, function(model) {
-				//console.log('pId', parentId);
-				//console.log(model.get('parent') == parentId);
 				return model.get('parent') == parentId;
 			});
 		},
@@ -60,14 +57,13 @@ $(document).ready(function() {
         events: {
             "dblclick .display .content"        :      	"edit",
             "click .display .content:hover"        :      	"edit",
-            "keypress .edit input"              :      	"updateOnEnter",
+            "keydown .edit input"              :      	"keyboardActions",
 			"click input.done"  			    : 		"toggleDone",
-            "click .display .delete"					   : 	    "deleteTodo",
-            "keydown .edit input"         :       "reOrderOnTab"
+            "click .display .delete"					   : 	    "deleteTodo"            
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'deleteTodo', 'save', 'updateOnEnter');
+            _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.model.bind('change', this.render);
             this.el.id += this.model.get("id");
             // Give reverse access to a model's view by setting its 'this' 
@@ -78,7 +74,7 @@ $(document).ready(function() {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.input = this.$(".input");
-            this.input.bind('blur', this.save);
+            this.input.bind('blur', this.close);
             return this;
         },
         
@@ -91,34 +87,41 @@ $(document).ready(function() {
         },
         
         save: function() {
-            this.model.save({ content: this.input.val() });
-            $(this.el).removeClass("editing");
+            this.model.save({ 
+				content: this.input.val(),
+				indent: this.model.get('indent') + 1
+			});
         },
+
+		close: function() {
+			this.save();
+			$(this.el).removeClass("editing");
+		},
         
         deleteTodo: function() {
             this.model.destroy();
             this.remove();
         },
         
-        updateOnEnter: function(e) {
+        keyboardActions: function(e) {
           if (e.keyCode == 13) {
-              this.save();
+              this.close();
           }
+		  if (e.keyCode == 9) {
+             $(this.el).css('padding-left', function(index) {
+                 return index + 50;
+             });
+console.log(this.model.get('indent'));
+			e.preventDefault();
+			this.save();
+			this.edit();
+console.log(this.model.get('indent'));
+	      }
         },
 
 		toggleDone: function() {
 			this.model.done();
-		},
-        
-        reOrderOnTab: function(e) {
-          if (e.keyCode == 9) {
-              console.log('tabbb');
-              $(this.el).css('padding-left', function(index) {
-                  return index + 50;
-              });
-              e.preventDefault();
-          }
-        }
+		}
     });
 
     window.TodoApp = Backbone.View.extend({
