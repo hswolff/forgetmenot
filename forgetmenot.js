@@ -6,7 +6,7 @@ $(document).ready(function() {
             content: "new empty todo",
             parent: "0",
             indent: 0,
-            order: "0",
+            order: 0,
             done: false
         },
         
@@ -105,17 +105,60 @@ $(document).ready(function() {
         },
         
         keyboardActions: function(e) {
-          if (e.keyCode == 13) {
-              this.close();
-          }
-		  if (e.keyCode == 9) {
-             $(this.el).css('padding-left', function(i, val) {
-                 return i + parseInt(val.replace('px','')) + 25;
-             });
-			this.save(1);
-			this.edit();
-			e.preventDefault();
-	      }
+			/**
+			 	backspace		8
+				tab				9
+				enter			13
+				shift			16
+				ctrl			17
+				alt				18
+				left arrow		37
+				up arrow		38
+				right arrow		39
+				down arrow		40
+				delete			46
+			**/
+			// Enter button - close todo and save
+			if (e.keyCode == 13) {
+			    this.close();
+			}
+			// Tab key - move todo to left one
+			if (e.keyCode == 9) {
+				$(this.el).css('padding-left', function(i, val) {
+				    return i + parseInt(val.replace('px','')) + 25;
+				});
+				this.save(1);
+				this.edit();
+				e.preventDefault();
+			}
+			/**
+				Note for Up and Down keys:
+				The '- 2' and none increments are
+				due to the collection being kept at index 0
+				but the order attribute being kept at index 1
+			**/
+			// Up key - close current todo and open todo above to edit
+			if (e.keyCode == 38) {
+				var todoToOpen = Todos.at(this.model.get("order") - 2);
+				// If we're already at the top then preventDefault()
+				if (!todoToOpen) {
+					e.preventDefault();
+				} else {
+					this.close();
+					todoToOpen.view.edit();
+				}
+			}
+			// Down key - close current todo and open todo above to edit
+			if (e.keyCode == 40) {
+				var todoToOpen = Todos.at(this.model.get("order"));
+				// If we're already at the top then preventDefault()
+				if (!todoToOpen) {
+					e.preventDefault();
+				} else {
+					this.close();
+					todoToOpen.view.edit();
+				}
+			}
         },
 
 		toggleDone: function() {
