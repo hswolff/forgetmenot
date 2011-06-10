@@ -66,6 +66,7 @@ $(document).ready(function() {
             _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.model.bind('change', this.render);
             this.el.id += this.model.get("id");
+			this.el.className += ' indent-' + this.model.get('indent');
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
             this.model.view = this;
@@ -86,10 +87,10 @@ $(document).ready(function() {
             //return false;
         },
         
-        save: function() {
+        save: function(indent) {
             this.model.save({ 
 				content: this.input.val(),
-				indent: this.model.get('indent') + 1
+				indent: this.model.get('indent') + (indent ? indent : 0)
 			});
         },
 
@@ -108,14 +109,12 @@ $(document).ready(function() {
               this.close();
           }
 		  if (e.keyCode == 9) {
-             $(this.el).css('padding-left', function(index) {
-                 return index + 50;
+             $(this.el).css('padding-left', function(i, val) {
+                 return i + parseInt(val.replace('px','')) + 25;
              });
-console.log(this.model.get('indent'));
-			e.preventDefault();
-			this.save();
+			this.save(1);
 			this.edit();
-console.log(this.model.get('indent'));
+			e.preventDefault();
 	      }
         },
 
