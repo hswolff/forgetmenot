@@ -32,6 +32,15 @@ $(document).ready(function() {
                 return this.last().get('order') + 1;
             }
         },
+
+		thoseWithParentOf: function(parentId) {
+			//console.log(parentId);
+			return _.select(this.models, function(model) {
+				//console.log('pId', parentId);
+				//console.log(model.get('parent') == parentId);
+				return model.get('parent') == parentId;
+			});
+		},
         
         comparator: function(todo) {
           return todo.get('order');
