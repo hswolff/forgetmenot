@@ -159,6 +159,21 @@ $(document).ready(function() {
 					todoToOpen.view.edit();
 				}
 			}
+			// Backspace key
+			if (e.keyCode == 8) {
+				if (this.input.val() == '') {
+					// need to refactor...make this DRY
+					var todoToOpen = Todos.at(this.model.get("order") - 2);
+					// If we're already at the top then preventDefault()
+					if (!todoToOpen) {
+						e.preventDefault();
+					} else {
+						this.close();
+						todoToOpen.view.edit();
+					}
+					this.deleteTodo();
+				}
+			}
         },
 
 		toggleDone: function() {
