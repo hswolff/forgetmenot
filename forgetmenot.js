@@ -120,16 +120,15 @@ $(document).ready(function() {
 			**/
 			// Enter button
 			if (e.keyCode == 13) {
+				// If last todo then close current 
+				// and create a new todo
 				if(!Todos.at(this.model.get("order"))) {
-					// If last todo then close current 
-					// and create a new todo
 					this.close();
-					forgetmenot.createNew();
+					forgetmenot.createNew("bottom");
 				} else {
-					// If not last todo then edit next todo
+				// If not last todo then edit next todo
 					this.editNextTodo(e);
 				}
-//			console.log(Todos.at(this.model.get("order")));
 			}
 			// Tab key - move todo to right one
 			if (e.keyCode == 9 && !e.shiftKey) {
@@ -142,9 +141,7 @@ $(document).ready(function() {
 			}
 			// Shift + Tab key - move todo to left one
 			if (e.shiftKey && e.keyCode == 9) {
-				console.log('hi');
 				$(this.el).css('padding-left', function(i, val) {
-					console.log(i, val);
 				    return i + parseInt(val.replace('px','')) - 25;
 				});
 				this.save(-2);
@@ -213,6 +210,7 @@ $(document).ready(function() {
             _.bindAll(this, 'createNew', 'addOne', 'addAll');
             Todos.bind('refresh', this.addAll);
             Todos.bind('refresh', this.resetOrder);
+			Todos.bind('remove', this.resetOrder);
             Todos.fetch();
         },
         
@@ -220,15 +218,19 @@ $(document).ready(function() {
             var todo = Todos.create({
 				content: ''
 			});
-            this.addOne(todo, (topOrBottom ? "top" : "")).edit();
+            this.addOne(todo, topOrBottom).edit();
         },
         
         addOne: function(todo, topOrBottom) {
             var view = new TodoView({model:todo});
 			if (topOrBottom == 'top') {
 				this.$("#todoItemsList").prepend(view.render().el);
+			} else if (topOrBottom == 'bottom') {
+				var lastTodoPosition = _.last(Todos.models).get("order") + 1;
+				todo.set({order: lastTodoPosition})
+				Todos.sort({silent: true});
+				this.$("#todoItemsList").append(view.render().el);
 			} else {
-				view.model.set({order: 89})
 				this.$("#todoItemsList").append(view.render().el);
 			}
             return view;
