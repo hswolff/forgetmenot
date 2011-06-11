@@ -49,7 +49,12 @@ $(document).ready(function() {
         
         comparator: function(todo) {
           return todo.get('order');
-        }
+        },
+
+		getParentTodo: function() {
+			
+		}
+		
     });
     
     window.Todos = new TodoList;
@@ -214,9 +219,10 @@ $(document).ready(function() {
         initialize: function() {
             _.bindAll(this, 'createNew', 'addOne', 'addAll');
             Todos.bind('refresh', this.addAll);
-            Todos.bind('refresh', this.resetOrder);
+            //Todos.bind('refresh', this.resetOrder);
 			Todos.bind('remove', this.resetOrder);
             Todos.fetch();
+			this.resetOrder();
         },
         
         createNew: function(topOrBottom) {
