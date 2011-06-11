@@ -196,16 +196,16 @@ $(document).ready(function() {
             Todos.fetch();
         },
         
-        createNew: function() {
+        createNew: function(topOrBottom) {
             var todo = Todos.create({
 				content: ''
 			});
-            this.addOne(todo, "prepend").edit();
+            this.addOne(todo, (topOrBottom ? "top" : "")).edit();
         },
         
-        addOne: function(todo, order) {
+        addOne: function(todo, topOrBottom) {
             var view = new TodoView({model:todo});
-			if (order == 'prepend') {
+			if (topOrBottom == 'top') {
 				this.$("#todoItemsList").prepend(view.render().el);
 			} else {
 				this.$("#todoItemsList").append(view.render().el);
