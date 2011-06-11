@@ -120,7 +120,13 @@ $(document).ready(function() {
 			**/
 			// Enter button - close todo and save
 			if (e.keyCode == 13) {
-			    this.close();
+				if(!Todos.at(this.model.get("order"))) {
+					this.close();
+					forgetmenot.createNew();
+				} else {
+					this.editNextTodo(e);
+				}
+//			console.log(Todos.at(this.model.get("order")));
 			}
 			// Tab key - move todo to left one
 			if (e.keyCode == 9) {
@@ -208,6 +214,7 @@ $(document).ready(function() {
 			if (topOrBottom == 'top') {
 				this.$("#todoItemsList").prepend(view.render().el);
 			} else {
+				view.model.set({order: 89})
 				this.$("#todoItemsList").append(view.render().el);
 			}
             return view;
