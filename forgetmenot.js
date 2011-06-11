@@ -88,8 +88,9 @@ $(document).ready(function() {
         },
         
         save: function(indent) {
+			var $inputVal = this.input.val();
             this.model.save({ 
-				content: this.input.val(),
+				content: ($inputVal == '' ? this.model.defaults.content : $inputVal),
 				indent: this.model.get('indent') + (indent ? indent : 0)
 			});
         },
