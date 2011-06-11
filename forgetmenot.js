@@ -232,6 +232,6 @@ $(document).ready(function() {
         }
     });
 
-    window.todoapp = new TodoApp;
+    window.forgetmenot = new TodoApp;
 
 });
