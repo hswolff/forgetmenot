@@ -118,12 +118,15 @@ $(document).ready(function() {
 				down arrow		40
 				delete			46
 			**/
-			// Enter button - close todo and save
+			// Enter button
 			if (e.keyCode == 13) {
 				if(!Todos.at(this.model.get("order"))) {
+					// If last todo then close current 
+					// and create a new todo
 					this.close();
 					forgetmenot.createNew();
 				} else {
+					// If not last todo then edit next todo
 					this.editNextTodo(e);
 				}
 //			console.log(Todos.at(this.model.get("order")));
