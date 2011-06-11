@@ -139,42 +139,42 @@ $(document).ready(function() {
 			**/
 			// Up key - close current todo and open todo above to edit
 			if (e.keyCode == 38) {
-				var todoToOpen = Todos.at(this.model.get("order") - 2);
-				// If we're already at the top then preventDefault()
-				if (!todoToOpen) {
-					e.preventDefault();
-				} else {
-					this.close();
-					todoToOpen.view.edit();
-				}
+				this.editPreviousTodo(e);
 			}
 			// Down key - close current todo and open todo above to edit
 			if (e.keyCode == 40) {
-				var todoToOpen = Todos.at(this.model.get("order"));
-				// If we're already at the top then preventDefault()
-				if (!todoToOpen) {
-					e.preventDefault();
-				} else {
-					this.close();
-					todoToOpen.view.edit();
-				}
+				this.editNextTodo(e);
 			}
 			// Backspace key
 			if (e.keyCode == 8) {
 				if (this.input.val() == '') {
-					// need to refactor...make this DRY
-					var todoToOpen = Todos.at(this.model.get("order") - 2);
-					// If we're already at the top then preventDefault()
-					if (!todoToOpen) {
-						e.preventDefault();
-					} else {
-						this.close();
-						todoToOpen.view.edit();
-					}
+					this.editPreviousTodo(e);
 					this.deleteTodo();
 				}
 			}
         },
+
+		editPreviousTodo: function(e) {
+			var todoToOpen = Todos.at(this.model.get("order") - 2);
+			// If we're already at the top then preventDefault()
+			if (!todoToOpen) {
+				e.preventDefault();
+			} else {
+				this.close();
+				todoToOpen.view.edit();
+			}
+		},
+
+		editNextTodo: function(e) {
+			var todoToOpen = Todos.at(this.model.get("order"));
+			// If we're already at the top then preventDefault()
+			if (!todoToOpen) {
+				e.preventDefault();
+			} else {
+				this.close();
+				todoToOpen.view.edit();
+			}
+		},
 
 		toggleDone: function() {
 			this.model.done();
