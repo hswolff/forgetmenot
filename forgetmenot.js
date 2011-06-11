@@ -228,7 +228,7 @@ $(document).ready(function() {
 				this.$("#todoItemsList").prepend(view.render().el);
 			} else if (topOrBottom == 'bottom') {
 				var lastTodoPosition = _.last(Todos.models).get("order") + 1;
-				todo.set({order: lastTodoPosition})
+				todo.set({order: lastTodoPosition});
 				Todos.sort({silent: true});
 				this.$("#todoItemsList").append(view.render().el);
 			} else {
