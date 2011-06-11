@@ -128,12 +128,23 @@ $(document).ready(function() {
 				}
 //			console.log(Todos.at(this.model.get("order")));
 			}
-			// Tab key - move todo to left one
-			if (e.keyCode == 9) {
+			// Tab key - move todo to right one
+			if (e.keyCode == 9 && !e.shiftKey) {
 				$(this.el).css('padding-left', function(i, val) {
 				    return i + parseInt(val.replace('px','')) + 25;
 				});
 				this.save(1);
+				this.edit();
+				e.preventDefault();
+			}
+			// Shift + Tab key - move todo to left one
+			if (e.shiftKey && e.keyCode == 9) {
+				console.log('hi');
+				$(this.el).css('padding-left', function(i, val) {
+					console.log(i, val);
+				    return i + parseInt(val.replace('px','')) - 25;
+				});
+				this.save(-2);
 				this.edit();
 				e.preventDefault();
 			}
