@@ -115,17 +115,10 @@ $(document).ready(function() {
         
         keyboardActions: function(e) {
 			/**
-			 	backspace		8
-				tab				9
-				enter			13
-				shift			16
-				ctrl			17
-				alt				18
 				left arrow		37
 				up arrow		38
 				right arrow		39
 				down arrow		40
-				delete			46
 			**/
 			// Enter button
 			if (e.keyCode == 13) {
