@@ -56,7 +56,21 @@ $(document).ready(function() {
 		// Checking to make sure the
 		// correct parent todo is returned
 		getParentTodo: function(todo) {
-			return this.at(todo.get('order') - 2);
+			return this.at(todo.get('order') - 1);
+		},
+		
+		// Passed in current todo
+		// Returns next todo item
+		// Based off of todo's 'order' attribute
+		getNextTodo: function(todo) {
+			return this.at(todo.get("order") + 1);
+		},
+		
+		// Passed in current todo
+		// Returns previous todo item
+		// Based off of todo's 'order' attribute
+		getPreviousTodo: function(todo) {
+			return this.at(todo.get("order") - 1)
 		}
 		
     });
@@ -133,7 +147,7 @@ $(document).ready(function() {
 			if (e.keyCode == 13) {
 				// If last todo then close current 
 				// and create a new todo
-				if(!Todos.at(this.model.get("order"))) {
+				if(!Todos.getNextTodo(this.model)) {
 					this.close();
 					forgetmenot.createNew("bottom");
 				} else {
@@ -185,8 +199,8 @@ $(document).ready(function() {
 			}
         },
 
-		editPreviousTodo: function(e) {
-			var todoToOpen = Todos.at(this.model.get("order") - 2);
+		editNextTodo: function(e) {
+			var todoToOpen = Todos.getNextTodo(this.model);
 			// If we're already at the top then preventDefault()
 			if (!todoToOpen) {
 				e.preventDefault();
@@ -195,9 +209,9 @@ $(document).ready(function() {
 				todoToOpen.view.edit();
 			}
 		},
-
-		editNextTodo: function(e) {
-			var todoToOpen = Todos.at(this.model.get("order"));
+		
+		editPreviousTodo: function(e) {
+			var todoToOpen = Todos.getPreviousTodo(this.model);
 			// If we're already at the top then preventDefault()
 			if (!todoToOpen) {
 				e.preventDefault();
@@ -256,7 +270,7 @@ $(document).ready(function() {
         },
 
         resetOrder: function(todo) {
-            var order = 0;
+            var order = -1;
             _.each(Todos.models, function(todo) {
                 order++;
                 todo.set({ order: order});
