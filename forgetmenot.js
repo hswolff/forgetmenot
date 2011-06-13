@@ -59,6 +59,16 @@ $(document).ready(function() {
 			return this.at(todo.get('order') - 1);
 		},
 		
+		// Gets passed current todo
+		// Sets current todo's parent todo Id correctly
+		setParentTodo: function(todo) {
+			todo.get('order');
+			var previousTodo = this.getPreviousTodo(todo);
+			if (previousTodo.get('parent') == '0') {
+				todo.setParent(previousTodo);
+			}
+		},
+		
 		// Passed in current todo
 		// Returns next todo item
 		// Based off of todo's 'order' attribute
