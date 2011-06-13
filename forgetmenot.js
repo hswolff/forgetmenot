@@ -50,9 +50,13 @@ $(document).ready(function() {
         comparator: function(todo) {
           return todo.get('order');
         },
-
-		getParentTodo: function() {
-			
+		
+		// Get's passed current todo
+		// Returns parent todo
+		// Checking to make sure the
+		// correct parent todo is returned
+		getParentTodo: function(todo) {
+			return this.at(todo.get('order') - 2);
 		}
 		
     });
@@ -140,7 +144,7 @@ $(document).ready(function() {
 			// Tab key - move todo to right one
 			// And make sub todo of parent (if it exists)
 			if (e.keyCode == 9 && !e.shiftKey) {
-				if(this.model.setParent(Todos.at(this.model.get('order') - 2))) {
+				if(this.model.setParent(Todos.getParentTodo(this.model))) {
 					$(this.el).css('padding-left', function(i, val) {
 					    return i + parseInt(val.replace('px','')) + 25;
 					});
