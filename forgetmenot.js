@@ -4,7 +4,8 @@ $(document).ready(function() {
         //Default Attributes
         defaults: {
             content: "new empty todo",
-            parent: "0",
+            parent: 0,
+			children: 0,
             indent: 0,
             order: 0,
             done: false
@@ -55,8 +56,16 @@ $(document).ready(function() {
 		// Returns parent todo
 		// Checking to make sure the
 		// correct parent todo is returned
-		getParentTodo: function(todo) {
-			return this.at(_.indexOf(Todos.models, todo) - 1);
+		getParentTodo: function(todo, previousTodo) {
+			var previousTodo = this.at(_.indexOf(Todos.models, (previousTodo ? previousTodo : todo)) - 1);
+			if (!previousTodo) {
+				return false;
+			} else if (todo.get('indent') == previousTodo.get('indent')) {
+				return (previousTodo ? previousTodo : NaN);
+			} else {
+				return this.getParentTodo(todo, previousTodo);
+			}
+			
 		},
 		
 		// Gets passed current todo
