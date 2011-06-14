@@ -56,7 +56,7 @@ $(document).ready(function() {
 		// Checking to make sure the
 		// correct parent todo is returned
 		getParentTodo: function(todo) {
-			return this.at(todo.get('order') - 1);
+			return this.at(_.indexOf(Todos.models, todo) - 1);
 		},
 		
 		// Gets passed current todo
@@ -73,14 +73,14 @@ $(document).ready(function() {
 		// Returns next todo item
 		// Based off of todo's 'order' attribute
 		getNextTodo: function(todo) {
-			return this.at(todo.get("order") + 1);
+			return this.at(_.indexOf(Todos.models, todo) + 1);
 		},
 		
 		// Passed in current todo
 		// Returns previous todo item
 		// Based off of todo's 'order' attribute
 		getPreviousTodo: function(todo) {
-			return this.at(todo.get("order") - 1)
+			return this.at(_.indexOf(Todos.models, todo) - 1)
 		}
 		
     });
