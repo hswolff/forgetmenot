@@ -187,11 +187,24 @@ $(document).ready(function() {
 				e.preventDefault();
 			}
 			// Shift + Tab key - move todo to left one
+			// And un-sub it from parent (if it exists)
 			if (e.shiftKey && e.keyCode == 9) {
+				console.log(Todos.getParentTodo(Todos.getPreviousTodo(this.model)));
+				if(this.model.get('indent') == 1) {
+					this.model.save({
+						indent: 0,
+						parent: 0
+					});
+				} else if ((this.model.get('indent') - 1) == Todos.getPreviousTodo(this.model).get('indent')) {
+					this.model.save({
+						parent: Todos.getPreviousTodo(this.model).get('parent'),
+						indent: Todos.getPreviousTodo(this.model).get('indent')
+					});
+				}
 				$(this.el).css('padding-left', function(i, val) {
 				    return i + parseInt(val.replace('px','')) - 25;
 				});
-				this.save(-2);
+				//this.save(-2);
 				this.edit();
 				e.preventDefault();
 			}
