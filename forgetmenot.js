@@ -27,6 +27,10 @@ $(document).ready(function() {
 			}
 			this.save({parent: parentTodo.id});
 			return true;
+		},
+		
+		indentBy: function(number) {
+			this.save({indent: (this.get('indent') + number)});
 		}
     });
     
@@ -66,6 +70,14 @@ $(document).ready(function() {
 				return this.getParentTodo(todo, previousTodo);
 			}
 			
+		},
+		
+		maintainChildrenOfParent: function(todo) {
+			Todos.each(function(model){
+				if (model.get('parent') == todo.id) {
+					model.indentBy(1);
+				}
+			});
 		},
 		
 		// Gets passed current todo
@@ -182,6 +194,7 @@ $(document).ready(function() {
 					    return i + parseInt(val.replace('px','')) + 25;
 					});
 					this.save(1);
+					Todos.maintainChildrenOfParent(this.model);
 					this.edit();
 				}
 				e.preventDefault();
