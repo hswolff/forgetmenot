@@ -75,7 +75,7 @@ $(document).ready(function() {
 		maintainChildrenOfParent: function(todo) {
 			Todos.each(function(model){
 				if (model.get('parent') == todo.id) {
-					model.indentBy(1);
+					model.save({indent: (todo.get('indent') + 1)});
 				}
 			});
 		},
@@ -192,7 +192,7 @@ $(document).ready(function() {
 					this.save(1);
 					Todos.maintainChildrenOfParent(this.model);
 					this.edit();
-				}
+				}	
 				e.preventDefault();
 			}
 			// Shift + Tab key - move todo to left one
@@ -203,13 +203,15 @@ $(document).ready(function() {
 						indent: 0,
 						parent: 0
 					});
+				} else if (!Todos.getPreviousTodo(this.model)) {
+					return false;
 				} else {
 					this.model.save({
 						parent: Todos.getPreviousTodo(this.model).get('parent'),
 						indent: Todos.getPreviousTodo(this.model).get('indent')
 					});
+					Todos.maintainChildrenOfParent(this.model);
 				}
-				//this.save(-2);
 				this.edit();
 				e.preventDefault();
 			}
