@@ -113,7 +113,6 @@ $(document).ready(function() {
     window.TodoView = Backbone.View.extend({
         tagName: "li",
         id: "todo-",
-        className: "todo",
         template: _.template($('#item-template').html()),
         
         events: {
@@ -128,7 +127,6 @@ $(document).ready(function() {
             _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.model.bind('change', this.render);
             this.el.id += this.model.get("id");
-			this.el.className += ' indent-' + this.model.get('indent');
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
             this.model.view = this;
@@ -136,6 +134,7 @@ $(document).ready(function() {
         
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
+			this.el.className = 'todo indent-' + this.model.get('indent');
             this.input = this.$(".input");
             this.input.bind('blur', this.close);
             return this;
@@ -190,9 +189,6 @@ $(document).ready(function() {
 			// And make sub todo of parent (if it exists)
 			if (e.keyCode == 9 && !e.shiftKey) {
 				if(this.model.setParent(Todos.getParentTodo(this.model))) {
-					$(this.el).css('padding-left', function(i, val) {
-					    return i + parseInt(val.replace('px','')) + 25;
-					});
 					this.save(1);
 					Todos.maintainChildrenOfParent(this.model);
 					this.edit();
@@ -213,9 +209,6 @@ $(document).ready(function() {
 						indent: Todos.getPreviousTodo(this.model).get('indent')
 					});
 				}
-				$(this.el).css('padding-left', function(i, val) {
-				    return i + parseInt(val.replace('px','')) - 25;
-				});
 				//this.save(-2);
 				this.edit();
 				e.preventDefault();
