@@ -274,10 +274,11 @@ $(document).ready(function() {
         },
         
         initialize: function() {
-            _.bindAll(this, 'createNew', 'addOne', 'addAll');
+            _.bindAll(this, 'createNew', 'createNewAfter', 'addOne', 'addAll');
             Todos.bind('refresh', this.addAll);
             //Todos.bind('refresh', this.resetOrder);
 			Todos.bind('remove', this.resetOrder);
+			Todos.bind('add', this.resetOrder);
             Todos.fetch();
 			this.resetOrder();
         },
@@ -287,6 +288,18 @@ $(document).ready(function() {
 				content: ''
 			});
             this.addOne(todo, (_.isString(topOrBottom) ? topOrBottom : 'bottom')).edit();
+        },
+
+		createNewAfter: function(t) {
+            var todo = Todos.create({
+				content: '',
+				parent: t.get('parent'),
+				indent: t.get('indent'),
+				order: (t.get('order') + 1)
+			});
+			var view = new TodoView({model:todo});
+			this.$('#' + t.id).after(view.render().el);
+			view.edit();
         },
         
         addOne: function(todo, topOrBottom) {
