@@ -179,6 +179,8 @@ $(document).ready(function() {
 				if(!Todos.getNextTodo(this.model)) {
 					this.close();
 					forgetmenot.createNew("bottom");
+				} else if (Todos.getNextTodo(this.model).get('indent') != this.model.get('indent')) {
+					forgetmenot.createNewAfter(this.model);
 				} else {
 				// If not last todo then edit next todo
 					this.editNextTodo(e);
