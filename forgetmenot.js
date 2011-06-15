@@ -278,7 +278,7 @@ $(document).ready(function() {
             var todo = Todos.create({
 				content: ''
 			});
-            this.addOne(todo, topOrBottom).edit();
+            this.addOne(todo, (_.isString(topOrBottom) ? topOrBottom : 'bottom')).edit();
         },
         
         addOne: function(todo, topOrBottom) {
