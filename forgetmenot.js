@@ -112,7 +112,6 @@ $(document).ready(function() {
     // Each Individual Todo Item View
     window.TodoView = Backbone.View.extend({
         tagName: "li",
-        id: "todo-",
         template: _.template($('#item-template').html()),
         
         events: {
@@ -126,7 +125,7 @@ $(document).ready(function() {
         initialize: function() {
             _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.model.bind('change', this.render);
-            this.el.id += this.model.get("id");
+            this.el.id = this.model.get("id");
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
             this.model.view = this;
