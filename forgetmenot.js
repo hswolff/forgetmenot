@@ -166,6 +166,7 @@ $(document).ready(function() {
         },
         
         keyboardActions: function(e) {
+			this.save();
 			/**
 				left arrow		37
 				up arrow		38
@@ -189,7 +190,6 @@ $(document).ready(function() {
 			// Tab key - move todo to right one
 			// And make sub todo of parent (if it exists)
 			if (e.keyCode == 9 && !e.shiftKey) {
-				this.save();
 				if(this.model.setParent(Todos.getParentTodo(this.model))) {
 					this.save(1);
 					Todos.maintainChildrenOfParent(this.model);
