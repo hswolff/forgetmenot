@@ -185,7 +185,13 @@ $(document).ready(function() {
 				if(!Todos.getNextTodo(this.model)) {
 					this.close();
 					forgetmenot.createNewAfter(this.model);
-				} else if (this.model.get('indent') != Todos.getNextTodo(this.model).get('indent')) {
+				} else if (this.model.get('indent') < Todos.getNextTodo(this.model).get('indent')) {
+					var that = this.model;
+					var t = Todos.select(function(t){
+						return (t.get('indent') == that.get('indent')) && (t.get('order') > that.get('order'));
+					});
+					forgetmenot.createNewBefore(t[0]);
+				} else if (this.model.get('indent') > Todos.getNextTodo(this.model).get('indent')) {
 					forgetmenot.createNewAfter(this.model);
 				} else {
 				// If not last todo then edit next todo
@@ -283,7 +289,7 @@ $(document).ready(function() {
         },
         
         initialize: function() {
-            _.bindAll(this, 'createNew', 'createNewAfter', 'addOne', 'addAll');
+            _.bindAll(this, 'createNew', 'createNewAfter', 'createNewBefore', 'addOne', 'addAll');
             Todos.bind('refresh', this.addAll);
             //Todos.bind('refresh', this.resetOrder);
 			Todos.bind('remove', this.resetOrder);
@@ -299,15 +305,27 @@ $(document).ready(function() {
             this.addOne(todo, (_.isString(topOrBottom) ? topOrBottom : 'bottom')).edit();
         },
 
-		createNewAfter: function(t) {
-            var todo = Todos.create({
+		createNewAfter: function(todo) {
+            var t = Todos.create({
 				content: '',
-				parent: t.get('parent'),
-				indent: t.get('indent'),
-				order: (t.get('order') + 1)
+				parent: todo.get('parent'),
+				indent: todo.get('indent'),
+				order: (todo.get('order') + 1)
 			});
-			var view = new TodoView({model:todo});
-			this.$('#' + t.id).after(view.render().el);
+			var view = new TodoView({model:t});
+			this.$('#' + todo.id).after(view.render().el);
+			view.edit();
+        },
+
+		createNewBefore: function(todo) {
+            var t = Todos.create({
+				content: '',
+				parent: todo.get('parent'),
+				indent: todo.get('indent'),
+				order: todo.get('order')
+			});
+			var view = new TodoView({model:t});
+			this.$('#' + todo.id).before(view.render().el);
 			view.edit();
         },
         
