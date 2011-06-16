@@ -51,6 +51,12 @@ $(document).ready(function() {
 				return model.get('parent') == parentId;
 			});
 		},
+		
+		thatAreDone: function() {
+			return _.select(this.models, function(model) {
+				return model.get('done') == true;
+			});
+		},
         
         comparator: function(todo) {
           return todo.get('order');
