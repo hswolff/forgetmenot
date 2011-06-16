@@ -235,6 +235,7 @@ $(document).ready(function() {
 				if (this.input.val() == '') {
 					this.editPreviousTodo(e);
 					this.deleteTodo();
+					e.preventDefault();
 				}
 			}
         },
