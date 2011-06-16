@@ -166,7 +166,6 @@ $(document).ready(function() {
         },
         
         keyboardActions: function(e) {
-			this.save();
 			/**
 				left arrow		37
 				up arrow		38
@@ -200,6 +199,7 @@ $(document).ready(function() {
 			// Shift + Tab key - move todo to left one
 			// And un-sub it from parent (if it exists)
 			if (e.shiftKey && e.keyCode == 9) {
+				this.save();
 				if(this.model.get('indent') == 1) {
 					this.model.save({
 						indent: 0,
