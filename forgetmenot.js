@@ -179,8 +179,8 @@ $(document).ready(function() {
 				// and create a new todo
 				if(!Todos.getNextTodo(this.model)) {
 					this.close();
-					forgetmenot.createNew("bottom");
-				} else if (Todos.getNextTodo(this.model).get('indent') != this.model.get('indent')) {
+					forgetmenot.createNewAfter(this.model);
+				} else if (this.model.get('indent') != Todos.getNextTodo(this.model).get('indent')) {
 					forgetmenot.createNewAfter(this.model);
 				} else {
 				// If not last todo then edit next todo
