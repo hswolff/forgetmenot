@@ -30,7 +30,7 @@ $(document).ready(function() {
 		},
 		
 		indentBy: function(number) {
-			this.save({indent: (this.get('indent') + number)});
+			this.save({indent: (this.get('indent') + (number ? number: 0))});
 		}
     });
     
@@ -67,7 +67,7 @@ $(document).ready(function() {
 		// Checking to make sure the
 		// correct parent todo is returned
 		getParentTodo: function(todo, previousTodo) {
-			var previousTodo = this.at(_.indexOf(Todos.models, (previousTodo ? previousTodo : todo)) - 1);
+			var previousTodo = this.at(Todos.indexOf(previousTodo ? previousTodo : todo) - 1);
 			if (!previousTodo) {
 				return false;
 			} else if (todo.get('indent') == previousTodo.get('indent')) {
@@ -79,11 +79,18 @@ $(document).ready(function() {
 		},
 		
 		maintainChildrenOfParent: function(todo) {
-			Todos.each(function(model){
-				if (model.get('parent') == todo.id) {
-					model.save({indent: (todo.get('indent') + 1)});
-				}
-			});
+			var childTodo = this.at(Todos.indexOf(childTodo ? childTodo: todo) + 1);
+			if (!childTodo) {
+				return false;
+			} else {
+				Todos.each(function(model){
+					if (todo.get('id') === model.get('parent')) {
+						model.save({indent: (todo.get('indent') + 1)});
+					}
+				});
+				return this.maintainChildrenOfParent(childTodo);
+			}
+			
 		},
 		
 		// Gets passed current todo
@@ -156,9 +163,9 @@ $(document).ready(function() {
         save: function(indent) {
 			var $inputVal = this.input.val();
             this.model.save({ 
-				content: ($inputVal == '' ? this.model.defaults.content : $inputVal),
-				indent: this.model.get('indent') + (indent ? indent : 0)
+				content: ($inputVal == '' ? this.model.defaults.content : $inputVal)
 			});
+			this.model.indentBy(indent);
         },
 
 		close: function() {
@@ -201,6 +208,7 @@ $(document).ready(function() {
 			// Tab key - move todo to right one
 			// And make sub todo of parent (if it exists)
 			if (e.keyCode == 9 && !e.shiftKey) {
+				this.save();
 				if(this.model.setParent(Todos.getParentTodo(this.model))) {
 					this.save(1);
 					Todos.maintainChildrenOfParent(this.model);
@@ -217,6 +225,7 @@ $(document).ready(function() {
 						indent: 0,
 						parent: 0
 					});
+					Todos.maintainChildrenOfParent(this.model);
 				} else if (!Todos.getPreviousTodo(this.model)) {
 					return false;
 				} else {
