@@ -230,8 +230,8 @@ $(document).ready(function() {
 					return false;
 				} else {
 					this.model.save({
-						parent: Todos.getPreviousTodo(this.model).get('parent'),
-						indent: Todos.getPreviousTodo(this.model).get('indent')
+						parent: Todos.get(this.model.get('parent')).get('parent'),
+						indent: Todos.get(this.model.get('parent')).get('indent')
 					});
 					Todos.maintainChildrenOfParent(this.model);
 				}
