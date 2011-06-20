@@ -187,18 +187,18 @@ $(document).ready(function() {
 			**/
 			// Enter button
 			if (e.keyCode == 13) {
-				// If last todo then close current 
-				// and create a new todo
 				if(!Todos.getNextTodo(this.model)) {
+					// If last todo then close current 
+					// and create a new todo
 					this.close();
 					forgetmenot.createNewAfter(this.model);
-				} else if (this.model.get('indent') < Todos.getNextTodo(this.model).get('indent')) {
-					var that = this.model;
-					var t = Todos.select(function(t){
-						return (t.get('indent') == that.get('indent')) && (t.get('order') > that.get('order'));
-					});
-					forgetmenot.createNewBefore(t[0]);
+				} else if (this.model.get('indent') === Todos.getNextTodo(this.model).get('indent')) {
+					// If next todo is at same indent
+					// Then edit next todo
+					this.editNextTodo(e);
 				} else if (this.model.get('indent') > Todos.getNextTodo(this.model).get('indent')) {
+					// If next todo is closer to indent '0'
+					// Then we create a new todo after current
 					forgetmenot.createNewAfter(this.model);
 				} else {
 				// If not last todo then edit next todo
