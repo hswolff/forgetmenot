@@ -107,14 +107,14 @@ $(document).ready(function() {
 		// Returns next todo item
 		// Based off of todo's 'order' attribute
 		getNextTodo: function(todo) {
-			return this.at(_.indexOf(Todos.models, todo) + 1);
+			return this.at(Todos.indexOf(todo) + 1);
 		},
 		
 		// Passed in current todo
 		// Returns previous todo item
 		// Based off of todo's 'order' attribute
 		getPreviousTodo: function(todo) {
-			return this.at(_.indexOf(Todos.models, todo) - 1)
+			return this.at(Todos.indexOf(todo) - 1);
 		}
 		
     });
