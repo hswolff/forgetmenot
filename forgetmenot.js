@@ -305,13 +305,17 @@ $(document).ready(function() {
 			Todos.bind('add', this.resetOrder);
             Todos.fetch();
 			this.resetOrder();
+			if (Todos.length == 0) {
+				this.createNew({content: 'Start your first Todo!'});
+				Todos.at(0).view.edit();
+			}
         },
         
-        createNew: function(topOrBottom) {
+        createNew: function(o) {
             var todo = Todos.create({
-				content: ''
+				content: o.content ? o.content : ''
 			});
-            this.addOne(todo, (_.isString(topOrBottom) ? topOrBottom : 'bottom')).edit();
+            this.addOne(todo, (_.isString(o.topOrBottom) ? o.topOrBottom : 'bottom')).edit();
         },
 
 		createNewAfter: function(todo) {
