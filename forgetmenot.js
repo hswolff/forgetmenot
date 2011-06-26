@@ -226,7 +226,7 @@ $(document).ready(function() {
 						parent: 0
 					});
 					Todos.maintainChildrenOfParent(this.model);
-				} else if (!Todos.getPreviousTodo(this.model)) {
+				} else if (!Todos.getPreviousTodo(this.model) || this.model.get('indent') == 0) {
 					return false;
 				} else {
 					this.model.save({
