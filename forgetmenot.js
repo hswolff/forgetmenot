@@ -83,6 +83,9 @@ $(document).ready(function() {
 			if (!childTodo) {
 				return false;
 			} else {
+				if(todo.get('indent') == 0) {
+					this.getNextTodo(todo).save({parent: todo.get('id'), indent: 1});
+				}
 				Todos.each(function(model){
 					if (todo.get('id') === model.get('parent')) {
 						model.save({indent: (todo.get('indent') + 1)});
