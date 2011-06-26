@@ -101,10 +101,12 @@ html, body {
 body {
     background-color:#282828;
     font-family: 'Times New Roman';
+    font-size:20px;
 }
 
 select, input, textarea, button { 
     font-size:20px;
+	font-family: 'Times New Roman';
 }
 
 .container {
@@ -207,12 +209,11 @@ ul.fmn-todos {
     width: 500px;
 }
 .fmn-todos .todo {
-    font-size: 22px;
-    margin: 15px 0 0;
+    margin: 10px 0 0;
+	height: 50px;
 }
     .fmn-todos .todo .display {
         border-bottom: 1px solid #B3B3B3;
-        padding: 0 0 10px 0;
     }
     .fmn-todos .todo .display.done .content {
         text-decoration: line-through;
@@ -222,18 +223,17 @@ ul.fmn-todos {
 	}
         .fmn-todos .todo .display .done {
             float: left;
-            margin: 7px 20px 0 0;
+            margin: 17px 18px 0 0;
         }
         .fmn-todos .todo .display .content {
-
+			float: left;
+			padding: 10px 0;
         }
 		.fmn-todos .todo .display .delete {
 			float: right;
 		    display: block;
 		    width: 32px; height: 32px;
 		    cursor: pointer;
-			position: relative;
-			top: -30px;
 		}
 
     .fmn-todos .todo .edit {
@@ -252,13 +252,13 @@ ul.fmn-todos {
         display: block;
         visibility: visible;
         border-bottom: 1px solid #B3B3B3;
-        padding: 0 0 4px 0;
+        padding: 0 0 5px 0;
     }
         .fmn-todos .todo.editing .edit .input {
-            padding: 0 0 10px 32px;
-            width: 470px;
+            padding: 10px 0;
+			text-indent: 30px;
+            width: 100%;
             outline: none;
-            font-size: 18px;
         }
 /** Todo Indent Rules **/
 .fmn-todos .todo.indent-1 { padding: 0 0 0 25px; }
