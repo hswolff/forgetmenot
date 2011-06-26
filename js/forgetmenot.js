@@ -372,10 +372,6 @@ $(document).ready(function() {
                 todo.save();
             });
             //Todos.refresh();
-        },
-        
-        test: function() {
-            alert('test');
         }
     });
 
