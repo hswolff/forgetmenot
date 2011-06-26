@@ -5,45 +5,60 @@
   	<meta charset="UTF-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  	<title>Forgetmenot ToDo List</title>
+  	<title>forgetmenot todo list | A ToDo List for the common forgetful-but-not-me.</title>
     
-    <link rel="stylesheet" href="forgetmenot.css?v=1">
-	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="forgetmenot-mobile.css?v=1">
-    
-    <script src="js/json2.js"></script>
-    <script src="js/jquery-1.5.2.min.js"></script>
-    <script src="js/underscore-min.js"></script>
-    <script src="js/backbone.js"></script>
-    <script src="js/backbone-localstorage.js"></script>
-    
-    <script src="forgetmenot.js"></script>
+    <link rel="stylesheet" href="css/forgetmenot.css?v=1">
+	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1">
+	<script src="js/head.load.min.js"></script>
+	
+	<script src="js/json2.js"></script>
+	<script src="js/jquery-1.5.2.min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/backbone.js"></script>
+	<script src="js/backbone-localstorage.js"></script>
+	<script src="forgetmenot.js"></script>
+	
+	<script type="text/javascript">
+	/*
+	head.js(
+		{json2: "js/json2.js"},
+		{jquery152: "js/jquery-1.5.2.min.js"},
+		{underscore: "js/underscore-min.js"},
+		{backbone: "js/backbone.js"},
+		{backbonels: "js/backbone-localstorage.js"},
+		{forgetmenot: "forgetmenot.js?v=0.1"}
+	);
+	*/
+	</script>
 
 </head>
 <body>
 
-    <div class="container">
-
-    	<h1>Forgetmenot ToDo List</h1>
-    	<span>A ToDo List for the common forgetful-but-not-me-not.</span>
-
-    	<ul class="todoList" id="todoApp">
-			<li id="createNew" class="info todo createNew">Create New ToDo</li>
-    	<!--
-			<li id="todo-1" class="todo">harrys page</li> 
-
-			<li id="todo-2" class="todo">saved</li>
-    		
-    		<li id="todo-3" class="todo current">buy an airplane
-    		    <input type="text" value="Buy an airplane">
-    		    <div class="save success">Save</div>
-    		    <div class="delete error">Delete</div>
-    		</li>
-		-->
-
+    <div class="container" id="todoApp">
+		<header>
+	    	<h1>forgetmenot &weierp; todo list</h1>
+			<img src="images/new.png" value="Create New" id="createNew" class="createNew" />
+		</header>
+		<nav class="">
+			<div class="full">
+				<h2>lists &#x2192;</h2>
+				<ul id="fmn-lists">
+					<li class="active"><a href="">today</a></li>
+					<li><a href="">soon</a></li>
+					<li><a href="">later</a></li>
+				</ul>
+			</div>
+			<div class="compact">
+				<h2><a href="">l<br/>i<br/>s<br/>t<br/>s</a></h2>
+			</div>
+		</nav>
+		
+    	<ul class="todoList fmn-todos" id="todoItemsList">
+			<!-- #todoApp items go here -->
     	</ul>
 
     	<footer>
-			<a href="http://hswolff.com/">hswolff is working on it</a>
+			
 		</footer>
 
 
@@ -52,10 +67,14 @@
     <!-- Templates -->
 
     <script type="text/template" id="item-template">
-			<span><%= content %></span>
-            <input type="text" value="<%= content %>">
-            <div class="save success">Save</div>
-		    <div class="delete error">Delete</div>
+		<div class="display <%= done ? 'done' : '' %>">
+			<input type="checkbox" class="done" <%= done ? 'checked="checked"' : '' %>>
+			<div class="content"><%= content %></div>
+			<div class="delete">&nbsp;</div>
+		</div>
+		<div class="edit">
+	        <input type="text" value="<%= content %>" class="input">
+		</div>
     </script>
 
 
