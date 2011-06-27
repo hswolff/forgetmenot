@@ -1,17 +1,39 @@
 <?php
 
-$id = $_GET['id'];
-//echo $_SERVER['REQUEST_METHOD'];
+$db_name = 'sqlite:todo.db';
+
+try {
+	if (!file_exists(str_replace('sqlite:', '', $db_name))) {
+		$db = new PDO($db_name);
+		$db->exec('CREATE TABLE todos (id INTEGER PRIMARY KEY, content TEXT)');
+		$db->exec("INSERT INTO todos (content) values ('Your first todo is...')");
+		print_r($db->errorInfo());
+		$db->close();
+		$db = null;
+	}
+}
+catch(Exception $e) {
+  die($e->getMessage());
+}
+
+$_PUT  = array();
+if($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    parse_str(file_get_contents('php://input'), $_PUT);
+}
+
 try{
 
-	switch($_GET['action'])
+	switch($_SERVER['REQUEST_METHOD'])
 	{			
-		case 'save':
-			ToDo::save($id,$_GET['text']);
+		case 'GET':
+			ToDo::get();
 			break;
 
-		case 'delete':
-			ToDo::delete($id);
+		case 'PUT':
+			$id = str_replace('/', '', $_SERVER["QUERY_STRING"]);
+			//print_r($_PUT);
+			print_r(file_get_contents('php://input'));
+			ToDo::update($id);
 			break;
 			
 		case 'new':
@@ -21,24 +43,10 @@ try{
 
 }
 catch(Exception $e){
-//	echo $e->getMessage();
+	echo $e->getMessage();
 	die("0");
 }
 
-
-$db_name = 'sqlite:todo.db';
-
-try {
-	if (!file_exists(str_replace('sqlite:', '', $db_name))) {
-		$db = new PDO($db_name);
-		$db->exec('CREATE TABLE todos (id INTEGER PRIMARY KEY, content TEXT, parent INTEGER, indent  INTEGER, order  INTEGER, done  INTEGER)');
-		$db->exec("INSERT INTO todos (content) values ('Your first todo is...')");
-		$db = null;
-	}
-}
-catch(Exception $e) {
-  die($error);
-}
 
 
 class ToDo {
@@ -48,6 +56,16 @@ class ToDo {
 	public function __construct($par){
 		if(is_array($par))
 			$this->data = $par;
+	}
+	
+	public static function get($id = null) {
+		global $db_name;
+		$db = new PDO($db_name);
+		$rows = $db->query('SELECT * FROM todos');
+//		print_r($db->errorInfo());
+		print_r(json_encode($rows->fetchAll(PDO::FETCH_ASSOC)));
+//		die();
+		return json_encode($rows->fetchAll(PDO::FETCH_ASSOC));
 	}
 	
 	public static function createNew($text) {
@@ -64,10 +82,10 @@ class ToDo {
 		';
 	}
 	
-	public static function save($id, $text) {
+	public static function update($id, $text) {
 		global $db_name;
 		$db = new PDO($db_name);
-		$db->exec('UPDATE todos SET content = "'.$text.'", updated_at = datetime(\'now\',\'localtime\') WHERE id = '.$id.'');
+		$db->exec('UPDATE todos SET content = "'.$text.'" WHERE id = '.$id.'');
 		$db->close();
 	}
 	
