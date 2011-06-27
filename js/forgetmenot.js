@@ -5,7 +5,6 @@ $(document).ready(function() {
         defaults: {
             content: "new empty todo",
             parent: 0,
-			children: 0,
             indent: 0,
             order: 0,
             done: false
@@ -36,7 +35,8 @@ $(document).ready(function() {
     
     window.TodoList = Backbone.Collection.extend({
         model: Todo,
-        localStorage: new Store("forgetmenot"),
+//        localStorage: new Store("forgetmenot"),
+		url: "fmn.php",
         
         nextOrder: function() {
             if (this.length === 0) {
