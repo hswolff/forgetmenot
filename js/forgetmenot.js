@@ -36,7 +36,7 @@ $(document).ready(function() {
     window.TodoList = Backbone.Collection.extend({
         model: Todo,
 //        localStorage: new Store("forgetmenot"),
-		url: "fmn.php",
+		url: "fmn.php?",
         
         nextOrder: function() {
             if (this.length === 0) {
@@ -131,8 +131,8 @@ $(document).ready(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "dblclick .display .content"        :      	"edit",
-            "click .display .content:hover"        :      	"edit",
+            "dblclick .display"        :      	"edit",
+            "click .display"        :      	"edit",
             "keydown .edit input"              :      	"keyboardActions",
 			"click input.done"  			    : 		"toggleDone",
             "click .display .delete"					   : 	    "deleteTodo"            
