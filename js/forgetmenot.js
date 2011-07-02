@@ -302,7 +302,7 @@ $(document).ready(function() {
         
         initialize: function() {
             _.bindAll(this, 'createNew', 'createNewAfter', 'createNewBefore', 'addOne', 'addAll');
-            Todos.bind('refresh', this.addAll);
+            Todos.bind('reset', this.addAll);
             //Todos.bind('refresh', this.resetOrder);
 			Todos.bind('remove', this.resetOrder);
 			Todos.bind('add', this.resetOrder);
