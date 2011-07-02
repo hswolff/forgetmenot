@@ -83,7 +83,7 @@ $(document).ready(function() {
 			if (!childTodo) {
 				return false;
 			} else {
-				if(todo.get('indent') == 0) {
+				if(todo.get('indent') == 0 && this.getNextTodo(todo).get('parent') == todo.get('id')) {
 					this.getNextTodo(todo).save({parent: todo.get('id'), indent: 1});
 				}
 				Todos.each(function(model){
