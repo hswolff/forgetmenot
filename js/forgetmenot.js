@@ -83,7 +83,7 @@ $(document).ready(function() {
 			if (!childTodo) {
 				return false;
 			} else {
-				if(todo.get('indent') == 0) {
+				if(todo.get('indent') == 0 && todo.get('id') == this.getNextTodo(todo).get('parent')) {
 					this.getNextTodo(todo).save({parent: todo.get('id'), indent: 1});
 				}
 				Todos.each(function(model){
@@ -302,7 +302,7 @@ $(document).ready(function() {
         
         initialize: function() {
             _.bindAll(this, 'createNew', 'createNewAfter', 'createNewBefore', 'addOne', 'addAll');
-            Todos.bind('refresh', this.addAll);
+            Todos.bind('reset', this.addAll);
             //Todos.bind('refresh', this.resetOrder);
 			Todos.bind('remove', this.resetOrder);
 			Todos.bind('add', this.resetOrder);
