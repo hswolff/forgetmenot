@@ -16,28 +16,27 @@ catch(Exception $e) {
   die($e->getMessage());
 }
 
-$_PUT  = array();
-if($_SERVER['REQUEST_METHOD'] == 'PUT') {
-    parse_str(file_get_contents('php://input'), $_PUT);
-}
+$data = array();
 
 try{
 
 	switch($_SERVER['REQUEST_METHOD'])
 	{			
 		case 'GET':
-			ToDo::get();
+			ToDo::get($_GET);
 			break;
 
 		case 'PUT':
-			$id = str_replace('/', '', $_SERVER["QUERY_STRING"]);
-			//print_r($_PUT);
-			print_r(file_get_contents('php://input'));
-			ToDo::update($id);
+			parse_str(file_get_contents('php://input'), $p_data);
+			$ak = array_keys($p_data);
+			$data = stripslashes($ak[0]);
+			//print_r($data);
+			var_dump(json_decode($data, true));
+			//ToDo::update($id);
 			break;
 			
-		case 'new':
-			ToDo::createNew($_GET['text']);
+		case 'POST':
+			ToDo::createNew($_POST);
 			break;
 	}
 

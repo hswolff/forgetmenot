@@ -36,7 +36,7 @@ $(document).ready(function() {
     window.TodoList = Backbone.Collection.extend({
         model: Todo,
 //        localStorage: new Store("forgetmenot"),
-		url: "fmn.php?",
+		url: "fmn.php",
         
         nextOrder: function() {
             if (this.length === 0) {
