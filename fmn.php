@@ -28,13 +28,16 @@ try{
 			break;
 
 		case 'POST':
+			print_r(json_encode($_POST));
+			//print_r(json_decode(stripslashes($_POST['model'])));
+			//print_r($_POST['_method']);
 			parse_str(file_get_contents('php://input'), $p_data);
 			$ak = array_keys($p_data);
 			$data = stripslashes($ak[0]);
 			//print_r($data);
 			$dataArray = json_decode($data, true);
 			//print_r($dataArray['content']);
-			ToDo::post($dataArray);
+			//ToDo::post($dataArray);
 			break;
 
 		case 'PUT':

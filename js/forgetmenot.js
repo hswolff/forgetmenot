@@ -301,6 +301,8 @@ $(document).ready(function() {
         },
         
         initialize: function() {
+//            Backbone.emulateHTTP = true;
+//            Backbone.emulateJSON = true;
             _.bindAll(this, 'createNew', 'createNewAfter', 'createNewBefore', 'addOne', 'addAll');
             Todos.bind('reset', this.addAll);
             //Todos.bind('refresh', this.resetOrder);
