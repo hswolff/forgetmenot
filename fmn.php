@@ -23,7 +23,18 @@ try{
 	switch($_SERVER['REQUEST_METHOD'])
 	{			
 		case 'GET':
+			//print_r($_GET);
 			ToDo::get($_GET);
+			break;
+
+		case 'POST':
+			parse_str(file_get_contents('php://input'), $p_data);
+			$ak = array_keys($p_data);
+			$data = stripslashes($ak[0]);
+			//print_r($data);
+			$dataArray = json_decode($data, true);
+			//print_r($dataArray['content']);
+			ToDo::post($dataArray);
 			break;
 
 		case 'PUT':
@@ -33,10 +44,6 @@ try{
 			//print_r($data);
 			var_dump(json_decode($data, true));
 			//ToDo::update($id);
-			break;
-			
-		case 'POST':
-			ToDo::createNew($_POST);
 			break;
 	}
 
@@ -64,10 +71,11 @@ class ToDo {
 //		print_r($db->errorInfo());
 		print_r(json_encode($rows->fetchAll(PDO::FETCH_ASSOC)));
 //		die();
-		return json_encode($rows->fetchAll(PDO::FETCH_ASSOC));
+//		return json_encode($rows->fetchAll(PDO::FETCH_ASSOC));
+		return true;
 	}
 	
-	public static function createNew($text) {
+	public static function post($data) {
 		global $db_name;
 		$db = new PDO($db_name);
 		$db->exec("INSERT INTO todos (content, created_at, updated_at) values ('".$text."', datetime('now','localtime'), datetime('now','localtime'))");
