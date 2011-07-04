@@ -107,7 +107,7 @@ class ToDo {
 		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
 		self::prepare($todo, $stmt);
 		
-		//$stmt->execute();
+		$stmt->execute();
 		$db = null;
 
 		return print_r(json_encode($todo));
