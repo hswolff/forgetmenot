@@ -83,33 +83,26 @@ class ToDo {
 		return print_r(json_encode($todos));
 	}
 	
-	public static function create($todo) {
-		global $db_name;
-		$db = new PDO($db_name);
-		print_r($todo);
-		/*
-		$content = 
-		$parent = 
-		$indent
-		$position
-		$done
-		*/
-		$db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
-		$db->bindParam(':content', $content);
-		$db->bindParam(':parent', $parent);
-		$db->bindParam(':indent', $indent);
-		$db->bindParam(':position', $position);
-		$db->bindParam(':done', $done);
-		$db->execute();
-		
-		echo $db->lastInsertRowID();
-		$db->close();
+	private function prepare($todo, $stmt) {
+		$stmt->bindParam(':content', $todo['content']);
+		$stmt->bindParam(':parent', $todo['parent']);
+		$stmt->bindParam(':indent', $todo['indent']);
+		$stmt->bindParam(':position', $todo['position']);
+		$stmt->bindParam(':done', $todo['done']);
 	}
 	
-	public function __toString() {
-		return '
-			<li id="todo-'.$this->data['id'].'" class="todo">'.$this->data['content'].'</li>
-		';
+	public static function create($todo) {
+		global $db_name;
+
+		$db = new PDO($db_name);		
+		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+
+		self::prepare($todo, $stmt);
+		
+		//$stmt->execute();
+		$db = null;
+
+		return print_r(json_encode($todo));
 	}
 	
 	public static function update($id, $text) {
