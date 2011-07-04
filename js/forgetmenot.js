@@ -357,7 +357,7 @@ $(document).ready(function() {
 			if (topOrBottom == 'top') {
 				this.$("#todoItemsList").prepend(view.render().el);
 			} else if (topOrBottom == 'bottom') {
-				var lastTodoPosition = _.last(Todos.models).get("position") + 1;
+				var lastTodoPosition = Todos.last().get("position") + 1;
 				todo.set({position: lastTodoPosition});
 				Todos.sort({silent: true});
 				this.$("#todoItemsList").append(view.render().el);
