@@ -6,7 +6,7 @@ $(document).ready(function() {
             content: "new empty todo",
             parent: 0,
             indent: 0,
-            order: 0,
+            position: 0,
             done: false
         },
         
@@ -38,11 +38,11 @@ $(document).ready(function() {
 //        localStorage: new Store("forgetmenot"),
 		url: "fmn.php",
         
-        nextOrder: function() {
+        nextPosition: function() {
             if (this.length === 0) {
                 return 1;
             } else {
-                return this.last().get('order') + 1;
+                return this.last().get('position') + 1;
             }
         },
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
 		},
         
         comparator: function(todo) {
-          return todo.get('order');
+          return todo.get('position');
         },
 		
 		// Get's passed current todo
@@ -99,7 +99,7 @@ $(document).ready(function() {
 		// Gets passed current todo
 		// Sets current todo's parent todo Id correctly
 		setParentTodo: function(todo) {
-			todo.get('order');
+			todo.get('position');
 			var previousTodo = this.getPreviousTodo(todo);
 			if (previousTodo.get('parent') == '0') {
 				todo.setParent(previousTodo);
@@ -108,14 +108,14 @@ $(document).ready(function() {
 		
 		// Passed in current todo
 		// Returns next todo item
-		// Based off of todo's 'order' attribute
+		// Based off of todo's 'position' attribute
 		getNextTodo: function(todo) {
 			return this.at(Todos.indexOf(todo) + 1);
 		},
 		
 		// Passed in current todo
 		// Returns previous todo item
-		// Based off of todo's 'order' attribute
+		// Based off of todo's 'position' attribute
 		getPreviousTodo: function(todo) {
 			return this.at(Todos.indexOf(todo) - 1);
 		}
@@ -245,7 +245,7 @@ $(document).ready(function() {
 				Note for Up and Down keys:
 				The '- 2' and none increments are
 				due to the collection being kept at index 0
-				but the order attribute being kept at index 1
+				but the position attribute being kept at index 1
 			**/
 			// Up key - close current todo and open todo above to edit
 			if (e.keyCode == 38) {
@@ -305,11 +305,11 @@ $(document).ready(function() {
 //            Backbone.emulateJSON = true;
             _.bindAll(this, 'createNew', 'createNewAfter', 'createNewBefore', 'addOne', 'addAll');
             Todos.bind('reset', this.addAll);
-            //Todos.bind('refresh', this.resetOrder);
-			Todos.bind('remove', this.resetOrder);
-			Todos.bind('add', this.resetOrder);
+            //Todos.bind('refresh', this.resetPosition);
+			Todos.bind('remove', this.resetPosition);
+			Todos.bind('add', this.resetPosition);
             Todos.fetch();
-			this.resetOrder();
+			this.resetPosition();
 			if (Todos.length == 0) {
 				this.createNew({content: 'Start your first Todo!'});
 				Todos.at(0).view.edit();
@@ -328,7 +328,7 @@ $(document).ready(function() {
 				content: '',
 				parent: todo.get('parent'),
 				indent: todo.get('indent'),
-				order: (todo.get('order') + 1)
+				position: (todo.get('position') + 1)
 			});
 			var view = new TodoView({model:t});
 			this.$('#' + todo.id).after(view.render().el);
@@ -340,7 +340,7 @@ $(document).ready(function() {
 				content: '',
 				parent: todo.get('parent'),
 				indent: todo.get('indent'),
-				order: todo.get('order')
+				position: todo.get('position')
 			});
 			var view = new TodoView({model:t});
 			this.$('#' + todo.id).before(view.render().el);
@@ -352,8 +352,8 @@ $(document).ready(function() {
 			if (topOrBottom == 'top') {
 				this.$("#todoItemsList").prepend(view.render().el);
 			} else if (topOrBottom == 'bottom') {
-				var lastTodoPosition = _.last(Todos.models).get("order") + 1;
-				todo.set({order: lastTodoPosition});
+				var lastTodoPosition = _.last(Todos.models).get("position") + 1;
+				todo.set({position: lastTodoPosition});
 				Todos.sort({silent: true});
 				this.$("#todoItemsList").append(view.render().el);
 			} else {
@@ -366,11 +366,11 @@ $(document).ready(function() {
             Todos.each(this.addOne);
         },
 
-        resetOrder: function(todo) {
-            var order = -1;
+        resetPosition: function(todo) {
+            var position = -1;
             _.each(Todos.models, function(todo) {
-                order++;
-                todo.set({ order: order});
+                position++;
+                todo.set({ position: position});
                 todo.save();
             });
             //Todos.refresh();
