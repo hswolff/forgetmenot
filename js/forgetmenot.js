@@ -313,12 +313,14 @@ $(document).ready(function() {
             //Todos.bind('refresh', this.resetPosition);
 			Todos.bind('remove', this.resetPosition);
 			Todos.bind('add', this.resetPosition);
-            Todos.fetch();
+            Todos.fetch({success: function(){
+				if (Todos.length == 0) {
+					forgetmenot.createNew({content: 'Start your first Todo!', topOrBottom: 'top'});
+					Todos.at(0).view.edit();
+				}
+			}});
 			this.resetPosition();
-			if (Todos.length == 0) {
-				this.createNew({content: 'Start your first Todo!'});
-				Todos.at(0).view.edit();
-			}
+			
         },
         
         createNew: function(o) {
