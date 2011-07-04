@@ -51,9 +51,8 @@ try{
 			parse_str(file_get_contents('php://input'), $p_data);
 			$ak = array_keys($p_data);
 			$data = stripslashes($ak[0]);
-			//print_r($data);
-			var_dump(json_decode($data, true));
-			//ToDo::update($id);
+			$dataArray = json_decode($data, true);
+			ToDo::update($dataArray);
 			break;
 	}
 
@@ -96,7 +95,6 @@ class ToDo {
 
 		$db = new PDO($db_name);		
 		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
-
 		self::prepare($todo, $stmt);
 		
 		//$stmt->execute();
@@ -105,11 +103,17 @@ class ToDo {
 		return print_r(json_encode($todo));
 	}
 	
-	public static function update($id, $text) {
+	public static function update($todo) {
 		global $db_name;
+		$id = (int)$todo['id'];
+		
 		$db = new PDO($db_name);
-		$db->exec('UPDATE todos SET content = "'.$text.'" WHERE id = '.$id.'');
-		$db->close();
+		$stmt = $db->prepare("UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
+
+		self::prepare($todo, $stmt);
+		$stmt->execute();
+		$db = null;
+		return print_r(json_encode($todo));
 	}
 	
 	public static function delete($id) {
