@@ -5,8 +5,8 @@ $db_name = 'sqlite:todo.db';
 try {
 	if (!file_exists(str_replace('sqlite:', '', $db_name))) {
 		$db = new PDO($db_name);
-		$db->exec('CREATE TABLE todos (id INTEGER PRIMARY KEY, content TEXT)');
-		$db->exec("INSERT INTO todos (content) values ('Your first todo is...')");
+		$db->exec("CREATE TABLE todos (id INTEGER PRIMARY KEY, content TEXT, parent INTEGER, indent INTEGER, order INTEGER, done INTEGER)");
+		//$db->exec("INSERT INTO todos (content) values ('Your first todo is...')");
 		print_r($db->errorInfo());
 		$db->close();
 		$db = null;
