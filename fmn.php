@@ -23,8 +23,8 @@ try{
 	switch($_SERVER['REQUEST_METHOD'])
 	{			
 		case 'GET':
-			//print_r($_GET);
-			ToDo::get($_GET);
+			$id = str_replace('/','',$_SERVER['QUERY_STRING']);
+			ToDo::get($id);
 			break;
 
 		case 'POST':
@@ -76,7 +76,12 @@ class ToDo {
 	public static function get($id = null) {
 		global $db_name;
 		$db = new PDO($db_name);
-		$rows = $db->prepare("SELECT * FROM todos");
+		if($id == '') {
+			$rows = $db->prepare("SELECT * FROM todos");
+		} else {
+			$rows = $db->prepare("SELECT * FROM todos WHERE id = $id");
+		}
+		
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
 		return print_r(json_encode($todos));
