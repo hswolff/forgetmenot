@@ -37,7 +37,7 @@ try{
 			//print_r($data);
 			$dataArray = json_decode($data, true);
 			//print_r($dataArray['content']);
-			//ToDo::post($dataArray);
+			//ToDo::create($dataArray);
 			break;
 
 		case 'PUT':
@@ -70,18 +70,31 @@ class ToDo {
 	public static function get($id = null) {
 		global $db_name;
 		$db = new PDO($db_name);
-		$rows = $db->query('SELECT * FROM todos');
-//		print_r($db->errorInfo());
-		print_r(json_encode($rows->fetchAll(PDO::FETCH_ASSOC)));
-//		die();
-//		return json_encode($rows->fetchAll(PDO::FETCH_ASSOC));
-		return true;
+		$rows = $db->prepare("SELECT * FROM todos");
+		$rows->execute();
+		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
+		return print_r(json_encode($todos));
 	}
 	
-	public static function post($data) {
+	public static function create($todo) {
 		global $db_name;
 		$db = new PDO($db_name);
-		$db->exec("INSERT INTO todos (content, created_at, updated_at) values ('".$text."', datetime('now','localtime'), datetime('now','localtime'))");
+		print_r($todo);
+		/*
+		$content = 
+		$parent = 
+		$indent
+		$position
+		$done
+		*/
+		$db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+		$db->bindParam(':content', $content);
+		$db->bindParam(':parent', $parent);
+		$db->bindParam(':indent', $indent);
+		$db->bindParam(':position', $position);
+		$db->bindParam(':done', $done);
+		$db->execute();
+		
 		echo $db->lastInsertRowID();
 		$db->close();
 	}
