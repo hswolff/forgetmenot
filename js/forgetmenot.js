@@ -7,7 +7,7 @@ $(document).ready(function() {
             parent: 0,
             indent: 0,
             position: 0,
-            done: false
+            done: 0
         },
         
         initialize: function() {
@@ -17,7 +17,12 @@ $(document).ready(function() {
         },
 
 		done: function() {
-			this.save({done: !this.get("done")});
+		    if (this.get("done") == 0) {
+		        this.save({done: 1});
+		    } else {
+		        this.save({done: 0});
+		    }
+			
 		},
 		
 		setParent: function(parentTodo) {
