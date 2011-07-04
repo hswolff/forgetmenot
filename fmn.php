@@ -54,6 +54,11 @@ try{
 			$dataArray = json_decode($data, true);
 			ToDo::update($dataArray);
 			break;
+			
+		case 'DELETE':
+			$id = (int)str_replace('/','',$_SERVER['QUERY_STRING']);
+			ToDo::delete($id);
+			break;
 	}
 
 }
@@ -123,9 +128,12 @@ class ToDo {
 	
 	public static function delete($id) {
 		global $db_name;
+
 		$db = new PDO($db_name);
-		$db->exec('DELETE FROM todos WHERE id = '.$id.'');
-		$db->close();
+		$stmt = $db->prepare("DELETE FROM todos WHERE id = $id");
+		$stmt->execute();
+		$db = null;
+
 	}
 	
 }
