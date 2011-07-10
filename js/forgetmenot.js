@@ -172,6 +172,7 @@ $(document).ready(function() {
 			var $inputVal = this.input.val();
             this.model.save({ 
 				content: ($inputVal == '' ? this.model.defaults.content : $inputVal)
+				indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
 			});
 			this.model.indentBy(indent);
         },
