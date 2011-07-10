@@ -28,30 +28,13 @@ try{
 			break;
 
 		case 'POST':
-			/* emulation method
-			print_r(json_encode($_POST));
-			print_r(json_decode(stripslashes($_POST['model'])));
-			print_r($_POST['_method']);
-			*/
-			// Parse POST data...regular $_POST doesn't seem to work
-			parse_str(file_get_contents('php://input'), $p_data);
-			// POST data is returned and the key has the entire JSON
-			// So we access just the key to get the JSON data
-			$ak = array_keys($p_data);
-			// Strip the extra slashes put in by PHP to make it 
-			// A standard JSON object.
-			// $data has our POST JSON object
-			$data = stripslashes($ak[0]);
-			// Decode the $data JSON object to an associative array
-			$dataArray = json_decode($data, true);
+			$dataArray = json_decode(stripslashes($_POST['model']), true);
 			ToDo::create($dataArray);
 			break;
 
 		case 'PUT':
-			parse_str(file_get_contents('php://input'), $p_data);
-			$ak = array_keys($p_data);
-			$data = stripslashes($ak[0]);
-			$dataArray = json_decode($data, true);
+			parse_str(file_get_contents('php://input'), $p_data);			
+			$dataArray = json_decode(stripslashes($p_data['model']), true);			
 			ToDo::update($dataArray);
 			break;
 			
