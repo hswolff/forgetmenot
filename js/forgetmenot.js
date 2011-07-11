@@ -29,7 +29,7 @@ $(document).ready(function() {
 			if(!parentTodo) {
 				return false;
 			}
-			this.save({parent: parentTodo.id});
+			this.save({parent: parentTodo.get('id')});
 			return true;
 		},
 		
@@ -145,7 +145,7 @@ $(document).ready(function() {
         
         initialize: function() {
             _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
-            this.model.bind('change', this.render);
+            this.bind('close', this.render);
             this.el.id = this.model.get("id");
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
@@ -171,15 +171,16 @@ $(document).ready(function() {
         save: function(indent) {
 			var $inputVal = this.input.val();
             this.model.save({ 
-				content: ($inputVal == '' ? this.model.defaults.content : $inputVal)
+				content: ($inputVal == '' ? this.model.defaults.content : $inputVal),
 				indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
 			});
-			this.model.indentBy(indent);
+//			this.model.indentBy(indent);
         },
 
 		close: function() {
 			this.save();
 			$(this.el).removeClass("editing");
+			this.trigger('close');
 		},
         
         deleteTodo: function() {
@@ -335,8 +336,8 @@ $(document).ready(function() {
             var t = Todos.create({
 				content: '',
 				parent: todo.get('parent'),
-				indent: todo.get('indent'),
-				position: (todo.get('position') + 1)
+				indent: parseInt(todo.get('indent')),
+				position: parseInt((todo.get('position') + 1))
 			});
 			var view = new TodoView({model:t});
 			this.$('#' + todo.id).after(view.render().el);
@@ -347,7 +348,7 @@ $(document).ready(function() {
             var t = Todos.create({
 				content: '',
 				parent: todo.get('parent'),
-				indent: todo.get('indent'),
+				indent: parseInt(todo.get('indent')),
 				position: todo.get('position')
 			});
 			var view = new TodoView({model:t});
