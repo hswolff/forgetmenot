@@ -91,8 +91,9 @@ class ToDo {
 		self::prepare($todo, $stmt);
 		
 		$stmt->execute();
+		$todo['id'] = (int)$db->lastInsertId();
 		$db = null;
-
+		
 		return print_r(json_encode($todo));
 	}
 	
