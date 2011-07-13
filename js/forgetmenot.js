@@ -146,7 +146,7 @@ $(document).ready(function() {
         initialize: function() {
             _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.bind('close', this.render);
-            this.el.id = this.model.get("id");
+            this.el.id = this.model.cid;
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
             this.model.view = this;
@@ -317,8 +317,8 @@ $(document).ready(function() {
             _.bindAll(this, 'createNew', 'createNewAfter', 'createNewBefore', 'addOne', 'addAll');
             Todos.bind('reset', this.addAll);
             //Todos.bind('refresh', this.resetPosition);
-			Todos.bind('remove', this.resetPosition);
-			Todos.bind('add', this.resetPosition);
+			//Todos.bind('remove', this.resetPosition);
+			//Todos.bind('add', this.resetPosition);
             Todos.fetch({success: function(){
 				if (Todos.length == 0) {
 					forgetmenot.createNew({content: 'Start your first Todo!', topOrBottom: 'top'});
@@ -343,7 +343,7 @@ $(document).ready(function() {
 				position: parseInt(todo.get('position')) + 1
 			});
 			var view = new TodoView({model:t});
-			this.$('#' + todo.id).after(view.render().el);
+			this.$('#' + todo.cid).after(view.render().el);
 			view.edit();
         },
 
