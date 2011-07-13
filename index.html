@@ -68,7 +68,7 @@
 
     <script type="text/template" id="item-template">
 		<div class="clearfix display <%= done == 1 ? 'done' : '' %>">
-			<input type="checkbox" class="done" <%= done ? 'checked="checked"' : '' %>>
+			<input type="checkbox" class="done" <%= done == 1 ? 'checked="checked"' : '' %>>
 			<div class="content"><%= content %></div>
 			<div class="delete">&nbsp;</div>
 		</div>

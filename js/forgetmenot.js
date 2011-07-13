@@ -137,7 +137,7 @@ $(document).ready(function() {
         
         events: {
             "dblclick .display"        :      	"edit",
-            "click .display"        :      	"edit",
+            //"click .display"        :      	"edit",
             "keydown .edit input"              :      	"keyboardActions",
 			"click input.done"  			    : 		"toggleDone",
             "click .display .delete"					   : 	    "deleteTodo"            
@@ -318,7 +318,6 @@ $(document).ready(function() {
             Todos.fetch({success: function(){
 				if (Todos.length == 0) {
 					forgetmenot.createNew({content: 'Start your first Todo!', topOrBottom: 'top'});
-					Todos.at(0).view.edit();
 				}
 			}});
 			this.resetPosition();
@@ -337,7 +336,7 @@ $(document).ready(function() {
 				content: '',
 				parent: todo.get('parent'),
 				indent: parseInt(todo.get('indent')),
-				position: parseInt((todo.get('position') + 1))
+				position: parseInt(todo.get('position')) + 1
 			});
 			var view = new TodoView({model:t});
 			this.$('#' + todo.id).after(view.render().el);
