@@ -218,17 +218,20 @@ $(document).ready(function() {
 			// Tab key - move todo to right one
 			// And make sub todo of parent (if it exists)
 			if (e.keyCode == 9 && !e.shiftKey) {
+				/* disable for now
 				this.save();
 				if(this.model.setParent(Todos.getParentTodo(this.model))) {
 					this.save(1);
 					Todos.maintainChildrenOfParent(this.model);
 					this.edit();
-				}	
+				}
+				*/
 				e.preventDefault();
 			}
 			// Shift + Tab key - move todo to left one
 			// And un-sub it from parent (if it exists)
 			if (e.shiftKey && e.keyCode == 9) {
+				/* disable for now
 				this.save();
 				if(this.model.get('indent') == 1) {
 					this.model.save({
@@ -246,6 +249,7 @@ $(document).ready(function() {
 					Todos.maintainChildrenOfParent(this.model);
 				}
 				this.edit();
+				*/
 				e.preventDefault();
 			}
 			/**
