@@ -45,6 +45,7 @@ $(function() {
         initialize: function() {
             _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.bind('close', this.render);
+			this.model.bind('change:done', this.render);
             this.el.id = this.model.cid;
             // Give reverse access to a model's view by setting its 'this' 
             // to a new attribute on the model
