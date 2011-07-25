@@ -139,7 +139,11 @@ $(function() {
 		url: "fmn.php?",
         
         comparator: function(todo) {
-          return todo.get('id');
+			if (todo.get('id').length === 1) {
+				return '0'+todo.get('id');
+			} else {
+				return todo.get('id');
+			}
         }
     });
     
