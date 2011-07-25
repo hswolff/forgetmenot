@@ -157,6 +157,9 @@ $(function() {
             _.bindAll(this, 'newTodo', 'addOne', 'addAll');
             fmn.Todos.bind('reset', this.addAll);
 			fmn.Todos.bind('add', this.addOne);
+			fmn.Todos.bind('add', function(model, collection){
+				model.view.edit();
+			});
             fmn.Todos.fetch();
         },
 
