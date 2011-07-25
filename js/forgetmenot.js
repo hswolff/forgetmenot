@@ -30,7 +30,7 @@ $(function() {
     });
 
     // Each Individual Todo Item View
-    window.TodoView = Backbone.View.extend({
+    fmn.TodoView = Backbone.View.extend({
         tagName: "li",
         template: _.template($('#item-template').html()),
         
@@ -169,7 +169,7 @@ $(function() {
         },
         
         addOne: function(o, p) {
-            var view = new TodoView({model:o.todo || o});
+            var view = new fmn.TodoView({model:o.todo || o});
 			this.$("#todoItemsList").append(view.render().el);
             return view;
         },
