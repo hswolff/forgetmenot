@@ -114,11 +114,13 @@ $(function() {
 
 			// Up key - close current todo and open todo above to edit
 			if (e.keyCode == 38) {
-				this.editPreviousTodo(e);
+				this.close();
+				fmn.Todos.getPrevious(this.model).view.edit();
 			}
 			// Down key - close current todo and open todo above to edit
 			if (e.keyCode == 40) {
-				this.editNextTodo(e);
+				this.close();
+				fmn.Todos.getNext(this.model).view.edit();
 			}
 			// Backspace key
 			if (e.keyCode == 8) {
@@ -138,6 +140,24 @@ $(function() {
     fmn.Collection = Backbone.Collection.extend({
         model: fmn.Model,
 		url: "fmn.php?",
+		
+		getNext: function(todo) {
+			var m = this.at(this.indexOf(todo) + 1);
+			if (!m) {
+				return todo;
+			} else {
+				return m;
+			}
+		},
+		
+		getPrevious: function(todo) {
+			var m = this.at(this.indexOf(todo) - 1);
+			if (!m) {
+				return todo;
+			} else {
+				return m;
+			}
+		},
         
         comparator: function(todo) {
 			if (todo.get('id').length === 1) {
