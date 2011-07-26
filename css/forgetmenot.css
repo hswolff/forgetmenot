@@ -153,6 +153,7 @@ header {
 	
 	#stats #clearCompleted {
 		float: right;
+		cursor: pointer;
 	}
 
 nav.lists {

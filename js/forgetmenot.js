@@ -39,16 +39,16 @@ $(function() {
             //"click .display"        :      	"edit",
             "keydown .edit input"              :      	"keyboardActions",
 			"click input.done"  			    : 		"toggleDone",
-            "click .display .delete"					   : 	    "deleteTodo"            
+            "click .display .delete"					   : 	    "delete"            
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
+            _.bindAll(this, 'render', 'delete', 'close','save', 'keyboardActions');
             this.bind('close', this.render);
 			this.model.bind('change:done', this.render);
             this.el.id = this.model.cid;
-            // Give reverse access to a model's view by setting its 'this' 
-            // to a new attribute on the model
+			
+			this.model.bind('destroy', this.delete)
             this.model.view = this;
         },
         
@@ -83,8 +83,7 @@ $(function() {
 			this.trigger('close');
 		},
         
-        deleteTodo: function() {
-            this.model.destroy();
+        delete: function() {
             this.remove();
         },
         
@@ -131,7 +130,7 @@ $(function() {
 			if (e.keyCode == 8) {
 				if (this.input.val() == '') {
 					this.editPreviousTodo(e);
-					this.deleteTodo();
+					this.model.destroy();
 					e.preventDefault();
 				}
 			}
@@ -163,7 +162,11 @@ $(function() {
 				return m;
 			}
 		},
-        
+		
+		done: function() {
+			return this.filter(function(todo){ return todo.get('done') == 1; });
+		},
+		
         comparator: function(todo) {
 			if (todo.get('id').length === 1) {
 				return '0'+todo.get('id');
@@ -174,24 +177,58 @@ $(function() {
     });
     
     fmn.Todos = new fmn.Collection;
+	
+	// Stats Template
+	fmn.StatsView = Backbone.View.extend({
+		el: $('#stats'),
+        template: _.template($('#stats-template').html()),
+
+		initialize: function() {
+			_.bindAll(this, 'render')
+			fmn.Todos.bind('all', this.render)
+		},
+		
+		render: function() {
+			$(this.el).html(this.template({
+				total: fmn.Todos.length,
+				done: fmn.Todos.done().length
+			}));
+		}
+	
+	});
 
     fmn.App = Backbone.View.extend({
         el: $("#todoApp"),
         
         events: {
-            "click #createNew"  :       "newTodo"
+            "click #createNew"  :       "newTodo",
+			'click #clearCompleted' : 	'clearCompleted'
         },
         
         initialize: function() {
             Backbone.emulateJSON = true;
-            _.bindAll(this, 'newTodo', 'addOne', 'addAll');
+            _.bindAll(this, 'render', 'newTodo', 'addOne', 'addAll');
             fmn.Todos.bind('reset', this.addAll);
 			fmn.Todos.bind('add', this.addOne);
 			fmn.Todos.bind('add', function(model, collection){
 				model.view.edit();
 			});
             fmn.Todos.fetch();
+
+			this.render();
         },
+
+		render: function() {
+			this.stats = new fmn.StatsView;
+		},
+		
+		clearCompleted: function() {
+			var remove = fmn.Todos.done();
+			_.each(remove, function(todo){
+				todo.destroy();
+			});
+			//fmn.Todos.remove(remove);
+		},
 
         addAll: function(collection, r) {
 			// If collection is empty add one
