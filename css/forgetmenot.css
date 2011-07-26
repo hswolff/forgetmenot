@@ -122,13 +122,13 @@ select, input, textarea, button {
 
 header {
 	border-bottom: 1px dashed #C2B8B7;
-	padding: 5px 0 15px;
 }
 
 	header h1 {
 	    font-size: 28px;
 	    text-align: center;
 	    font-style: italic;
+		margin: 10px 0;
 	}
 	header .createNew {
 		/*  Disable for now */
@@ -140,6 +140,19 @@ header {
 		position: relative;
 		float: right;
 		top: -32px;
+	}
+
+#stats {
+	font-size: 14px;
+	margin: 15px 0 0;
+}
+
+	#stats .text {
+		
+	}
+	
+	#stats #clearCompleted {
+		float: right;
 	}
 
 nav.lists {
