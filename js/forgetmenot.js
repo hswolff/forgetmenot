@@ -34,10 +34,10 @@ $(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "click .display" : 			"edit",
-            "keydown .edit input" : 	"keyboardActions",
-			"click input.done" : 		"toggleDone",
-            "click .display .delete" :  "delete"            
+            "click .display .content" : 			"edit",
+			"click input.done" : 					"toggleDone",
+            "click .display .delete" :  			"delete",
+			"keydown .edit input" : 				"keyboardActions"       
         },
         
         initialize: function() {

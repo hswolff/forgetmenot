@@ -231,6 +231,7 @@ ul.fmn-todos {
 }
     .fmn-todos .todo .display {
         border-bottom: 1px dashed #B3B3B3;
+		width: 560px;
     }
     .fmn-todos .todo .display.done .content {
         text-decoration: line-through;
@@ -245,6 +246,7 @@ ul.fmn-todos {
         .fmn-todos .todo .display .content {
 			float: left;
 			padding: 10px 0;
+			width: 496px;
         }
 		.fmn-todos .todo .display .delete {
 			float: right;
