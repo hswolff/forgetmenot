@@ -3,7 +3,6 @@ $(function() {
 	window.fmn = {};
 	
     fmn.Model = Backbone.Model.extend({
-        //Default Attributes
         defaults: {
             content: "new empty todo",
             parent: 0,
@@ -35,19 +34,16 @@ $(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "dblclick .display"        :      	"edit",
-            //"click .display"        :      	"edit",
-            "keydown .edit input"              :      	"keyboardActions",
-			"click input.done"  			    : 		"toggleDone",
-            "click .display .delete"					   : 	    "delete"            
+            "click .display" : 			"edit",
+            "keydown .edit input" : 	"keyboardActions",
+			"click input.done" : 		"toggleDone",
+            "click .display .delete" :  "delete"            
         },
         
         initialize: function() {
             _.bindAll(this, 'render', 'delete', 'close','save', 'keyboardActions');
             this.bind('close', this.render);
-			this.model.bind('change:done', this.render);
-            this.el.id = this.model.cid;
-			
+			this.model.bind('change:done', this.render);			
 			this.model.bind('destroy', this.delete)
             this.model.view = this;
         },
@@ -65,7 +61,6 @@ $(function() {
             $(this.el).addClass("editing");
             this.input.val(content);
             this.input.focus();
-            //return false;
         },
         
         save: function(indent) {
@@ -74,7 +69,6 @@ $(function() {
 				content: ($inputVal == '' ? this.model.defaults.content : $inputVal),
 				indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
 			});
-//			this.model.indentBy(indent);
         },
 
 		close: function() {
@@ -88,12 +82,7 @@ $(function() {
         },
         
         keyboardActions: function(e) {
-			/**
-				left arrow		37
-				up arrow		38
-				right arrow		39
-				down arrow		40
-			**/
+	
 			// Enter button
 			if (e.keyCode == 13) {
 				this.close();
@@ -105,11 +94,13 @@ $(function() {
 				}
 				e.preventDefault();
 			}
+			
 			// Tab key - move todo to right one
 			// And make sub todo of parent (if it exists)
 			if (e.keyCode == 9 && !e.shiftKey) {
 				e.preventDefault();
 			}
+			
 			// Shift + Tab key - move todo to left one
 			// And un-sub it from parent (if it exists)
 			if (e.shiftKey && e.keyCode == 9) {
@@ -121,19 +112,20 @@ $(function() {
 				this.close();
 				fmn.Todos.getPrevious(this.model).view.edit();
 			}
+			
 			// Down key - close current todo and open todo above to edit
 			if (e.keyCode == 40) {
 				this.close();
 				fmn.Todos.getNext(this.model).view.edit();
 			}
+			
 			// Backspace key
 			if (e.keyCode == 8) {
 				if (this.input.val() == '') {
-					this.editPreviousTodo(e);
-					this.model.destroy();
 					e.preventDefault();
 				}
 			}
+			
         },
 
 		toggleDone: function() {
@@ -201,7 +193,7 @@ $(function() {
         el: $("#todoApp"),
         
         events: {
-            "click #createNew"  :       "newTodo",
+            'click #createNew' :       	'newTodo',
 			'click #clearCompleted' : 	'clearCompleted'
         },
         
@@ -227,7 +219,6 @@ $(function() {
 			_.each(remove, function(todo){
 				todo.destroy();
 			});
-			//fmn.Todos.remove(remove);
 		},
 
         addAll: function(collection, r) {
