@@ -98,7 +98,12 @@ $(function() {
 			// Enter button
 			if (e.keyCode == 13) {
 				this.close();
-				fmn.app.newTodo();
+				var nextModel = fmn.Todos.getNext(this.model);
+				if (this.model === nextModel) {
+					fmn.app.newTodo();
+				} else {
+					nextModel.view.edit();
+				}
 				e.preventDefault();
 			}
 			// Tab key - move todo to right one
