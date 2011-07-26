@@ -99,46 +99,50 @@ html, body {
 }
 
 body {
-    background-color:#282828;
-    font-family: 'Times New Roman';
-    font-size:20px;
+    background-color:#E0E0E0;
 }
 
+body, 
 select, input, textarea, button { 
     font-size:20px;
-	font-family: 'Times New Roman';
+	font-family:  'Times New Roman';
 }
 
 .container {
-    background: #DCDCDC;
-    width: 500px;
+    background: #FBFEFB;
+    width: 560px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 10px 50px;
     position: relative;
     min-height: 100%;
-    border: 1px solid #505050;
+    border: 1px solid #C2B8B7;
     border-top: none;
     border-bottom: none;
 }
 
-header h1 {
-    font-size: 28px;
-    text-align: center;
-    font-style: italic;
-}
-header .createNew {
-	/*  Disable for now */
-	display: none;
-	width: 32px;
-	height: 32px;
-    text-align: center;
-    cursor: pointer;
-	position: relative;
-	float: right;
-	top: -32px;
+header {
+	border-bottom: 1px dashed #C2B8B7;
+	padding: 5px 0 15px;
 }
 
-nav {
+	header h1 {
+	    font-size: 28px;
+	    text-align: center;
+	    font-style: italic;
+	}
+	header .createNew {
+		/*  Disable for now */
+		display: none;
+		width: 32px;
+		height: 32px;
+	    text-align: center;
+	    cursor: pointer;
+		position: relative;
+		float: right;
+		top: -32px;
+	}
+
+nav.lists {
     /* disable for now */
     display:none;
     position: absolute;
@@ -148,57 +152,57 @@ nav {
     border: 1px solid #505050;
     border-right: none;
 }
-    nav .compact {
+    nav.lists .compact {
         display:none;
     }
-    nav h2 {
+    nav.lists h2 {
         font-size: 20px;
         margin: 4px;
     }
-    nav ul {
+    nav.lists ul {
         font-size: 16px;
     }
-        nav ul li {
+        nav.lists ul li {
             padding: 10px 0;
             margin: 0 10px;
             cursor: pointer;
         }
-        nav ul li.active {
+        nav.lists ul li.active {
             color: #000;
             font-weight: bold;
         }
-        nav ul li:hover,
-        nav ul li:hover a,
-        nav ul li:hover a:visited {
+        nav.lists ul li:hover,
+        nav.lists ul li:hover a,
+        nav.lists ul li:hover a:visited {
             color: #000;
             font-weight: bold;
         }
-        nav ul li:hover a,
-        nav ul li:hover a:visited {
+        nav.lists ul li:hover a,
+        nav.lists ul li:hover a:visited {
             text-decoration: underline;
         }
-        nav ul li:before {
+        nav.lists ul li:before {
             content: '\00bb  ';
         }
-            nav ul li a,
-            nav ul li a:visited {
+            nav.lists ul li a,
+            nav.lists ul li a:visited {
                 text-decoration: none;
                 color: #282828;
             }
-            nav ul li.active a,
-            nav ul li.active a:visited {
+            nav.lists ul li.active a,
+            nav.lists ul li.active a:visited {
                 text-decoration: none;
                 color: #000;
             }
 
-nav.hide {
+nav.lists.hide {
     width: 20px;
     left: -21px;
 }
-    nav.hide .full {
+    nav.lists.hide .full {
         display: none;
     }
-    nav.hide .compact {
+    nav.lists.hide .compact {
         display: block;
     }
 
@@ -206,14 +210,13 @@ nav.hide {
 ul.fmn-todos {
     list-style: none;
     margin: 30px auto 0;
-    width: 500px;
 }
 .fmn-todos .todo {
     margin: 10px 0 0;
 	height: 50px;
 }
     .fmn-todos .todo .display {
-        border-bottom: 1px solid #B3B3B3;
+        border-bottom: 1px dashed #B3B3B3;
     }
     .fmn-todos .todo .display.done .content {
         text-decoration: line-through;
