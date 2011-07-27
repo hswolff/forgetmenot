@@ -16,29 +16,33 @@ header .createNew {
 }
 
 .container {
-    background: #DCDCDC;
-    width: 95%;
+    width: 294px;
     margin: 0 auto;
     padding: 10px;
     position: relative;
     min-height: 100%;
-    border: 1px solid #505050;
-    border-top: none;
-    border-bottom: none;
 }
 
 ul.fmn-todos {
 
 }
 
-
+/*
 .fmn-todos .todo.editing .edit .input {
     padding: 0 0 10px 32px;
     width: 85%;
     outline: none;
     font-size: 18px;
 }
+*/
+	
+	.fmn-todos .todo .display {
+		width: 280px;
+	}
 
+	.fmn-todos .todo .display .content {
+		width: 216px;
+	}
 
 footer {
     display: none;
