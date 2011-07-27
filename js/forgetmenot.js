@@ -36,15 +36,15 @@ $(function() {
         events: {
             "click .display .content" : 			"edit",
 			"click input.done" : 					"toggleDone",
-            "click .display .delete" :  			"delete",
+            "click .display .delete" :  			"deleteTodo",
 			"keydown .edit input" : 				"keyboardActions"       
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'delete', 'close','save', 'keyboardActions');
+            _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
             this.bind('close', this.render);
 			this.model.bind('change:done', this.render);			
-			this.model.bind('destroy', this.delete)
+			this.model.bind('destroy', this.deleteTodo);
             this.model.view = this;
         },
         
@@ -77,7 +77,7 @@ $(function() {
 			this.trigger('close');
 		},
         
-        delete: function() {
+        deleteTodo: function() {
             this.remove();
         },
         
