@@ -1,6 +1,5 @@
 header h1 {
     font-size: 28px;
-    color: red;
     text-align: center;
     font-style: italic;
 }
@@ -38,11 +37,24 @@ ul.fmn-todos {
 	
 	.fmn-todos .todo .display {
 		width: 280px;
+		height: 45px;
 	}
 
 	.fmn-todos .todo .display .content {
 		width: 216px;
 	}
+	
+		.fmn-todos .todo .display .done {
+            float: left;
+            margin: 17px 18px 0 0;
+        }
+        
+		.fmn-todos .todo .display .delete {
+			float: right;
+		    display: block;
+		    width: 30px; height: 30px;
+		    cursor: pointer;
+		}
 
 footer {
     display: none;

@@ -245,7 +245,7 @@ ul.fmn-todos {
         }
         .fmn-todos .todo .display .content {
 			float: left;
-			padding: 10px 0;
+			margin: 10px 0;
 			width: 496px;
         }
 		.fmn-todos .todo .display .delete {
