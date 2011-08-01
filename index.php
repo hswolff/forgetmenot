@@ -4,8 +4,8 @@ $users = array(
 	'admin' => 'pass',
 	'username' => 'password'
 );
+/*
 session_start();
-
 $_SESSION['auth'] = false;
 if (authenticate($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 	$_SESSION['auth'] = true;
@@ -29,6 +29,7 @@ function authenticate($user, $pass) {
 		}
 	}
 }
+*/
 ?>
 
 <!doctype html>
