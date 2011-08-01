@@ -181,7 +181,7 @@ $(function() {
 
 		initialize: function() {
 			_.bindAll(this, 'render')
-			fmn.Todos.bind('all', this.render)
+			fmn.Todos.bind('all', this.render);
 		},
 		
 		render: function() {
