@@ -36,7 +36,7 @@ $(function() {
         events: {
             "click .display .content" : 			"edit",
 			"click input.done" : 					"toggleDone",
-            "click .display .delete" :  			"deleteTodo",
+            "click .display .delete" :  			"destroyTodo",
 			"keydown .edit input" : 				"keyboardActions"       
         },
         
@@ -75,6 +75,10 @@ $(function() {
 			this.save();
 			$(this.el).removeClass("editing");
 			this.trigger('close');
+		},
+		
+		destroyTodo: function() {
+			this.model.destroy();
 		},
         
         deleteTodo: function() {
