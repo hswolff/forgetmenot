@@ -1,3 +1,36 @@
+<?php
+// Users Array
+$users = array(
+	'admin' => 'pass',
+	'username' => 'password'
+);
+session_start();
+
+$_SESSION['auth'] = false;
+if (authenticate($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+	$_SESSION['auth'] = true;
+	pass;
+} else if (!isset($_SERVER['PHP_AUTH_USER']) || !$_SESSION['auth']) {
+    header('WWW-Authenticate: Basic realm="Forgetmenot"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'Wrong credentials!  Try again!';
+    exit;
+} else {
+	echo 'Wrong credentials!  Try again!';
+	exit;
+}
+function authenticate($user, $pass) {
+	global $users;
+	foreach ($users as $u => $p) {
+		if($user == $u && $pass == $p) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
