@@ -4,6 +4,12 @@ $users = array(
 	'admin' => 'pass',
 	'username' => 'password'
 );
+
+/*
+ *  Uncomment the following
+ *	To enable password protection
+ */
+
 /*
 session_start();
 $_SESSION['auth'] = false;
@@ -41,31 +47,16 @@ function authenticate($user, $pass) {
 	<meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-  	<title>forgetmenot todo list | A ToDo List for the common forgetful-but-not-me.</title>
+  	<title>forgetmenot todo list | A Todo List for the common forgetful-but-not-me.</title>
     
     <link rel="stylesheet" href="css/forgetmenot.css?v=1">
 	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1">
-	<script src="js/head.load.min.js"></script>
 	
 	<script src="js/json2.js"></script>
 	<script src="js/jquery-1.6.2.min.js"></script>
 	<script src="js/underscore-min.js"></script>
 	<script src="js/backbone-min.js"></script>
-<!--	<script src="js/backbone-localstorage.js"></script> -->
 	<script src="js/forgetmenot.js"></script>
-	
-	<script type="text/javascript">
-	/*
-	head.js(
-		{json2: "js/json2.js"},
-		{jquery152: "js/jquery-1.6.2.min.js"},
-		{underscore: "js/underscore-min.js"},
-		{backbone: "js/backbone.js"},
-		{backbonels: "js/backbone-localstorage.js"},
-		{forgetmenot: "js/forgetmenot.js?v=0.1"}
-	);
-	*/
-	</script>
 
 </head>
 <body>
