@@ -1,13 +1,14 @@
 <?php
 
-$db_name = 'sqlite:todo.db';
+// PDO style DB name
+define("DB_NAME", "sqlite:todo.db");
 
+// If the db file doesn't exist create it!
+// If it exists then carry on our merry way
 try {
-	if (!file_exists(str_replace('sqlite:', '', $db_name))) {
-		$db = new PDO($db_name);
+	if (!file_exists(str_replace('sqlite:', '', DB_NAME))) {
+		$db = new PDO(DB_NAME);
 		$db->exec("CREATE TABLE todos (id INTEGER PRIMARY KEY, content TEXT, parent INTEGER, indent INTEGER, position INTEGER, done INTEGER)");
-		//$db->exec("INSERT INTO todos (content) values ('Your first todo is...')");
-		print_r($db->errorInfo());
 		$db->close();
 		$db = null;
 	}
@@ -16,52 +17,44 @@ catch(Exception $e) {
   die($e->getMessage());
 }
 
-$data = array();
 
-try{
-
-	switch($_SERVER['REQUEST_METHOD'])
-	{			
-		case 'GET':
-			$id = str_replace('/','',$_SERVER['QUERY_STRING']);
-			ToDo::get($id);
-			break;
-
-		case 'POST':
-			$dataArray = json_decode(stripslashes($_POST['model']), true);
-			ToDo::create($dataArray);
-			break;
-
-		case 'PUT':
-			parse_str(file_get_contents('php://input'), $p_data);			
-			$dataArray = json_decode(stripslashes($p_data['model']), true);			
-			ToDo::update($dataArray);
-			break;
-			
-		case 'DELETE':
-			$id = (int)str_replace('/','',$_SERVER['QUERY_STRING']);
-			ToDo::delete($id);
-			break;
-	}
-
-}
-catch(Exception $e){
-	echo $e->getMessage();
-	die("0");
-}
+// Instantiate new API object
+$api = new API;
+// Execute API, passing in the request method
+$api->exec($_SERVER['REQUEST_METHOD']);
 
 
-
-class ToDo {
+class API {
 	
-	private $data;
-	
-	public function __construct($par){
-		if(is_array($par))
-			$this->data = $par;
+	// Switchboard, redirecting calls to appropriate functions
+	public function exec($arg) {
+		
+		switch($arg)  {		
+
+			case 'GET':
+				$id = str_replace('/','',$_SERVER['QUERY_STRING']);
+				API::read($id);
+				break;
+
+			case 'PUT':
+				parse_str(file_get_contents('php://input'), $p_data);			
+				$dataArray = json_decode(stripslashes($p_data['model']), true);			
+				API::update($dataArray);
+				break;
+
+			case 'POST':
+				$dataArray = json_decode(stripslashes($_POST['model']), true);
+				API::create($dataArray);
+				break;
+
+			case 'DELETE':
+				$id = (int)str_replace('/','',$_SERVER['QUERY_STRING']);
+				API::delete($id);
+				break;
+		}
 	}
 	
-	public static function get($id = null) {
+	public static function read($id = null) {
 		global $db_name;
 		$db = new PDO($db_name);
 		if($id == '') {
@@ -73,14 +66,6 @@ class ToDo {
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
 		return print_r(json_encode($todos));
-	}
-	
-	private function prepare($todo, $stmt) {
-		$stmt->bindParam(':content', $todo['content']);
-		$stmt->bindParam(':parent', $todo['parent']);
-		$stmt->bindParam(':indent', $todo['indent']);
-		$stmt->bindParam(':position', $todo['position']);
-		$stmt->bindParam(':done', $todo['done']);
 	}
 	
 	public static function create($todo) {
@@ -120,16 +105,14 @@ class ToDo {
 
 	}
 	
+	private function prepare($todo, $stmt) {
+		$stmt->bindParam(':content', $todo['content']);
+		$stmt->bindParam(':parent', $todo['parent']);
+		$stmt->bindParam(':indent', $todo['indent']);
+		$stmt->bindParam(':position', $todo['position']);
+		$stmt->bindParam(':done', $todo['done']);
+	}
+	
 }
-
-
-/*
-$todos = array();
-$db = new PDO($db_name);
-$rows = $db->query('SELECT * FROM todos');
-while ($row = $rows->fetch()) {
-	$todos[] = new ToDo($row);
-}
-*/
 
 ?>
