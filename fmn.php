@@ -38,13 +38,13 @@ class API {
 
 			case 'PUT':
 				parse_str(file_get_contents('php://input'), $p_data);			
-				$dataArray = json_decode(stripslashes($p_data['model']), true);			
-				self::update($dataArray);
+				$object = json_decode(stripslashes($p_data['model']), true);			
+				self::update($object);
 				break;
 
 			case 'POST':
-				$dataArray = json_decode(stripslashes($_POST['model']), true);
-				self::create($dataArray);
+				$object = json_decode(stripslashes($_POST['model']), true);
+				self::create($object);
 				break;
 
 			case 'DELETE':
@@ -54,8 +54,26 @@ class API {
 		}
 	}
 	
+	/*
+	 * Static functions for:
+	 *		C R U D
+	 */
+
+	public static function create($object) {
+
+		$db = new PDO(DB_NAME);		
+		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+		self::prepare($object, $stmt);
+		
+		$stmt->execute();
+		$object['id'] = (int)$db->lastInsertId();
+		$db = null;
+		
+		return print_r(json_encode($object));
+	}
+	
 	public static function read($id = null) {
-		global $db_name;
+
 		$db = new PDO(DB_NAME);
 		if($id == '') {
 			$rows = $db->prepare("SELECT * FROM todos");
@@ -68,35 +86,20 @@ class API {
 		return print_r(json_encode($todos));
 	}
 	
-	public static function create($todo) {
-		global $db_name;
+	public static function update($object) {
 
-		$db = new PDO(DB_NAME);		
-		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
-		self::prepare($todo, $stmt);
-		
-		$stmt->execute();
-		$todo['id'] = (int)$db->lastInsertId();
-		$db = null;
-		
-		return print_r(json_encode($todo));
-	}
-	
-	public static function update($todo) {
-		global $db_name;
-		$id = (int)$todo['id'];
+		$id = (int)$object['id'];
 		
 		$db = new PDO(DB_NAME);
 		$stmt = $db->prepare("UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
 
-		self::prepare($todo, $stmt);
+		self::prepare($object, $stmt);
 		$stmt->execute();
 		$db = null;
-		return print_r(json_encode($todo));
+		return print_r(json_encode($object));
 	}
 	
 	public static function delete($id) {
-		global $db_name;
 
 		$db = new PDO(DB_NAME);
 		$stmt = $db->prepare("DELETE FROM todos WHERE id = $id");
@@ -105,12 +108,17 @@ class API {
 
 	}
 	
-	private function prepare($todo, $stmt) {
-		$stmt->bindParam(':content', $todo['content']);
-		$stmt->bindParam(':parent', $todo['parent']);
-		$stmt->bindParam(':indent', $todo['indent']);
-		$stmt->bindParam(':position', $todo['position']);
-		$stmt->bindParam(':done', $todo['done']);
+	/*
+	 * Private functions for
+	 * DB interactions
+	 */
+	
+	private function prepare($object, $stmt) {
+		$stmt->bindParam(':content', $object['content']);
+		$stmt->bindParam(':parent', $object['parent']);
+		$stmt->bindParam(':indent', $object['indent']);
+		$stmt->bindParam(':position', $object['position']);
+		$stmt->bindParam(':done', $object['done']);
 	}
 	
 }
