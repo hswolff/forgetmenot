@@ -18,15 +18,15 @@ Features
 *  Accessible via modern web browser
 *  Accessible via modern mobile browsers
 *  Uses SQLite DB
-*  Pretty to look at, pretty to use
-	* *TODO* Skin-able
 *  Basic HTTP Auth to password protect your todos
-*  *TODO*  Folder/Sub-list Support
-*  *TODO*  Meta-Information Available for each ToDo
+*  Pretty to look at, pretty to use
+	* [TODO] Skin-able
+*  [TODO]  Folder/Sub-list Support
+*  [TODO]  Meta-Information Available for each ToDo
 	*  Notes
 	*  URL
 	*  Due Date
-*  *TODO*  Multi-user accounts
+*  [TODO]  Multi-user accounts
 
 
 Dependencies
