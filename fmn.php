@@ -33,30 +33,30 @@ class API {
 
 			case 'GET':
 				$id = str_replace('/','',$_SERVER['QUERY_STRING']);
-				API::read($id);
+				self::read($id);
 				break;
 
 			case 'PUT':
 				parse_str(file_get_contents('php://input'), $p_data);			
 				$dataArray = json_decode(stripslashes($p_data['model']), true);			
-				API::update($dataArray);
+				self::update($dataArray);
 				break;
 
 			case 'POST':
 				$dataArray = json_decode(stripslashes($_POST['model']), true);
-				API::create($dataArray);
+				self::create($dataArray);
 				break;
 
 			case 'DELETE':
 				$id = (int)str_replace('/','',$_SERVER['QUERY_STRING']);
-				API::delete($id);
+				self::delete($id);
 				break;
 		}
 	}
 	
 	public static function read($id = null) {
 		global $db_name;
-		$db = new PDO($db_name);
+		$db = new PDO(DB_NAME);
 		if($id == '') {
 			$rows = $db->prepare("SELECT * FROM todos");
 		} else {
@@ -71,7 +71,7 @@ class API {
 	public static function create($todo) {
 		global $db_name;
 
-		$db = new PDO($db_name);		
+		$db = new PDO(DB_NAME);		
 		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
 		self::prepare($todo, $stmt);
 		
@@ -86,7 +86,7 @@ class API {
 		global $db_name;
 		$id = (int)$todo['id'];
 		
-		$db = new PDO($db_name);
+		$db = new PDO(DB_NAME);
 		$stmt = $db->prepare("UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
 
 		self::prepare($todo, $stmt);
@@ -98,7 +98,7 @@ class API {
 	public static function delete($id) {
 		global $db_name;
 
-		$db = new PDO($db_name);
+		$db = new PDO(DB_NAME);
 		$stmt = $db->prepare("DELETE FROM todos WHERE id = $id");
 		$stmt->execute();
 		$db = null;
