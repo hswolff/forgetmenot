@@ -1,7 +1,7 @@
 Forgetmenot
 ===========
 
-**Forgetmenot is under development at the moment...**
+Clocking in at version 1.0 'cause it feels so good.
 
 One-Sentence Pitch
 ------------------
@@ -19,14 +19,14 @@ Features
 *  Accessible via modern mobile browsers
 *  Uses SQLite DB
 *  Pretty to look at, pretty to use
-	* [Eventually] Skin-able
+	* *TODO* Skin-able
 *  Basic HTTP Auth to password protect your todos
-*  [TODO]  Folder/Sub-list Support
-*  [TODO]  Meta-Information Available for each ToDo
+*  *TODO*  Folder/Sub-list Support
+*  *TODO*  Meta-Information Available for each ToDo
 	*  Notes
 	*  URL
 	*  Due Date
-*  [TODO]  Multi-user accounts
+*  *TODO*  Multi-user accounts
 
 
 Dependencies
@@ -38,9 +38,9 @@ Dependencies
 
 Tested On
 -----------
-Google Chrome (~v12+)
-Mozilla Firefox 3.6.18
-Mobile Safari (iOS 4.2.9)
+* Google Chrome (~v12+)
+* Mozilla Firefox 3.6.18
+* Mobile Safari (iOS 4.2.9)
 
 
 Credits
