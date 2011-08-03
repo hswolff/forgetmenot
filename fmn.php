@@ -26,6 +26,14 @@ $api->exec($_SERVER['REQUEST_METHOD']);
 
 class API {
 	
+	// Private PDO object
+	private $db;
+
+	public function __construct(){
+		$this->db = new PDO(DB_NAME);
+
+	}
+	
 	// Switchboard, redirecting calls to appropriate functions
 	public function exec($arg) {
 		
@@ -33,76 +41,75 @@ class API {
 
 			case 'GET':
 				$id = str_replace('/','',$_SERVER['QUERY_STRING']);
-				self::read($id);
+				$this->read($id);
 				break;
 
 			case 'PUT':
 				parse_str(file_get_contents('php://input'), $p_data);			
 				$object = json_decode(stripslashes($p_data['model']), true);			
-				self::update($object);
+				$this->update($object);
 				break;
 
 			case 'POST':
 				$object = json_decode(stripslashes($_POST['model']), true);
-				self::create($object);
+				$this->create($object);
 				break;
 
 			case 'DELETE':
 				$id = (int)str_replace('/','',$_SERVER['QUERY_STRING']);
-				self::delete($id);
+				$this->delete($id);
 				break;
 		}
 	}
 	
 	/*
-	 * Static functions for:
+	 * Object methods for:
 	 *		C R U D
 	 */
 
-	public static function create($object) {
+	public function create($object) {
 
-		$db = new PDO(DB_NAME);		
-		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+		$stmt = $this->db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
 		self::prepare($object, $stmt);
 		
 		$stmt->execute();
-		$object['id'] = (int)$db->lastInsertId();
+		$object['id'] = (int)$this->db->lastInsertId();
 		$db = null;
 		
 		return print_r(json_encode($object));
+		
 	}
 	
-	public static function read($id = null) {
+	public function read($id = null) {
 
-		$db = new PDO(DB_NAME);
 		if($id == '') {
-			$rows = $db->prepare("SELECT * FROM todos");
+			$rows = $this->db->prepare("SELECT * FROM todos");
 		} else {
-			$rows = $db->prepare("SELECT * FROM todos WHERE id = $id");
+			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
 		}
 		
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
 		return print_r(json_encode($todos));
+		
 	}
 	
-	public static function update($object) {
+	public function update($object) {
 
 		$id = (int)$object['id'];
 		
-		$db = new PDO(DB_NAME);
-		$stmt = $db->prepare("UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
+		$stmt = $this->db->prepare("UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
 
 		self::prepare($object, $stmt);
 		$stmt->execute();
 		$db = null;
 		return print_r(json_encode($object));
+		
 	}
 	
-	public static function delete($id) {
+	public function delete($id) {
 
-		$db = new PDO(DB_NAME);
-		$stmt = $db->prepare("DELETE FROM todos WHERE id = $id");
+		$stmt = $this->db->prepare("DELETE FROM todos WHERE id = $id");
 		$stmt->execute();
 		$db = null;
 
