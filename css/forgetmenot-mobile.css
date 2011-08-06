@@ -26,14 +26,10 @@ ul.fmn-todos {
 
 }
 
-/*
+
 .fmn-todos .todo.editing .edit .input {
-    padding: 0 0 10px 32px;
-    width: 85%;
-    outline: none;
-    font-size: 18px;
 }
-*/
+
 	
 	.fmn-todos .todo .display {
 		width: 280px;

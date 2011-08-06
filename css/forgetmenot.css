@@ -291,53 +291,6 @@ ul.fmn-todos {
 
 
 
-/**
-.todoList {
-    margin: 30px 0;
-    list-style: none;
-}
-.todoList li {
-    padding: 10px;
-    width: 90%;
-    margin: 0 auto;
-    clear: both;
-    border-top: 1px solid #CCC;
-    position: relative;
-}
-.todoList li input {
-    cursor: pointer;
-    padding: 10px;
-    margin: 0;
-    width: 92%;
-}
-.todoList li input:hover {
-    background: url(../images/edit32.png) no-repeat 100% 0;
-}
-.todoList li input:focus {
-    outline: 0 none;
-    border-color:#666;
-    background: url(../images/delete32.png) no-repeat 100% 0;
-}
-.todoList li .delete {
-    position: absolute;
-    display: none;
-    width: 32px; height: 32px;
-    right: 22px;
-    top: 13px;
-    cursor: pointer;
-    //background:#000;
-}
-.todoList li.createNew {
-    text-align: center;
-    border: 2px solid #92CAE4;
-    width: 31%;
-    position: fixed;
-    bottom: 30px;
-    cursor: pointer;
-}
-**/
-
-
 footer {
     position: fixed;
     bottom: 0;
@@ -346,8 +299,6 @@ footer {
 footer a {
     text-decoration:none;
 }
-
-
 
 
 

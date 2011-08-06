@@ -1,5 +1,7 @@
 <?php
 // Users Array
+// Each line follows the structure of:
+//	'username' => 'password'
 $users = array(
 	'admin' => 'pass',
 	'username' => 'password'
@@ -9,8 +11,7 @@ $users = array(
  *  Uncomment the following
  *	To enable password protection
  */
-
-/*
+/* // <== remove
 session_start();
 $_SESSION['auth'] = false;
 if (authenticate($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
@@ -35,7 +36,7 @@ function authenticate($user, $pass) {
 		}
 	}
 }
-*/
+*/ // <== remove
 ?>
 
 <!doctype html>
