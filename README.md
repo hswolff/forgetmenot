@@ -3,6 +3,8 @@ forgetmenot  (fmn)
 
 Clocking in at version 1.0 'cause it feels so good.
 
+![Preview Image](https://raw.github.com/hswolff/forgetmenot/dev/preview.png)
+
 Goal
 ----
 Forgetmenot is a self-hosted todo list application that is accessible via web and mobile browser.
