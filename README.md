@@ -40,7 +40,7 @@ Features
 
 How it looks
 --------------
-![Preview Image](https://raw.github.com/hswolff/forgetmenot/preview.png)
+![Preview Image](https://github.com/hswolff/forgetmenot/raw/master/preview.png)
 
 
 Dependencies
