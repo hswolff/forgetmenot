@@ -167,11 +167,13 @@ class API {
 	 */
 	
 	static function prepare($object, $stmt) {
-		$stmt->bindParam(':content', $object['content']);
-		$stmt->bindParam(':parent', $object['parent']);
-		$stmt->bindParam(':indent', $object['indent']);
-		$stmt->bindParam(':position', $object['position']);
-		$stmt->bindParam(':done', $object['done']);
+		global $tableLayout;
+		// Bind each column name to object passed in
+		foreach ($tableLayout as $name => $type) {
+			if ($name != 'id') {
+				$stmt->bindParam($name, $object[$name]);
+			}
+		}
 	}
 	
 }
