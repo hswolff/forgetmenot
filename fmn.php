@@ -8,8 +8,25 @@ define("DB_NAME", "sqlite:todo.db");
 try {
 	if (!file_exists(str_replace('sqlite:', '', DB_NAME))) {
 		$db = new PDO(DB_NAME);
-		$db->exec("CREATE TABLE todos (id INTEGER PRIMARY KEY, content TEXT, parent INTEGER, indent INTEGER, position INTEGER, done INTEGER)");
-		$db->close();
+		$db->exec("CREATE TABLE todos (	id INTEGER PRIMARY KEY, 
+										content TEXT, 
+										parent INTEGER, 
+										indent INTEGER, 
+										position INTEGER, 
+										done INTEGER)			");
+		// Enter First Default Row
+		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+		$object = array(
+			'content' => 'first dummy',
+			'parent' => 0,
+			'indent' => 0,
+			'position' => 0,
+			'done' => false
+		);
+		API::prepare($object, $stmt);
+		
+		$stmt->execute();
+
 		$db = null;
 	}
 }
@@ -80,7 +97,7 @@ class API {
 		
 	}
 	
-	public function read($id = null) {
+	public function read($id = null, $list = 1) {
 
 		if($id == '') {
 			$rows = $this->db->prepare("SELECT * FROM todos");
@@ -120,7 +137,7 @@ class API {
 	 * DB interactions
 	 */
 	
-	private function prepare($object, $stmt) {
+	static function prepare($object, $stmt) {
 		$stmt->bindParam(':content', $object['content']);
 		$stmt->bindParam(':parent', $object['parent']);
 		$stmt->bindParam(':indent', $object['indent']);
