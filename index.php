@@ -53,13 +53,12 @@ function authenticate($user, $pass) {
     <link rel="stylesheet" href="css/forgetmenot.css?v=1">
 	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1">
 	
-	<script src="js/libs/jquery-1.6.2.min.js"></script>
+	<script src="js/libs/jquery-1.7.min.js"></script>
 	<script src="js/libs/underscore-min.js"></script>
-	<script src="js/libs/backbone.js"></script>
+	<script src="js/libs/backbone-min.js"></script>
 
 	<script src="js/fmn-item.js"></script>
 	<script src="js/fmn-list.js"></script>
-
 	<script src="js/forgetmenot.js"></script>
 
 </head>
