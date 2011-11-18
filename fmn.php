@@ -115,7 +115,10 @@ class API {
 
 	public function create($object) {
 
-		$stmt = $this->db->prepare("INSERT INTO ".TABLE_NAME." (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+		global $tableLayout, $tableColumns, $pdoTableColumns;
+		// Original like:
+		// "INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)"
+		$stmt = $this->db->prepare("INSERT INTO ".TABLE_NAME." ({$tableColumns}) values ({$pdoTableColumns})");
 		self::prepare($object, $stmt);
 		
 		$stmt->execute();
@@ -129,8 +132,10 @@ class API {
 	public function read($id = null, $list = 1) {
 
 		if($id == '') {
+			// Original like: "SELECT * FROM todos"
 			$rows = $this->db->prepare("SELECT * FROM ".TABLE_NAME);
 		} else {
+			// Original like: "SELECT * FROM todos WHERE id = $id"
 			$rows = $this->db->prepare("SELECT * FROM ".TABLE_NAME." WHERE id = $id");
 		}
 		
@@ -141,10 +146,19 @@ class API {
 	}
 	
 	public function update($object) {
-
 		$id = (int)$object['id'];
-		
-		$stmt = $this->db->prepare("UPDATE ".TABLE_NAME." SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
+
+		global $tableLayout;
+		$updateStatement = '';
+		foreach ($tableLayout as $name => $type) {
+			if ($name != 'id') {
+				$updateStatement .= $name.' = :'.$name.',';
+			}
+		}
+		$updateStatement = substr($updateStatement, 0, -1);
+		// Original like:
+		// "UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id"
+		$stmt = $this->db->prepare("UPDATE ".TABLE_NAME." SET {$updateStatement} WHERE id = $id");
 
 		self::prepare($object, $stmt);
 		$stmt->execute();
@@ -154,7 +168,7 @@ class API {
 	}
 	
 	public function delete($id) {
-
+		// Original like: "DELETE FROM todos WHERE id = $id"
 		$stmt = $this->db->prepare("DELETE FROM ".TABLE_NAME." WHERE id = $id");
 		$stmt->execute();
 		$db = null;
