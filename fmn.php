@@ -1,32 +1,61 @@
 <?php
 
+// Define Table Name
+define("TABLE_NAME", "todo");
+
+// Table Layout
+$tableLayout = array(
+	/*
+	'name' => 'column type'
+	*/
+	'id' => 'INTEGER PRIMARY KEY',
+	'content' => 'TEXT', 
+	'parent' => 'INTEGER', 
+	'indent' => 'INTEGER', 
+	'position' => 'INTEGER', 
+	'done' => 'INTEGER'
+);
+
 // PDO style DB name
-define("DB_NAME", "sqlite:todo.db");
+define("DB_NAME", "sqlite:".TABLE_NAME.".db");
+
+// For use in API
+// of format: 'content, parent, indent, position, done'
+$tableColumns = '';
+$pdoTableColumns = '';
+foreach ($tableLayout as $name => $type) {
+	// exclude column name of 'id'
+	if ($name != 'id') {
+		$tableColumns .= $name.',';
+		$pdoTableColumns .= ':'.$name.',';
+	}
+}
+$tableColumns = substr($tableColumns, 0, -1);
+$pdoTableColumns = substr($pdoTableColumns, 0, -1);
+
 
 // If the db file doesn't exist create it!
 // If it exists then carry on our merry way
 try {
-	if (!file_exists(str_replace('sqlite:', '', DB_NAME))) {
+	if (!file_exists(TABLE_NAME.".db")) {
 		$db = new PDO(DB_NAME);
-		$db->exec("CREATE TABLE todos (	id INTEGER PRIMARY KEY, 
-										content TEXT, 
-										parent INTEGER, 
-										indent INTEGER, 
-										position INTEGER, 
-										done INTEGER)			");
+		// Format table for correct PDO statement
+		$rows = '';
+		foreach ($tableLayout as $name => $type) {
+			$rows .= $name.' '.$type.',';
+		}
+		$db->exec("CREATE TABLE ".TABLE_NAME." (".substr($rows, 0, -1).")");
 		// Enter First Default Row
-		$stmt = $db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
-		$object = array(
+		$stmt = $db->prepare("INSERT INTO ".TABLE_NAME." (".$tableColumns.") values (".$pdoTableColumns.")");
+		$row = array(
 			'content' => 'first dummy',
 			'parent' => 0,
 			'indent' => 0,
 			'position' => 0,
 			'done' => false
 		);
-		API::prepare($object, $stmt);
-		
+		API::prepare($row, $stmt);
 		$stmt->execute();
-
 		$db = null;
 	}
 }
@@ -86,7 +115,7 @@ class API {
 
 	public function create($object) {
 
-		$stmt = $this->db->prepare("INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
+		$stmt = $this->db->prepare("INSERT INTO ".TABLE_NAME." (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)");
 		self::prepare($object, $stmt);
 		
 		$stmt->execute();
@@ -100,9 +129,9 @@ class API {
 	public function read($id = null, $list = 1) {
 
 		if($id == '') {
-			$rows = $this->db->prepare("SELECT * FROM todos");
+			$rows = $this->db->prepare("SELECT * FROM ".TABLE_NAME);
 		} else {
-			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
+			$rows = $this->db->prepare("SELECT * FROM ".TABLE_NAME." WHERE id = $id");
 		}
 		
 		$rows->execute();
@@ -115,7 +144,7 @@ class API {
 
 		$id = (int)$object['id'];
 		
-		$stmt = $this->db->prepare("UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
+		$stmt = $this->db->prepare("UPDATE ".TABLE_NAME." SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id");
 
 		self::prepare($object, $stmt);
 		$stmt->execute();
@@ -126,7 +155,7 @@ class API {
 	
 	public function delete($id) {
 
-		$stmt = $this->db->prepare("DELETE FROM todos WHERE id = $id");
+		$stmt = $this->db->prepare("DELETE FROM ".TABLE_NAME." WHERE id = $id");
 		$stmt->execute();
 		$db = null;
 
