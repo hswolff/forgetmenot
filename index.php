@@ -1,4 +1,5 @@
 <?php
+require_once('fmn.php');
 // Users Array
 // Each line follows the structure of:
 //	'username' => 'password'
@@ -50,9 +51,15 @@ function authenticate($user, $pass) {
 
   	<title>forgetmenot todo list | A Todo List for the common forgetful-but-not-me.</title>
     
-    <link rel="stylesheet" href="css/forgetmenot.css?v=1">
-	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1">
+    <link rel="stylesheet" href="css/boilerplate.css?v=1"/>
+    <link rel="stylesheet" href="css/forgetmenot.css?v=1"/>
+    <link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1"/>
+
+    <link rel="stylesheet/less" href="css/less/boilerplate.less"/>
+    <link rel="stylesheet/less" href="css/less/forgetmenot.less"/>
 	
+	
+	<script src="js/libs/less.min.js"></script>	
 	<script src="js/libs/jquery-1.7.min.js"></script>
 	<script src="js/libs/underscore-min.js"></script>
 	<script src="js/libs/backbone-min.js"></script>
@@ -88,7 +95,12 @@ function authenticate($user, $pass) {
 		</nav>
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
-			<!-- #todoApp items go here -->
+    		<!-- #todoApp items go here -->
+    		<script type="text/json" id="todos">
+    			<?php
+    			
+    			?>
+    		</script>
     	</ul>
 
     	<footer>

@@ -5,6 +5,7 @@ $(function() {
     fmn.Model = Backbone.Model.extend({
         defaults: {
             content: "new empty todo",
+            list: 0,
             parent: 0,
             indent: 0,
             position: 0,

@@ -10,6 +10,7 @@ $tableLayout = array(
 	*/
 	'id' => 'INTEGER PRIMARY KEY',
 	'content' => 'TEXT', 
+	'list' => 'INTEGER',
 	'parent' => 'INTEGER', 
 	'indent' => 'INTEGER', 
 	'position' => 'INTEGER', 
@@ -49,6 +50,7 @@ try {
 		$stmt = $db->prepare("INSERT INTO ".TABLE_NAME." (".$tableColumns.") values (".$pdoTableColumns.")");
 		$row = array(
 			'content' => 'first dummy',
+			'list' => 0,
 			'parent' => 0,
 			'indent' => 0,
 			'position' => 0,
@@ -88,6 +90,7 @@ class API {
 			case 'GET':
 				$id = str_replace('/','',$_SERVER['QUERY_STRING']);
 				$this->read($id);
+				print_r($id);
 				break;
 
 			case 'PUT':
@@ -129,7 +132,7 @@ class API {
 		
 	}
 	
-	public function read($id = null, $list = 1) {
+	public function read($id = null, $list = 0) {
 
 		if($id == '') {
 			// Original like: "SELECT * FROM todos"
