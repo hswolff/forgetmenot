@@ -66,8 +66,8 @@ $(function() {
         save: function(indent) {
 			var $inputVal = this.input.val();
             this.model.save({ 
-				name: ($inputVal == '' ? this.model.defaults.name : $inputVal),
-				indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
+				name: ($inputVal == '' ? this.model.defaults.name : $inputVal)
+				// indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
 			});
         },
 
