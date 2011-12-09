@@ -40,22 +40,8 @@ $tableLayout = array(
 // PDO style DB name
 define("DATABASE_FILE", "sqlite:".DATABASE_NAME.".db");
 
-// For use in API
-// of format: 'content, parent, indent, position, done'
-$tableColumns = '';
-$pdoTableColumns = '';
-foreach ($tableLayout as $name => $type) {
-	// exclude column name of 'id'
-	if ($name != 'id') {
-		$tableColumns .= $name.',';
-		$pdoTableColumns .= ':'.$name.',';
-	}
-}
-// content,status,order,parent_id,list_id
-$tableColumns = substr($tableColumns, 0, -1);
-// :content,:status,:order,:parent_id,:list_id
-$pdoTableColumns = substr($pdoTableColumns, 0, -1);
 
+// Utility function for use in API
 function formatColumnsForPdo($columns) {
 	$tableColumns = '';
 	$pdoTableColumns = '';
@@ -73,9 +59,7 @@ function formatColumnsForPdo($columns) {
 	$pdoTableColumns = substr($pdoTableColumns, 0, -1);
 	return array($tableColumns, $pdoTableColumns);
 }
-$a = formatColumnsForPdo($dataStructure['todos']);
-var_dump( $a[0] );
-// die();
+
 
 // If the db file doesn't exist create it!
 // If it exists then carry on our merry way
@@ -150,9 +134,9 @@ class API {
 		switch($arg)  {		
 
 			case 'GET':
-				$id = str_replace('/','',$_SERVER['QUERY_STRING']);
-				$this->read($id);
-				print_r($id);
+				$params = str_replace('/','',$_SERVER['QUERY_STRING']);
+				parse_str($params, $params);
+				$this->read($params);
 				break;
 
 			case 'PUT':
@@ -194,20 +178,25 @@ class API {
 		
 	}
 	
-	public function read($id = null, $list = 0) {
-
-		if($id == '') {
-			// Original like: "SELECT * FROM todos"
-			$rows = $this->db->prepare("SELECT * FROM ".DATABASE_NAME);
+	public function read($params = false) {
+		if(isset($params['list'])) {
+			$id = $params['list'];
+			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
+		} else if(isset($params['todo'])) {
+			$id = $params['todo'];
+			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
 		} else {
-			// Original like: "SELECT * FROM todos WHERE id = $id"
-			$rows = $this->db->prepare("SELECT * FROM ".DATABASE_NAME." WHERE id = $id");
+			$rows = $this->db->prepare("SELECT * FROM todos");
 		}
-		
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
+
+		if (isset($id)) {
+			$todos = array(
+				$id => $todos
+			);
+		}
 		return print_r(json_encode($todos));
-		
 	}
 	
 	public function update($object) {
