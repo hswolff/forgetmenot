@@ -34,7 +34,7 @@ $(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "click .display .name" : 			"edit",
+            "dblclick .display .name" : 			"edit",
 			"click input.done" : 					"toggleDone",
             "click .display .delete" :  			"destroyTodo",
 			"keydown .edit input" : 				"keyboardActions"       
@@ -90,6 +90,8 @@ $(function() {
 			// Enter button
 			if (e.keyCode == 13) {
 				this.close();
+				fmn.app.newTodo();
+				return;
 				var nextModel = fmn.Todos.getNext(this.model);
 				if (this.model === nextModel) {
 					fmn.app.newTodo();

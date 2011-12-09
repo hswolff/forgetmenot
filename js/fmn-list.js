@@ -3,6 +3,12 @@ $(function() {
     fmn.Todos = Backbone.Collection.extend({
         model: fmn.Todo,
 		url: "fmn.php?",
+
+		initialize: function() {
+			this.model.bind('remove', function(model,collection) {
+				// console.log(model, collection);
+			});
+		},
 		
 		getNext: function(todo) {
 			var m = this.at(this.indexOf(todo) + 1);

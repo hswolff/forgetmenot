@@ -19,8 +19,25 @@ $(function() {
 	
 	});
 
+	fmn.Routes = Backbone.Router.extend({
+		routes: {
+			'list/:list': 	"list"
+		},
+
+		initialize: function() {
+			this.bind('route:list', function(a, b) {
+				// console.log('hi', a,b);
+			});
+		},
+
+		list: function(list) {
+			fmn.app.collection.fetch({data: {list: list}});
+		}
+	});
+
     fmn.App = Backbone.View.extend({
         el: $("#todoApp"),
+        list: $("#todoItemsList", this.el), 
         
         events: {
             'click #createNew' :       	'newTodo',
@@ -54,6 +71,7 @@ $(function() {
 		},
 
         addAll: function(collection, r) {
+        	this.list.empty();
 			// If collection is empty add one
 			if(!collection.length) {
 				var model = collection.create();
@@ -76,4 +94,6 @@ $(function() {
     // Run application
     fmn.app = new fmn.App;
 
+    fmn.app.router = new fmn.Routes;
+	Backbone.history.start({pushState: false, root: '/forgetmenot/'});
 });

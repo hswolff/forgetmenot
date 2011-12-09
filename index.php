@@ -98,7 +98,10 @@ function authenticate($user, $pass) {
     		<!-- #todoApp items go here -->
     		<script type="text/javascript" id="todos">
     		$(function() {
-    			fmn.app.collection.reset(<?php require_once('fmn.php'); ?>);
+    			if(!window.location.hash) {
+    				fmn.app.collection.reset(<?php require_once('fmn.php'); ?>);
+    				fmn.app.router.navigate('list/1')
+    			}
     		});
     		</script>
     	</ul>

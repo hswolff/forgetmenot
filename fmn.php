@@ -179,8 +179,8 @@ class API {
 	}
 	
 	public function read($params = false) {
-		if(isset($params['list'])) {
-			$id = $params['list'];
+		if(isset($params['list']) || isset($params['model']['list'])) {
+			$id = isset($params['list']) ? $params['list'] : $params['model']['list'];
 			$rows = $this->db->prepare("SELECT * FROM todos WHERE list_id = $id");
 		} else if(isset($params['todo'])) {
 			$id = $params['todo'];
