@@ -98,7 +98,7 @@ function authenticate($user, $pass) {
     		<!-- #todoApp items go here -->
     		<script type="text/javascript" id="todos">
     		$(function() {
-    			fmn.todos.reset(<?php require_once('fmn.php'); ?>);
+    			fmn.app.collection.reset(<?php require_once('fmn.php'); ?>);
     		});
     		</script>
     	</ul>
@@ -118,13 +118,13 @@ function authenticate($user, $pass) {
 	</script>
 
     <script type="text/template" id="item-template">
-		<div class="clearfix display <%= done == 1 ? 'done' : '' %>">
-			<input type="checkbox" class="done" <%= done == 1 ? 'checked="checked"' : '' %>>
-			<div class="content"><%= content %></div>
+		<div class="clearfix display <%= status == 1 ? 'done' : '' %>">
+			<input type="checkbox" class="done" <%= status == 1 ? 'checked="checked"' : '' %>>
+			<div class="name"><%= name %></div>
 			<div class="delete">&nbsp;</div>
 		</div>
 		<div class="edit">
-	        <input type="text" value="<%= content %>" class="input">
+	        <input type="text" value="<%= name %>" class="input">
 		</div>
     </script>
 

@@ -29,13 +29,13 @@ $(function() {
         
         initialize: function(bootstrap) {
 
-        	fmn.todos = new fmn.Todos;
+        	this.collection = new fmn.Todos;
 
             Backbone.emulateJSON = true;
             _.bindAll(this, 'render', 'newTodo', 'addOne', 'addAll');
-            fmn.Todos.bind('reset', this.addAll);
-			fmn.Todos.bind('add', this.addOne);
-			fmn.Todos.bind('add', function(model, collection){
+            this.collection.bind('reset', this.addAll);
+			this.collection.bind('add', this.addOne);
+			this.collection.bind('add', function(model, collection){
 				model.view.edit();
 			});
 
@@ -47,7 +47,7 @@ $(function() {
 		},
 		
 		clearCompleted: function() {
-			var remove = fmn.Todos.done();
+			var remove = this.collection.done();
 			_.each(remove, function(todo){
 				todo.destroy();
 			});
@@ -68,7 +68,7 @@ $(function() {
         },
 
         newTodo: function(o) {
-            fmn.Todos.create();
+            this.collection.create();
         }
 
     });

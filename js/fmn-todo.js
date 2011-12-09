@@ -4,17 +4,16 @@ $(function() {
 	
     fmn.Todo = Backbone.Model.extend({
         defaults: {
-            content: "new empty todo",
-            list: 0,
-            parent: 0,
-            indent: 0,
+            name: "new empty todo",
+            list_id: 1,
+            parent_id: 0,
             position: 0,
-            done: 0
+            status: 0
         },
         
         initialize: function() {
-            if (!this.get("content")) {
-              this.set({"content": this.defaults.content});
+            if (!this.get("name")) {
+              this.set({"name": this.defaults.name});
             }
         },
 
@@ -35,7 +34,7 @@ $(function() {
         template: _.template($('#item-template').html()),
         
         events: {
-            "click .display .content" : 			"edit",
+            "click .display .name" : 			"edit",
 			"click input.done" : 					"toggleDone",
             "click .display .delete" :  			"destroyTodo",
 			"keydown .edit input" : 				"keyboardActions"       
@@ -58,16 +57,16 @@ $(function() {
         },
         
         edit: function() {
-            var content = this.model.get('content');
+            var name = this.model.get('name');
             $(this.el).addClass("editing");
-            this.input.val(content);
+            this.input.val(name);
             this.input.focus();
         },
         
         save: function(indent) {
 			var $inputVal = this.input.val();
             this.model.save({ 
-				content: ($inputVal == '' ? this.model.defaults.content : $inputVal),
+				name: ($inputVal == '' ? this.model.defaults.name : $inputVal),
 				indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
 			});
         },
