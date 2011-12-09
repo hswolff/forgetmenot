@@ -1,7 +1,7 @@
 $(function() {
  
-    fmn.Collection = Backbone.Collection.extend({
-        model: fmn.Model,
+    fmn.Todos = Backbone.Collection.extend({
+        model: fmn.Todo,
 		url: "fmn.php?",
 		
 		getNext: function(todo) {
@@ -34,8 +34,6 @@ $(function() {
 			}
         }
     });
-    
-    fmn.Todos = new fmn.Collection;
 	
 
 });

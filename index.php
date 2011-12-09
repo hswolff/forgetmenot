@@ -1,5 +1,5 @@
 <?php
-require_once('fmn.php');
+
 // Users Array
 // Each line follows the structure of:
 //	'username' => 'password'
@@ -64,9 +64,9 @@ function authenticate($user, $pass) {
 	<script src="js/libs/underscore-min.js"></script>
 	<script src="js/libs/backbone-min.js"></script>
 
-	<script src="js/fmn-item.js"></script>
+	<script src="js/fmn-todo.js"></script>
 	<script src="js/fmn-list.js"></script>
-	<script src="js/forgetmenot.js"></script>
+	<script src="js/fmn-app.js"></script>
 
 </head>
 <body>
@@ -96,10 +96,10 @@ function authenticate($user, $pass) {
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
     		<!-- #todoApp items go here -->
-    		<script type="text/json" id="todos">
-    			<?php
-    			
-    			?>
+    		<script type="text/javascript" id="todos">
+    		$(function() {
+    			fmn.todos.reset(<?php require_once('fmn.php'); ?>);
+    		});
     		</script>
     	</ul>
 

@@ -2,7 +2,7 @@ $(function() {
     // Global namespace
 	window.fmn = {};
 	
-    fmn.Model = Backbone.Model.extend({
+    fmn.Todo = Backbone.Model.extend({
         defaults: {
             content: "new empty todo",
             list: 0,

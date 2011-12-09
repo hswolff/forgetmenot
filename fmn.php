@@ -185,17 +185,21 @@ class API {
 		} else if(isset($params['todo'])) {
 			$id = $params['todo'];
 			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
-		} else {
+		} else if(isset($params['all'])) {
 			$rows = $this->db->prepare("SELECT * FROM todos");
+		} else {
+			$id = 1;
+			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = 1");
 		}
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
-
+		/*
 		if (isset($id)) {
 			$todos = array(
 				$id => $todos
 			);
 		}
+		*/
 		return print_r(json_encode($todos));
 	}
 	

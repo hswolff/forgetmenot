@@ -27,7 +27,10 @@ $(function() {
 			'click #clearCompleted' : 	'clearCompleted'
         },
         
-        initialize: function() {
+        initialize: function(bootstrap) {
+
+        	fmn.todos = new fmn.Todos;
+
             Backbone.emulateJSON = true;
             _.bindAll(this, 'render', 'newTodo', 'addOne', 'addAll');
             fmn.Todos.bind('reset', this.addAll);
@@ -35,7 +38,6 @@ $(function() {
 			fmn.Todos.bind('add', function(model, collection){
 				model.view.edit();
 			});
-            fmn.Todos.fetch();
 
 			this.render();
         },
@@ -71,6 +73,7 @@ $(function() {
 
     });
 
+    // Run application
     fmn.app = new fmn.App;
 
 });
