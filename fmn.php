@@ -1,7 +1,28 @@
 <?php
 
 // Define Table Name
-define("TABLE_NAME", "todo");
+define("DATABASE_NAME", "todo");
+
+$dataStructure = array(
+	"todos" => array(
+		/*
+		'name' => 'column type'
+		*/
+		'id' => 'INTEGER PRIMARY KEY',
+		'name' => 'TEXT', 
+		'description' => 'TEXT', 
+		'status' => 'INTEGER',
+		'position' => 'INTEGER', 
+		'parent_id' => 'INTEGER',	
+		'list_id' => 'INTEGER'
+	),
+	"lists" => array(
+		'id' => 'INTEGER PRIMARY KEY',
+		'name' => 'TEXT',
+		'status' => 'INTEGER',
+		'position' => 'INTEGER',
+	)
+);
 
 // Table Layout
 $tableLayout = array(
@@ -10,15 +31,14 @@ $tableLayout = array(
 	*/
 	'id' => 'INTEGER PRIMARY KEY',
 	'content' => 'TEXT', 
-	'list' => 'INTEGER',
-	'parent' => 'INTEGER', 
-	'indent' => 'INTEGER', 
-	'position' => 'INTEGER', 
-	'done' => 'INTEGER'
+	'status' => 'INTEGER',
+	'order' => 'INTEGER', 
+	'parent_id' => 'INTEGER',	
+	'list_id' => 'INTEGER'
 );
 
 // PDO style DB name
-define("DB_NAME", "sqlite:".TABLE_NAME.".db");
+define("DATABASE_FILE", "sqlite:".DATABASE_NAME.".db");
 
 // For use in API
 // of format: 'content, parent, indent, position, done'
@@ -31,32 +51,74 @@ foreach ($tableLayout as $name => $type) {
 		$pdoTableColumns .= ':'.$name.',';
 	}
 }
+// content,status,order,parent_id,list_id
 $tableColumns = substr($tableColumns, 0, -1);
+// :content,:status,:order,:parent_id,:list_id
 $pdoTableColumns = substr($pdoTableColumns, 0, -1);
 
+function formatColumnsForPdo($columns) {
+	$tableColumns = '';
+	$pdoTableColumns = '';
+	foreach ($columns as $name => $type) {
+		// exclude column name of 'id'
+		if ($name != 'id') {
+			$tableColumns .= $name.',';
+			$pdoTableColumns .= ':'.$name.',';
+		}
+	}
+	// Return columns without trailing ,
+	// content,status,order,parent_id,list_id
+	$tableColumns = substr($tableColumns, 0, -1);
+	// :content,:status,:order,:parent_id,:list_id
+	$pdoTableColumns = substr($pdoTableColumns, 0, -1);
+	return array($tableColumns, $pdoTableColumns);
+}
+$a = formatColumnsForPdo($dataStructure['todos']);
+var_dump( $a[0] );
+// die();
 
 // If the db file doesn't exist create it!
 // If it exists then carry on our merry way
 try {
-	if (!file_exists(TABLE_NAME.".db")) {
-		$db = new PDO(DB_NAME);
-		// Format table for correct PDO statement
-		$rows = '';
-		foreach ($tableLayout as $name => $type) {
-			$rows .= $name.' '.$type.',';
+	if (!file_exists(DATABASE_NAME.".db")) {
+		$db = new PDO(DATABASE_FILE);
+
+		// Create tables
+		foreach($dataStructure as $table => $layout) {
+			// Format table columns for correct PDO statement
+			$rows = '';
+			foreach ($layout as $name => $type) {
+				$rows .= $name.' '.$type.',';
+			}
+			$db->exec("CREATE TABLE ".$table." (".substr($rows, 0, -1).")");
 		}
-		$db->exec("CREATE TABLE ".TABLE_NAME." (".substr($rows, 0, -1).")");
-		// Enter First Default Row
-		$stmt = $db->prepare("INSERT INTO ".TABLE_NAME." (".$tableColumns.") values (".$pdoTableColumns.")");
+
+		// Create first list
+		$columns = formatColumnsForPdo($dataStructure['lists']);
+		$stmt = $db->prepare("INSERT INTO lists (".$columns[0].") values (".$columns[1].")");
 		$row = array(
-			'content' => 'first dummy',
-			'list' => 0,
-			'parent' => 0,
-			'indent' => 0,
+			'id' => 1,
+			'name' => 'Default List',
+			'status' => 0,
 			'position' => 0,
-			'done' => false
 		);
-		API::prepare($row, $stmt);
+		API::prepare($stmt, 'lists', $row);
+		$stmt->execute();
+
+		// Create first Todo
+		$columns = formatColumnsForPdo($dataStructure['todos']);
+		$stmt = $db->prepare("INSERT INTO todos (".$columns[0].") values (".$columns[1].")");
+		$row = array(
+			'id' => 1,
+			'name' => 'First Dummy Todo', 
+			'description' => '', 
+			'status' => 0,
+			'position' => 0, 
+			'parent_id' => 0,	
+			'list_id' => 1
+		);
+		API::prepare($stmt, 'todos', $row);
+
 		$stmt->execute();
 		$db = null;
 	}
@@ -78,7 +140,7 @@ class API {
 	private $db;
 
 	public function __construct(){
-		$this->db = new PDO(DB_NAME);
+		$this->db = new PDO(DATABASE_FILE);
 
 	}
 	
@@ -121,7 +183,7 @@ class API {
 		global $tableLayout, $tableColumns, $pdoTableColumns;
 		// Original like:
 		// "INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)"
-		$stmt = $this->db->prepare("INSERT INTO ".TABLE_NAME." ({$tableColumns}) values ({$pdoTableColumns})");
+		$stmt = $this->db->prepare("INSERT INTO ".DATABASE_NAME." ({$tableColumns}) values ({$pdoTableColumns})");
 		self::prepare($object, $stmt);
 		
 		$stmt->execute();
@@ -136,10 +198,10 @@ class API {
 
 		if($id == '') {
 			// Original like: "SELECT * FROM todos"
-			$rows = $this->db->prepare("SELECT * FROM ".TABLE_NAME);
+			$rows = $this->db->prepare("SELECT * FROM ".DATABASE_NAME);
 		} else {
 			// Original like: "SELECT * FROM todos WHERE id = $id"
-			$rows = $this->db->prepare("SELECT * FROM ".TABLE_NAME." WHERE id = $id");
+			$rows = $this->db->prepare("SELECT * FROM ".DATABASE_NAME." WHERE id = $id");
 		}
 		
 		$rows->execute();
@@ -161,7 +223,7 @@ class API {
 		$updateStatement = substr($updateStatement, 0, -1);
 		// Original like:
 		// "UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id"
-		$stmt = $this->db->prepare("UPDATE ".TABLE_NAME." SET {$updateStatement} WHERE id = $id");
+		$stmt = $this->db->prepare("UPDATE ".DATABASE_NAME." SET {$updateStatement} WHERE id = $id");
 
 		self::prepare($object, $stmt);
 		$stmt->execute();
@@ -172,7 +234,7 @@ class API {
 	
 	public function delete($id) {
 		// Original like: "DELETE FROM todos WHERE id = $id"
-		$stmt = $this->db->prepare("DELETE FROM ".TABLE_NAME." WHERE id = $id");
+		$stmt = $this->db->prepare("DELETE FROM ".DATABASE_NAME." WHERE id = $id");
 		$stmt->execute();
 		$db = null;
 
@@ -183,12 +245,12 @@ class API {
 	 * DB interactions
 	 */
 	
-	static function prepare($object, $stmt) {
-		global $tableLayout;
+	static function prepare($stmt, $table, $row) {
+		global $dataStructure;
 		// Bind each column name to object passed in
-		foreach ($tableLayout as $name => $type) {
+		foreach ($dataStructure[$table] as $name => $type) {
 			if ($name != 'id') {
-				$stmt->bindParam($name, $object[$name]);
+				$stmt->bindParam($name, $row[$name]);
 			}
 		}
 	}
