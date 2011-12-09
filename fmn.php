@@ -163,12 +163,12 @@ class API {
 	 */
 
 	public function create($object) {
-
-		global $tableLayout, $tableColumns, $pdoTableColumns;
+		global $dataStructure;
+		$columns = formatColumnsForPdo($dataStructure['todos']);
 		// Original like:
 		// "INSERT INTO todos (content, parent, indent, position, done) values (:content, :parent, :indent, :position, :done)"
-		$stmt = $this->db->prepare("INSERT INTO ".DATABASE_NAME." ({$tableColumns}) values ({$pdoTableColumns})");
-		self::prepare($object, $stmt);
+		$stmt = $this->db->prepare("INSERT INTO todos ({$columns[0]}) values ({$columns[1]})");
+		self::prepare($stmt, 'todos', $object);
 		
 		$stmt->execute();
 		$object['id'] = (int)$this->db->lastInsertId();
@@ -181,7 +181,7 @@ class API {
 	public function read($params = false) {
 		if(isset($params['list'])) {
 			$id = $params['list'];
-			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
+			$rows = $this->db->prepare("SELECT * FROM todos WHERE list_id = $id");
 		} else if(isset($params['todo'])) {
 			$id = $params['todo'];
 			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
@@ -189,7 +189,7 @@ class API {
 			$rows = $this->db->prepare("SELECT * FROM todos");
 		} else {
 			$id = 1;
-			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = 1");
+			$rows = $this->db->prepare("SELECT * FROM todos WHERE list_id = 1");
 		}
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
@@ -206,9 +206,9 @@ class API {
 	public function update($object) {
 		$id = (int)$object['id'];
 
-		global $tableLayout;
+		global $dataStructure;
 		$updateStatement = '';
-		foreach ($tableLayout as $name => $type) {
+		foreach ($dataStructure['todos'] as $name => $type) {
 			if ($name != 'id') {
 				$updateStatement .= $name.' = :'.$name.',';
 			}
@@ -216,9 +216,9 @@ class API {
 		$updateStatement = substr($updateStatement, 0, -1);
 		// Original like:
 		// "UPDATE todos SET content = :content, parent = :parent, indent = :indent, position = :position, done = :done WHERE id = $id"
-		$stmt = $this->db->prepare("UPDATE ".DATABASE_NAME." SET {$updateStatement} WHERE id = $id");
+		$stmt = $this->db->prepare("UPDATE todos SET {$updateStatement} WHERE id = $id");
 
-		self::prepare($object, $stmt);
+		self::prepare($stmt, 'todos', $object);
 		$stmt->execute();
 		$db = null;
 		return print_r(json_encode($object));
@@ -227,10 +227,9 @@ class API {
 	
 	public function delete($id) {
 		// Original like: "DELETE FROM todos WHERE id = $id"
-		$stmt = $this->db->prepare("DELETE FROM ".DATABASE_NAME." WHERE id = $id");
+		$stmt = $this->db->prepare("DELETE FROM todos WHERE id = $id");
 		$stmt->execute();
 		$db = null;
-
 	}
 	
 	/*
