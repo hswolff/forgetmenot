@@ -100,7 +100,7 @@ function authenticate($user, $pass) {
     		$(function() {
     			if(!window.location.hash) {
     				fmn.app.collection.reset(<?php require_once('fmn.php'); ?>);
-    				fmn.app.router.navigate('list/1')
+    				fmn.app.router.navigate('list/1');
     			}
     		});
     		</script>
@@ -118,6 +118,10 @@ function authenticate($user, $pass) {
 	<script type="text/template" id="stats-template">
 		<span class="text"><%= done %> / <%= total %></span>
 		<span id="clearCompleted">Clear Completed</span>
+	</script>
+
+	<script type="text/template" id="list-template">
+		<li><%= name %></li>
 	</script>
 
     <script type="text/template" id="item-template">
