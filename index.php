@@ -99,7 +99,7 @@ function authenticate($user, $pass) {
     		<script type="text/javascript" id="todos">
     		$(function() {
     			if(!window.location.hash) {
-    				fmn.app.collection.reset(<?php require_once('fmn.php'); ?>);
+    				fmn.app.collection.reset(<?php require_once('api/index.php'); ?>);
     				fmn.app.router.navigate('list/1');
     			}
     		});
