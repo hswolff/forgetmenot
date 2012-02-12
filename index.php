@@ -60,6 +60,8 @@ function authenticate($user, $pass) {
     <script src="js/libs/less.min.js"></script>	
  -->	
 	
+	<script data-main="js/main" src="js/libs/require.js"></script>
+	
 	<script src="js/libs/jquery.js"></script>
 	<script src="js/libs/underscore.js"></script>
 	<script src="js/libs/backbone.js"></script>
