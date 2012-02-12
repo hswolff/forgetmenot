@@ -21,8 +21,8 @@ class Todo {
 	}
 
 	private function __before() {
-		// $db = DATABASE_FILE ?: '';
-		$this->db = new PDO('sqlite:todo.db');
+		// $this->db = new PDO('sqlite:../todo.db');
+		$this->db = new PDO(DATABASE_FILE);
 	}
 
 	/*
@@ -47,11 +47,7 @@ class Todo {
 	}
 	
 	public function read($id = false, $list_id = false, $status = false) {
-		// If no params we want all todos
-		if (!$id && !$list_id && !$status) {
-			$rows = $this->db->prepare("SELECT * FROM todos");
-		}
-		else if ($id) {
+		if ($id) {
 			$rows = $this->db->prepare("SELECT * FROM todos WHERE id = $id");
 		}
 		else if ($list_id) {
@@ -60,16 +56,13 @@ class Todo {
 		else if ($status) {
 			$rows = $this->db->prepare("SELECT * FROM todos WHERE status = $status");
 		}
+		else {
+			$rows = $this->db->prepare("SELECT * FROM todos");
+		}
 
 		$rows->execute();
 		$todos = $rows->fetchAll(PDO::FETCH_ASSOC);
-		/*
-		if (isset($id)) {
-			$todos = array(
-				$id => $todos
-			);
-		}
-		*/
+
 		return print_r(json_encode($todos));
 	}
 	
