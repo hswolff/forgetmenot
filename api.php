@@ -1,13 +1,69 @@
 <?php
 
-require_once("database.php");
+require_once("api/database.php");
+
+require_once("api/todo.php");
+
+// API Paths
+
+// example path: forgetmenot/api/?/ideas/2?status=done
+$url = parse_url($_SERVER['QUERY_STRING']);
+// var_dump($url);
+$path = explode('/', $url['path']);
+// Normalize resource path to remove empty values
+foreach ($path as $key => $value) {
+	if (!$value) {
+		unset($path[$key]);
+		continue;
+	}
+}
+// Normalize array back to 0-index
+$path = array_values($path);
+// var_dump($path);
+
+if (isset($url['query'])) {
+	parse_str($url['query'], $query);
+}
+// var_dump($query);
+
+
+
+// die();
+
+
+$todo = new Todo();
+
+switch($_SERVER['REQUEST_METHOD'])  {		
+
+	case 'GET':
+		$params = str_replace('/','',$_SERVER['QUERY_STRING']);
+		parse_str($params, $params);
+		$todo->read($params);
+		break;
+
+	case 'PUT':
+		parse_str(file_get_contents('php://input'), $p_data);			
+		$object = json_decode(stripslashes($p_data['model']), true);			
+		$todo->update($object);
+		break;
+
+	case 'POST':
+		$object = json_decode(stripslashes($_POST['model']), true);
+		$todo->create($object);
+		break;
+
+	case 'DELETE':
+		$id = (int)str_replace('/','',$_SERVER['QUERY_STRING']);
+		$todo->delete($id);
+		break;
+}
+
+
 
 // Instantiate new API object
-$api = new API;
+// $api = new API;
 // Execute API, passing in the request method
-$api->exec($_SERVER['REQUEST_METHOD']);
-
-
+// $api->exec($_SERVER['REQUEST_METHOD']);
 class API {
 	
 	// Private PDO object

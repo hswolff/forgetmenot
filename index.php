@@ -99,8 +99,8 @@ function authenticate($user, $pass) {
     		<script type="text/javascript" id="todos">
     		$(function() {
     			if(!window.location.hash) {
-    				fmn.app.collection.reset(<?php require_once('api/index.php'); ?>);
-    				fmn.app.router.navigate('list/1');
+    				fmn.app.collection.reset(<?php require_once('api.php'); ?>);
+    				// fmn.app.router.navigate('list/1');
     			}
     		});
     		</script>

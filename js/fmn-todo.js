@@ -142,7 +142,7 @@ $(function() {
 
     fmn.Todos = Backbone.Collection.extend({
         model: fmn.Todo,
-		url: "api/?",
+		url: "api.php?",
 
 		initialize: function() {
 			this.model.bind('remove', function(model,collection) {
