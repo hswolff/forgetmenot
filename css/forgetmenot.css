@@ -1,0 +1,47 @@
+input[type=text],input[type=password],input.text,input.title,textarea{background-color:#fff;border:1px solid #bbb;}
+input[type=text]:focus,input[type=password]:focus,input.text:focus,input.title:focus,textarea:focus{border-color:#666;}
+html,body{height:100%;}
+body{background-color:#E0E0E0;}
+body,select,input,textarea,button{font-size:20px;font-family:'Times New Roman';}
+.container{background:#FBFEFB;width:560px;margin:0 auto;padding:10px 50px;position:relative;min-height:100%;border:1px solid #C2B8B7;border-top:none;border-bottom:none;}
+header{border-bottom:1px dashed #C2B8B7;}
+header h1{font-size:28px;text-align:center;font-style:italic;margin:10px 0;}
+header .createNew{display:none;width:32px;height:32px;text-align:center;cursor:pointer;position:relative;float:right;top:-32px;}
+#stats{font-size:14px;margin:15px 0 0;}
+#stats #clearCompleted{float:right;cursor:pointer;}
+nav.lists{display:none;position:absolute;left:-161px;width:160px;background:#DCDCDC;border:1px solid #505050;border-right:none;}
+nav.lists .compact{display:none;}
+nav.lists h2{font-size:20px;margin:4px;}
+nav.lists ul{font-size:16px;}
+nav.lists ul li{padding:10px 0;margin:0 10px;cursor:pointer;}
+nav.lists ul li.active{color:#000;font-weight:bold;}
+nav.lists ul li:hover,nav.lists ul li:hover a,nav.lists ul li:hover a:visited{color:#000;font-weight:bold;}
+nav.lists ul li:hover a,nav.lists ul li:hover a:visited{text-decoration:underline;}
+nav.lists ul li:before{content:'\00bb ';}
+nav.lists ul li a,nav.lists ul li a:visited{text-decoration:none;color:#282828;}
+nav.lists ul li.active a,nav.lists ul li.active a:visited{text-decoration:none;color:#000;}
+nav.lists.hide{width:20px;left:-21px;}
+nav.lists.hide .full{display:none;}
+nav.lists.hide .compact{display:block;}
+ul.fmn-todos{list-style:none;margin:30px auto 0;}
+.fmn-todos .todo{margin:10px 0 0;height:50px;}
+.fmn-todos .todo .display{border-bottom:1px dashed #B3B3B3;width:560px;}
+.fmn-todos .todo .display.done .content{text-decoration:line-through;}
+.fmn-todos .todo .display:hover{background:url(../images/delete32.png) no-repeat 100% 0;}
+.fmn-todos .todo .display .done{float:left;margin:17px 18px 0 0;}
+.fmn-todos .todo .display .content{float:left;margin:10px 0;width:496px;}
+.fmn-todos .todo .display .delete{float:right;display:block;width:32px;height:32px;cursor:pointer;}
+.fmn-todos .todo .edit{display:none;visibility:hidden;}
+.fmn-todos .todo.editing .display{display:none;visibility:hidden;}
+.fmn-todos .todo.editing .edit{display:block;visibility:visible;border-bottom:1px solid #B3B3B3;padding:0 0 5px 0;}
+.fmn-todos .todo.editing .edit .input{padding:10px 0;text-indent:30px;width:100%;outline:none;}
+.fmn-todos .todo.indent-1{padding:0 0 0 25px;}
+.fmn-todos .todo.indent-2{padding:0 0 0 50px;}
+.fmn-todos .todo.indent-3{padding:0 0 0 75px;}
+.fmn-todos .todo.indent-4{padding:0 0 0 100px;}
+.fmn-todos .todo.indent-5{padding:0 0 0 125px;}
+.fmn-todos .todo.indent-6{padding:0 0 0 150px;}
+.fmn-todos .todo.indent-7{padding:0 0 0 175px;}
+.fmn-todos .todo.indent-8{padding:0 0 0 200px;}
+footer{position:fixed;bottom:0;margin:0 auto;}
+footer a{text-decoration:none;}
