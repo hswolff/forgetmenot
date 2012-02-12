@@ -60,9 +60,9 @@ function authenticate($user, $pass) {
     <script src="js/libs/less.min.js"></script>	
  -->	
 	
-	<script src="js/libs/jquery-1.7.min.js"></script>
-	<script src="js/libs/underscore-min.js"></script>
-	<script src="js/libs/backbone-min.js"></script>
+	<script src="js/libs/jquery.js"></script>
+	<script src="js/libs/underscore.js"></script>
+	<script src="js/libs/backbone.js"></script>
 
 	<script src="js/fmn-todo.js"></script>
 	<script src="js/fmn-list.js"></script>
