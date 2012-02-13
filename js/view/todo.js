@@ -11,7 +11,7 @@ function($, _, Backbone) {
             "dblclick .display .name" : 			"edit",
 			"click input.done" : 					"toggleDone",
             "click .display .delete" :  			"destroyTodo",
-			"keydown .edit input" : 				"keyboardActions"       
+			"keydown .edit input" : 				"keyboardActions"   
         },
         
         initialize: function() {
@@ -25,6 +25,7 @@ function($, _, Backbone) {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
 			this.el.className = 'todo indent-' + this.model.get('indent');
+			this.el.id = this.model.cid;
             this.input = this.$(".input");
             this.input.bind('blur', this.close);
             return this;
@@ -64,11 +65,11 @@ function($, _, Backbone) {
 			// Enter button
 			if (e.keyCode == 13) {
 				this.close();
-				fmn.app.newTodo();
+				this.model.collection.create();
 				return;
 				var nextModel = fmn.Todos.getNext(this.model);
 				if (this.model === nextModel) {
-					fmn.app.newTodo();
+					this.model.collection.create();
 				} else {
 					nextModel.view.edit();
 				}
@@ -90,13 +91,13 @@ function($, _, Backbone) {
 			// Up key - close current todo and open todo above to edit
 			if (e.keyCode == 38) {
 				this.close();
-				fmn.Todos.getPrevious(this.model).view.edit();
+				this.model.collection.getPrevious(this.model).view.edit();
 			}
 			
 			// Down key - close current todo and open todo above to edit
 			if (e.keyCode == 40) {
 				this.close();
-				fmn.Todos.getNext(this.model).view.edit();
+				this.model.collection.getNext(this.model).view.edit();
 			}
 			
 			// Backspace key
