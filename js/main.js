@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: "./js",
+	// priority: ['common', 'main'],
 	paths: {
 		'jquery': 'libs/jquery',
 		'underscore': 'libs/underscore',
@@ -8,14 +8,15 @@ require.config({
 	}
 });
 
-require(['jquery', 
+require(['common',
+		'jquery', 
 		'underscore', 
 		'backbone', 
 		'collection/todos', 
 		'view/stats', 
 		'view/todo',
 		'view/todos'], 
-function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
+function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
     var Routes = Backbone.Router.extend({
 		routes: {
