@@ -1,0 +1,8 @@
+<div class="clearfix display <%= status == 1 ? 'done' : '' %>">
+	<input type="checkbox" class="done" <%= status == 1 ? 'checked="checked"' : '' %>>
+	<div class="name"><%= name %></div>
+	<div class="delete">&nbsp;</div>
+</div>
+<div class="edit">
+    <input type="text" value="<%= name %>" class="input">
+</div>

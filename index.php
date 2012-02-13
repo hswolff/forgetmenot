@@ -98,32 +98,7 @@ function authenticate($user, $pass) {
     	<footer>
 			
 		</footer>
-
-
     </div>
-
-    <!-- Templates -->
-	
-	<script type="text/template" id="stats-template">
-		<span class="text"><%= done %> / <%= total %></span>
-		<span id="clearCompleted">Clear Completed</span>
-	</script>
-
-	<script type="text/template" id="list-template">
-		<li><%= name %></li>
-	</script>
-
-    <script type="text/template" id="item-template">
-		<div class="clearfix display <%= status == 1 ? 'done' : '' %>">
-			<input type="checkbox" class="done" <%= status == 1 ? 'checked="checked"' : '' %>>
-			<div class="name"><%= name %></div>
-			<div class="delete">&nbsp;</div>
-		</div>
-		<div class="edit">
-	        <input type="text" value="<%= name %>" class="input">
-		</div>
-    </script>
-
 
 </body>
 </html>

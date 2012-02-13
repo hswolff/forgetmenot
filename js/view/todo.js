@@ -1,11 +1,12 @@
 define(['jquery', 
 		'underscore', 
-		'backbone'], 
-function($, _, Backbone) {
+		'backbone',
+		'text!template/todo.html'], 
+function($, _, Backbone, todo) {
 	
 	var TodoView = Backbone.View.extend({
         tagName: "li",
-        template: _.template($('#item-template').html()),
+        template: _.template(todo),
         
         events: {
             "dblclick .display .name" : 			"edit",

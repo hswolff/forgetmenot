@@ -1,12 +1,13 @@
 define(['jquery', 
 		'underscore', 
-		'backbone'], 
-function($, _, Backbone) {
+		'backbone',
+		'text!template/stats.html'], 
+function($, _, Backbone, stats) {
 	
 	// Stats Template
 	var StatsView = Backbone.View.extend({
 		el: $('#stats'),
-        template: _.template($('#stats-template').html()),
+        template: _.template(stats),
 
 		initialize: function() {
 			_.bindAll(this, 'render')
