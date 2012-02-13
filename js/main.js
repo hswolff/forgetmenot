@@ -34,11 +34,19 @@ function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 	});
 
     var App = Backbone.View.extend({
+
+    	events: {
+    		'click #createNew' :       	'newTodo',
+    		'click #clearCompleted' : 	'clearCompleted'
+    	},
+
         el: $("#todoApp"),
         
         initialize: function(bootstrap) {
 
             Backbone.emulateJSON = true;
+
+            _.bindAll(this);
 
             this.todosView = new TodosView;
 
@@ -52,7 +60,18 @@ function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
             }, this));
 
             this.stats.render(this.todosView.collection.length, this.todosView.collection.done().length);
-        }
+        },
+
+        newTodo: function(o) {
+            this.todosView.collection.create();
+        },
+
+        clearCompleted: function() {
+			var remove = this.todosView.collection.done();
+			_.each(remove, function(todo){
+				todo.destroy();
+			});
+		}
 
     });
 
