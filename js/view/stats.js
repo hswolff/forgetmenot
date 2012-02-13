@@ -13,10 +13,10 @@ function($, _, Backbone) {
 			// fmn.Todos.bind('all', this.render);
 		},
 		
-		render: function() {
+		render: function(total, done) {
 			$(this.el).html(this.template({
-				total: fmn.Todos.length,
-				done: fmn.Todos.done().length
+				total: total,
+				done: done
 			}));
 		}
 	

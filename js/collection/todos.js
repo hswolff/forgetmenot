@@ -33,7 +33,7 @@ function($, _, Backbone, Todo) {
 		},
 		
 		done: function() {
-			return this.filter(function(todo){ return todo.get('done') == 1; });
+			return this.filter(function(todo){ return todo.get('status') == 1; });
 		},
 		
         comparator: function(todo) {

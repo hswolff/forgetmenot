@@ -38,21 +38,26 @@ function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
         
         initialize: function(bootstrap) {
 
-        	this.collection = new Todos;
-
             Backbone.emulateJSON = true;
 
             this.todosView = new TodosView;
 
+            this.todosView.collection.reset(json);
+
+            // Set up Stats View
 			this.stats = new StatsView;
+
+			this.todosView.collection.bind('change:status', _.bind(function(model, status) {
+				this.stats.render(model.collection.length, model.collection.done().length);
+            }, this));
+
+            this.stats.render(this.todosView.collection.length, this.todosView.collection.done().length);
         }
 
     });
 
     // Run application
-    var app = new App;
-
-    app.todosView.collection.reset(json);
+    var app = new App;    
 
     // fmn.app.router = new fmn.Routes;
 	// Backbone.history.start({pushState: false, root: '/forgetmenot/'});
