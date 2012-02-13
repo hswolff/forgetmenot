@@ -57,7 +57,7 @@ function authenticate($user, $pass) {
 
     <link rel="stylesheet/less" href="css/less/boilerplate.less"/>
     <link rel="stylesheet/less" href="css/less/forgetmenot.less"/>
-    <script src="js/libs/less.min.js"></script>	
+    <script src="js/libs/less.js"></script>	
  
 	
 	<script data-main="js/main" src="js/libs/require.js"></script>
