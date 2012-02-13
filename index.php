@@ -54,11 +54,11 @@ function authenticate($user, $pass) {
     <link rel="stylesheet" href="css/boilerplate.css?v=1"/>
     <link rel="stylesheet" href="css/forgetmenot.css?v=1"/>
     <link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1"/>
-<!-- 
+
     <link rel="stylesheet/less" href="css/less/boilerplate.less"/>
     <link rel="stylesheet/less" href="css/less/forgetmenot.less"/>
     <script src="js/libs/less.min.js"></script>	
- -->	
+ 
 	
 	<script data-main="js/main" src="js/libs/require.js"></script>
 
