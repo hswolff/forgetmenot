@@ -13,8 +13,9 @@ require(['jquery',
 		'backbone', 
 		'collection/todos', 
 		'view/stats', 
-		'view/todo'], 
-function($, _, Backbone, Todos, StatsView, TodoView) {
+		'view/todo',
+		'view/todos'], 
+function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
     var Routes = Backbone.Router.extend({
 		routes: {
@@ -34,56 +35,16 @@ function($, _, Backbone, Todos, StatsView, TodoView) {
 
     var App = Backbone.View.extend({
         el: $("#todoApp"),
-        list: $("#todoItemsList", this.el), 
-        
-        events: {
-            'click #createNew' :       	'newTodo',
-			'click #clearCompleted' : 	'clearCompleted'
-        },
         
         initialize: function(bootstrap) {
 
         	this.collection = new Todos;
 
             Backbone.emulateJSON = true;
-            _.bindAll(this, 'render', 'newTodo', 'addOne', 'addAll');
-            this.collection.bind('reset', this.addAll);
-			this.collection.bind('add', this.addOne);
-			this.collection.bind('add', function(model, collection){
-				model.view.edit();
-			});
 
-			this.render();
-        },
+            this.todosView = new TodosView;
 
-		render: function() {
 			this.stats = new StatsView;
-		},
-		
-		clearCompleted: function() {
-			var remove = this.collection.done();
-			_.each(remove, function(todo){
-				todo.destroy();
-			});
-		},
-
-        addAll: function(collection, r) {
-        	this.list.empty();
-			// If collection is empty add one
-			if(!collection.length) {
-				var model = collection.create();
-			}
-            collection.each(this.addOne);
-        },
-        
-        addOne: function(o, p) {
-            var view = new TodoView({model:o.todo || o});
-			this.$("#todoItemsList").append(view.render().el);
-            return view;
-        },
-
-        newTodo: function(o) {
-            this.collection.create();
         }
 
     });
@@ -91,7 +52,7 @@ function($, _, Backbone, Todos, StatsView, TodoView) {
     // Run application
     var app = new App;
 
-    app.collection.reset(json);
+    app.todosView.collection.reset(json);
 
     // fmn.app.router = new fmn.Routes;
 	// Backbone.history.start({pushState: false, root: '/forgetmenot/'});
