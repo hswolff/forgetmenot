@@ -67,7 +67,7 @@ function($, _, Backbone) {
 				this.close();
 				this.model.collection.create();
 				return;
-				var nextModel = fmn.Todos.getNext(this.model);
+				var nextModel = this.model.collection.getNext(this.model);
 				if (this.model === nextModel) {
 					this.model.collection.create();
 				} else {

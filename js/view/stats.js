@@ -10,7 +10,6 @@ function($, _, Backbone) {
 
 		initialize: function() {
 			_.bindAll(this, 'render')
-			// fmn.Todos.bind('all', this.render);
 		},
 		
 		render: function(total, done) {
