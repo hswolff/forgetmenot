@@ -61,14 +61,6 @@ function authenticate($user, $pass) {
  -->	
 	
 	<script data-main="js/main" src="js/libs/require.js"></script>
-	
-	<script src="js/libs/jquery.js"></script>
-	<script src="js/libs/underscore.js"></script>
-	<script src="js/libs/backbone.js"></script>
-
-	<script src="js/fmn-todo.js"></script>
-	<script src="js/fmn-list.js"></script>
-	<script src="js/fmn-app.js"></script>
 
 </head>
 <body>
@@ -99,12 +91,7 @@ function authenticate($user, $pass) {
     	<ul class="todoList fmn-todos" id="todoItemsList">
     		<!-- #todoApp items go here -->
     		<script type="text/javascript" id="todos">
-    		$(function() {
-    			if(!window.location.hash) {
-    				fmn.app.collection.reset(<?php require_once('api.php'); ?>);
-    				// fmn.app.router.navigate('list/1');
-    			}
-    		});
+    		var json = <?php require_once('api.php'); ?>;
     		</script>
     	</ul>
 

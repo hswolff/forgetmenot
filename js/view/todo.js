@@ -1,35 +1,9 @@
-$(function() {
-    // Global namespace
-	window.fmn = {};
+define(['jquery', 
+		'underscore', 
+		'backbone'], 
+function($, _, Backbone) {
 	
-    fmn.Todo = Backbone.Model.extend({
-        defaults: {
-            name: "new empty todo",
-            list_id: 1,
-            parent_id: 0,
-            position: 0,
-            status: 0
-        },
-        
-        initialize: function() {
-            if (!this.get("name")) {
-              this.set({"name": this.defaults.name});
-            }
-        },
-
-		done: function() {
-		    if (this.get("status") == 0) {
-		        this.save({status: 1});
-		    } else {
-		        this.save({status: 0});
-		    }
-			
-		},
-
-    });
-
-    // Each Individual Todo Item View
-    fmn.TodoView = Backbone.View.extend({
+	var TodoView = Backbone.View.extend({
         tagName: "li",
         template: _.template($('#item-template').html()),
         
@@ -139,46 +113,5 @@ $(function() {
 		}
     });
 
-
-    fmn.Todos = Backbone.Collection.extend({
-        model: fmn.Todo,
-		url: "api.php?",
-
-		initialize: function() {
-			this.model.bind('remove', function(model,collection) {
-				// console.log(model, collection);
-			});
-		},
-		
-		getNext: function(todo) {
-			var m = this.at(this.indexOf(todo) + 1);
-			if (!m) {
-				return todo;
-			} else {
-				return m;
-			}
-		},
-		
-		getPrevious: function(todo) {
-			var m = this.at(this.indexOf(todo) - 1);
-			if (!m) {
-				return todo;
-			} else {
-				return m;
-			}
-		},
-		
-		done: function() {
-			return this.filter(function(todo){ return todo.get('done') == 1; });
-		},
-		
-        comparator: function(todo) {
-			if (todo.get('id').length === 1) {
-				return '0'+todo.get('id');
-			} else {
-				return todo.get('id');
-			}
-        }
-    });
-
+	return TodoView;
 });

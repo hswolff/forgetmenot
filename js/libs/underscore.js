@@ -1,3 +1,4 @@
+define([], function(){
 //     Underscore.js 1.3.1
 //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
 //     Underscore is freely distributable under the MIT license.
@@ -997,3 +998,5 @@
   };
 
 }).call(this);
+
+return _; });

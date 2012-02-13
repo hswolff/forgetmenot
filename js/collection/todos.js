@@ -1,7 +1,11 @@
-$(function() {
- 
-    fmn.Todos = Backbone.Collection.extend({
-        model: fmn.Todo,
+define(['jquery', 
+		'underscore', 
+		'backbone', 
+		'model/todo'], 
+function($, _, Backbone, Todo) {
+	
+	var Todos = Backbone.Collection.extend({
+        model: Todo,
 		url: "api.php?",
 
 		initialize: function() {
@@ -40,6 +44,6 @@ $(function() {
 			}
         }
     });
-	
 
+    return Todos;
 });
