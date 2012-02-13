@@ -34,15 +34,8 @@ function($, _, Backbone, Todo) {
 		
 		done: function() {
 			return this.filter(function(todo){ return todo.get('status') == 1; });
-		},
+		}
 		
-        comparator: function(todo) {
-			if (todo.get('id').length === 1) {
-				return '0'+todo.get('id');
-			} else {
-				return todo.get('id');
-			}
-        }
     });
 
     return Todos;
