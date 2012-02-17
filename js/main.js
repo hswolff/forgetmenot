@@ -37,7 +37,7 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
     var App = Backbone.View.extend({
 
     	el: $("#app"),
-    	
+
     	events: {
     		'click #createNew' :       	'newTodo',
     		'click #clearCompleted' : 	'clearCompleted'
@@ -47,11 +47,7 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
             Backbone.emulateJSON = true;
 
-            _.bindAll(this);
-
-            this.todosView = new TodosView;
-
-            this.todosView.collection.reset(json);
+            this.todosView = new TodosView(json);
 
             // Set up Stats View
 			this.stats = new StatsView;
