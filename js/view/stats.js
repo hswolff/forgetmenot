@@ -9,15 +9,34 @@ function($, _, Backbone, stats) {
 		el: $('#stats'),
         template: _.template(stats),
 
-		initialize: function() {
-			_.bindAll(this, 'render')
+        events: {
+    		'click #clearCompleted' : 	'clearCompleted'
+    	},
+
+		initialize: function(collection) {
+			_.bindAll(this)
+			this.collection = collection;
+
+			var self = this;
+			this.collection.bind('change:status', function(model, status) {
+				self.render(model.collection.length, model.collection.done().length);
+            });
+
+            this.render(this.collection.length, this.collection.done().length);
 		},
 		
 		render: function(total, done) {
-			$(this.el).html(this.template({
+			this.$el.html(this.template({
 				total: total,
 				done: done
 			}));
+		},
+
+		clearCompleted: function() {
+			var remove = this.collection.done();
+			_.each(remove, function(todo){
+				todo.destroy();
+			});
 		}
 	
 	});

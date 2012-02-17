@@ -39,36 +39,23 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
     	el: $("#app"),
 
     	events: {
-    		'click #createNew' :       	'newTodo',
-    		'click #clearCompleted' : 	'clearCompleted'
+    		'click #createNew' :       	'newTodo'
     	},
         
         initialize: function(bootstrap) {
 
             Backbone.emulateJSON = true;
 
-            this.todosView = new TodosView(json);
+            this.todos = new Todos(todos);
+            this.todos.view = new TodosView(this.todos);
 
             // Set up Stats View
-			this.stats = new StatsView;
-
-			this.todosView.collection.bind('change:status', _.bind(function(model, status) {
-				this.stats.render(model.collection.length, model.collection.done().length);
-            }, this));
-
-            this.stats.render(this.todosView.collection.length, this.todosView.collection.done().length);
+			this.stats = new StatsView(this.todos);
         },
 
         newTodo: function(o) {
             this.todosView.collection.create();
-        },
-
-        clearCompleted: function() {
-			var remove = this.todosView.collection.done();
-			_.each(remove, function(todo){
-				todo.destroy();
-			});
-		}
+        }
 
     });
 
