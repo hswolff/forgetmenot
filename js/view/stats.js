@@ -23,9 +23,15 @@ function($, _, Backbone, stats) {
             });
 
             this.render(this.collection.length, this.collection.done().length);
+
+            this.collection.bind('add remove', this.render)
 		},
 		
 		render: function(total, done) {
+			if (_.isObject(total)) {
+				total = done.length;
+				done = done.done().length;
+			}
 			this.$el.html(this.template({
 				total: total,
 				done: done

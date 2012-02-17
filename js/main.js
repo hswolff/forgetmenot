@@ -49,7 +49,6 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
             this.todos = new Todos(todos);
             this.todos.view = new TodosView(this.todos);
 
-            // Set up Stats View
 			this.stats = new StatsView(this.todos);
         },
 
