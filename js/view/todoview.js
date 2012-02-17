@@ -9,57 +9,56 @@ function($, _, Backbone, todo) {
         template: _.template(todo),
         
         events: {
-            "dblclick .display .name" : 			"edit",
-			"click input.done" : 					"toggleDone",
-            "click .display .delete" :  			"destroyTodo",
-			"keydown .edit input" : 				"keyboardActions"   
+            "dblclick .name": "edit",
+			"click input.status" : "status",
+            "click .delete" : "delete",
+			"keydown input.name" : "keyboardActions"   
         },
         
         initialize: function() {
-            _.bindAll(this, 'render', 'deleteTodo', 'close','save', 'keyboardActions');
-            this.bind('close', this.render);
-			this.model.bind('change:done', this.render);			
-			this.model.bind('destroy', this.deleteTodo);
+            _.bindAll(this);
             this.model.view = this;
+
+            this.el.className = 'clearfix todo';
+			this.el.id = this.model.cid;
+
+			this.model.bind('change', this.render);			
+			this.model.bind('destroy', this.remove);
+
+			var self = this;
+			this.model.bind('change:edit', function(model, edit) {
+				console.log('hi', model, edit)
+				if (edit) {
+					self.$input = self.$("input.name");
+            		self.$input.bind('blur', self.close);
+					self.$input.focus();
+				}
+			})
         },
         
-        render: function() {
+        render: function(model) {
             this.$el.html(this.template(this.model.toJSON()));
-			this.el.className = 'todo indent-' + this.model.get('indent');
-			this.el.id = this.model.cid;
-            this.input = this.$(".input");
-            this.input.bind('blur', this.close);
             return this;
         },
         
         edit: function() {
-            var name = this.model.get('name');
             this.$el.addClass("editing");
-            this.input.val(name);
-            this.input.focus();
+            this.model.set('edit', true);
+            // this.$input.focus();
         },
         
-        save: function(indent) {
-			var $inputVal = this.input.val();
+        close: function() {
+        	this.$el.removeClass("editing");
+			var $inputVal = this.$input.val();
             this.model.save({ 
-				name: ($inputVal == '' ? this.model.defaults.name : $inputVal)
-				// indent: parseInt(this.model.get('indent') + (indent ? indent : ''))
+				name: ($inputVal == '' ? this.model.defaults.name : $inputVal),
+				edit: false
 			});
-        },
-
-		close: function() {
-			this.save();
-			this.$el.removeClass("editing");
-			this.trigger('close');
 		},
 		
-		destroyTodo: function() {
+		delete: function() {
 			this.model.destroy();
 		},
-        
-        deleteTodo: function() {
-            this.remove();
-        },
         
         keyboardActions: function(e) {
 	
@@ -103,14 +102,14 @@ function($, _, Backbone, todo) {
 			
 			// Backspace key
 			if (e.keyCode == 8) {
-				if (this.input.val() == '') {
+				if (this.$input.val() == '') {
 					e.preventDefault();
 				}
 			}
 			
         },
 
-		toggleDone: function() {
+		status: function() {
 			this.model.done();
 		}
     });

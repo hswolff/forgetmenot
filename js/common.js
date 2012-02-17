@@ -10,8 +10,8 @@ define([
 	'collection/todos',
 	// Views
 	'view/stats',
-	'view/todo',
-	'view/todos',
+	'view/todoview',
+	'view/todosview',
 	// Templates
 	'text!template/stats.html',
 	'text!template/todo.html'],

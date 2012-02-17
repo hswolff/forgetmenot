@@ -14,8 +14,8 @@ require(['common',
 		'backbone', 
 		'collection/todos', 
 		'view/stats', 
-		'view/todo',
-		'view/todos'], 
+		'view/todoview',
+		'view/todosview'], 
 function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
     var Routes = Backbone.Router.extend({

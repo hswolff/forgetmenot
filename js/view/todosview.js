@@ -2,7 +2,7 @@ define(['jquery',
 		'underscore', 
 		'backbone', 
 		'collection/todos',
-		'view/todo'], 
+		'view/todoview'], 
 function($, _, Backbone, Todos, TodoView) {
 	
 	var TodosView = Backbone.View.extend({
