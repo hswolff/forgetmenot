@@ -36,7 +36,7 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
     var App = Backbone.View.extend({
 
-    	el: $("#app"),
+    	el: "#app",
 
     	events: {
     		'click #createNew' :       	'newTodo'
@@ -53,7 +53,7 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
         },
 
         newTodo: function(o) {
-            this.todosView.collection.create();
+            this.todos.create();
         }
 
     });

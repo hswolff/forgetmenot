@@ -7,7 +7,7 @@ function($, _, Backbone, Todos, TodoView) {
 	
 	var TodosView = Backbone.View.extend({
 
-        el: $("#todoItemsList"), 
+        el: "#todoItemsList",
         
         initialize: function(collection) {
         	_.bindAll(this);

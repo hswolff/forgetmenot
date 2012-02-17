@@ -6,7 +6,7 @@ function($, _, Backbone, stats) {
 	
 	// Stats Template
 	var StatsView = Backbone.View.extend({
-		el: $('#stats'),
+		el: '#stats',
         template: _.template(stats),
 
         events: {

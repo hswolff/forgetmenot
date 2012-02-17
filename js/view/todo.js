@@ -24,7 +24,7 @@ function($, _, Backbone, todo) {
         },
         
         render: function() {
-            $(this.el).html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model.toJSON()));
 			this.el.className = 'todo indent-' + this.model.get('indent');
 			this.el.id = this.model.cid;
             this.input = this.$(".input");
@@ -34,7 +34,7 @@ function($, _, Backbone, todo) {
         
         edit: function() {
             var name = this.model.get('name');
-            $(this.el).addClass("editing");
+            this.$el.addClass("editing");
             this.input.val(name);
             this.input.focus();
         },
@@ -49,7 +49,7 @@ function($, _, Backbone, todo) {
 
 		close: function() {
 			this.save();
-			$(this.el).removeClass("editing");
+			this.$el.removeClass("editing");
 			this.trigger('close');
 		},
 		
