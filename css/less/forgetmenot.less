@@ -2,7 +2,9 @@
 input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
 input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus {border-color:#666;}
 
-
+ul, ol {
+    padding: 0;
+}
 
 
 html, body {
@@ -135,7 +137,29 @@ nav.lists.hide {
 ul.fmn-todos {
     list-style: none;
     margin: 30px auto 0;
+
+    .todo {
+        height: 40px;
+        margin: 5px 0;
+        > * {
+            display: inline-block;
+        }
+        .status {
+            margin-right: 15px;
+        }
+        .delete {
+            width: 32px;
+            height: 32px;
+            float: right;
+            cursor: pointer;
+        }
+        &:hover .delete {
+            background: url(../../images/delete32.png) no-repeat 100% 0;
+        }
+    }
 }
+
+/*
 .fmn-todos .todo {
     margin: 10px 0 0;
     height: 50px;
@@ -190,17 +214,7 @@ ul.fmn-todos {
             width: 100%;
             outline: none;
         }
-/** Todo Indent Rules **/
-.fmn-todos .todo.indent-1 { padding: 0 0 0 25px; }
-.fmn-todos .todo.indent-2 { padding: 0 0 0 50px; }
-.fmn-todos .todo.indent-3 { padding: 0 0 0 75px; }
-.fmn-todos .todo.indent-4 { padding: 0 0 0 100px; }
-.fmn-todos .todo.indent-5 { padding: 0 0 0 125px; }
-.fmn-todos .todo.indent-6 { padding: 0 0 0 150px; }
-.fmn-todos .todo.indent-7 { padding: 0 0 0 175px; }
-.fmn-todos .todo.indent-8 { padding: 0 0 0 200px; }
-
-
+*/
 
 footer {
     position: fixed;

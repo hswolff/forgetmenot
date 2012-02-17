@@ -24,27 +24,21 @@ function($, _, Backbone, todo) {
 
 			this.model.bind('change', this.render);			
 			this.model.bind('destroy', this.remove);
-
-			var self = this;
-			this.model.bind('change:edit', function(model, edit) {
-				console.log('hi', model, edit)
-				if (edit) {
-					self.$input = self.$("input.name");
-            		self.$input.bind('blur', self.close);
-					self.$input.focus();
-				}
-			})
         },
         
         render: function(model) {
             this.$el.html(this.template(this.model.toJSON()));
+            if (model && model.get('edit')) {
+				this.$input = this.$("input.name");
+        		this.$input.bind('blur', this.close);
+				this.$input.focus();
+			}
             return this;
         },
         
         edit: function() {
             this.$el.addClass("editing");
             this.model.set('edit', true);
-            // this.$input.focus();
         },
         
         close: function() {

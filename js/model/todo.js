@@ -8,7 +8,9 @@ function($, _, Backbone) {
             list_id: 1,
             parent_id: 0,
             position: 0,
-            status: 0
+            status: 0,
+            // View states
+            edit: false
         },
         
         initialize: function() {
