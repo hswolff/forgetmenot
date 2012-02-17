@@ -1,5 +1,4 @@
 <?php
-
 // Users Array
 // Each line follows the structure of:
 //	'username' => 'password'
@@ -39,7 +38,6 @@ function authenticate($user, $pass) {
 }
 */ // <== remove
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -58,14 +56,12 @@ function authenticate($user, $pass) {
     <link rel="stylesheet/less" href="css/less/boilerplate.less"/>
     <link rel="stylesheet/less" href="css/less/forgetmenot.less"/>
     <script src="js/libs/less.js"></script>	
- 
 	
 	<script data-main="js/main" src="js/libs/require.js"></script>
-
 </head>
 <body>
 
-    <div class="container" id="todoApp">
+    <div class="container" id="app">
 		<header>
 	    	<h1>forgetmenot &weierp; todo list</h1>
 			<img src="images/new.png" value="Create New" id="createNew" class="createNew" />
@@ -74,6 +70,7 @@ function authenticate($user, $pass) {
 				<!-- stats go here -->
 			</nav>
 		</header>
+
 		<nav class="lists ">
 			<div class="full">
 				<h2>lists &#x2192;</h2>
@@ -89,7 +86,7 @@ function authenticate($user, $pass) {
 		</nav>
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
-    		<!-- #todoApp items go here -->
+    		<!-- #app items go here -->
     		<script type="text/javascript" id="todos">
     		var json = <?php require_once('api.php'); ?>;
     		</script>

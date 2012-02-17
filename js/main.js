@@ -36,12 +36,12 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
     var App = Backbone.View.extend({
 
+    	el: $("#app"),
+    	
     	events: {
     		'click #createNew' :       	'newTodo',
     		'click #clearCompleted' : 	'clearCompleted'
     	},
-
-        el: $("#todoApp"),
         
         initialize: function(bootstrap) {
 
