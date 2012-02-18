@@ -49,11 +49,8 @@ function authenticate($user, $pass) {
 
   	<title>forgetmenot todo list | A Todo List for the common forgetful-but-not-me.</title>
     
-    <link rel="stylesheet" href="css/boilerplate.css?v=1"/>
     <link rel="stylesheet" href="css/forgetmenot.css?v=1"/>
-    <link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1"/>
-
-    <link rel="stylesheet/less" href="css/less/boilerplate.less"/>
+    
     <link rel="stylesheet/less" href="css/less/forgetmenot.less"/>
     <script src="js/libs/less.js"></script>	
 	
