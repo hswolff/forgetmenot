@@ -70,20 +70,6 @@ function authenticate($user, $pass) {
 				<!-- stats go here -->
 			</nav>
 		</header>
-
-		<nav class="lists ">
-			<div class="full">
-				<h2>lists &#x2192;</h2>
-				<ul id="fmn-lists">
-					<li class="active"><a href="">today</a></li>
-					<li><a href="">soon</a></li>
-					<li><a href="">later</a></li>
-				</ul>
-			</div>
-			<div class="compact">
-				<h2><a href="">l<br/>i<br/>s<br/>t<br/>s</a></h2>
-			</div>
-		</nav>
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
     		<!-- #app items go here -->

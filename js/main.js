@@ -18,22 +18,6 @@ require(['common',
 		'view/todosview'], 
 function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
-    var Routes = Backbone.Router.extend({
-		routes: {
-			'list/:list': 	"list"
-		},
-
-		initialize: function() {
-			this.bind('route:list', function(a, b) {
-				// console.log('hi', a,b);
-			});
-		},
-
-		list: function(list) {
-			fmn.app.collection.fetch({data: {list: list}});
-		}
-	});
-
     var App = Backbone.View.extend({
 
     	el: "#app",
@@ -61,12 +45,4 @@ function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
     // Run application
     var app = new App;    
 
-    // fmn.app.router = new fmn.Routes;
-	// Backbone.history.start({pushState: false, root: '/forgetmenot/'});
-
-	$(function() {
-		if(!window.location.hash) {
-			// fmn.app.router.navigate('list/1');
-		}
-	});
 });

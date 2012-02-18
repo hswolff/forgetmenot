@@ -9,9 +9,7 @@ function($, _, Backbone, Todo) {
 		url: "api.php?",
 
 		initialize: function() {
-			this.model.bind('remove', function(model,collection) {
-				// console.log(model, collection);
-			});
+			
 		},
 		
 		getNext: function(todo) {
