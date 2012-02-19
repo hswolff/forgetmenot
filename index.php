@@ -50,8 +50,7 @@ function authenticate($user, $pass) {
   	<title>forgetmenot - a todo list</title>
     
     <link rel="stylesheet" href="css/forgetmenot.css?v=1"/>
-    
-    
+
 	<script data-main="js/main" src="js/libs/require.js"></script>
 </head>
 <body>

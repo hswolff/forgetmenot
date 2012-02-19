@@ -1,5 +1,5 @@
 require.config({
-	// priority: ['common', 'main'],
+    priority: ['common', 'main'],
 	paths: {
 		'jquery': 'libs/jquery',
 		'underscore': 'libs/underscore',
@@ -8,15 +8,14 @@ require.config({
 	}
 });
 
-require(['common',
-		'jquery', 
+require(['jquery', 
 		'underscore', 
 		'backbone', 
 		'collection/todos', 
 		'view/stats', 
 		'view/todoview',
 		'view/todosview'], 
-function(common, $, _, Backbone, Todos, StatsView, TodoView, TodosView) {
+function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
 
     var App = Backbone.View.extend({
 

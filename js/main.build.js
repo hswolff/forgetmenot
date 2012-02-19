@@ -11,5 +11,10 @@
         	exclude: ['common']
         }
     ],
-    mainConfigFile: './main.js'
+    paths: {
+        'jquery': 'libs/jquery',
+        'underscore': 'libs/underscore',
+        'backbone': 'libs/backbone',
+        'text': 'libs/text'
+    }
 })
