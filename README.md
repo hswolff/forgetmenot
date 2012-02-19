@@ -34,10 +34,10 @@ Install
 1.  Download the [latest stable version](https://github.com/hswolff/forgetmenot/tarball/master)
 2.  Extract files and upload to your web server.
 
-### Add Basic Auth To Directory in 3 Easy Steps
-1.  Open index.php in your favorite editor
-2.  Edit the $users array to add your own user/pass combos
-3.  Remove the comments to allow the PHP code to execute
+### Add Basic Auth
+1.  Open index.php.
+2.  Edit the $users array to add your own user/pass.
+3.  Remove the comments to allow PHP code to execute.
 
 
 Libraries Used
