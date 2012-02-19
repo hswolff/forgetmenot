@@ -42,6 +42,6 @@ function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
     });
 
     // Run application
-    var app = new App;    
+    new App;    
 
 });

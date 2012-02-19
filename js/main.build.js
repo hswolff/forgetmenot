@@ -16,5 +16,6 @@
         'underscore': 'libs/underscore',
         'backbone': 'libs/backbone',
         'text': 'libs/text'
-    }
+    },
+    optimizeCss: 'standard'
 })
