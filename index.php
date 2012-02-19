@@ -47,20 +47,18 @@ function authenticate($user, $pass) {
 	<meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-  	<title>forgetmenot todo list | A Todo List for the common forgetful-but-not-me.</title>
+  	<title>forgetmenot - a todo list</title>
     
     <link rel="stylesheet" href="css/forgetmenot.css?v=1"/>
     
-    <link rel="stylesheet/less" href="css/less/forgetmenot.less"/>
-    <script src="js/libs/less.js"></script>	
-	
+    
 	<script data-main="js/main" src="js/libs/require.js"></script>
 </head>
 <body>
 
     <div class="container" id="app">
-		<header>
-	    	<h1>forgetmenot &weierp; todo list</h1>
+		<header class="clearfix">
+	    	<h1>forgetmenot - a todo list</h1>
 			<img src="images/new.png" value="Create New" id="createNew" class="createNew" />
 			
 			<nav id="stats" class="clearfix">

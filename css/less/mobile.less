@@ -2,16 +2,12 @@ header h1 {
     font-size: 28px;
     text-align: center;
     font-style: italic;
+    margin-top: 0;
 }
 
 header .createNew {
-	width: 32px;
-	height: 32px;
-    text-align: center;
-    cursor: pointer;
-	position: relative;
-	float: right;
-	top: -32px;
+    top: 35px;
+    left: 0;
 }
 
 .container {
@@ -20,42 +16,34 @@ header .createNew {
     padding: 10px;
     position: relative;
     min-height: 100%;
+    padding-top: 0;
+}
+
+#stats {
+    width: 50%;
+    float: right;
+    margin: 0;
+    .text {
+        float: left;
+    }
 }
 
 ul.fmn-todos {
-
-}
-
-
-.fmn-todos .todo.editing .edit .input {
-}
-
-	
-	.fmn-todos .todo .display {
-		width: 280px;
-		height: 45px;
-	}
-
-	.fmn-todos .todo .display .content {
-		width: 216px;
-	}
-	
-		.fmn-todos .todo .display .done {
-            float: left;
-            margin: 17px 18px 0 0;
+    .todo {
+        input.name {
+            width: 70%;
         }
-        
-		.fmn-todos .todo .display .delete {
-			float: right;
-		    display: block;
-		    width: 30px; height: 30px;
-		    cursor: pointer;
-		}
+        .delete {
+            background: url(../images/delete32.png) no-repeat 100% 0;
+        }
+    }
+
+}
+
 
 footer {
     display: none;
 }
-
 
 
 
@@ -76,12 +64,12 @@ header h1 {
 }
 
 .fmn-todos .todo .display {
-	width: 450px;
-	height: 45px;
+    width: 450px;
+    height: 45px;
 }
 
 .fmn-todos .todo .display .content {
-	width: 385px;
+    width: 385px;
 }
 
 

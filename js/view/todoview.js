@@ -9,7 +9,7 @@ function($, _, Backbone, todo) {
         template: _.template(todo),
         
         events: {
-            "dblclick .name": "edit",
+            "click .name": "edit",
 			"click input.status" : "status",
             "click .delete" : "delete",
 			"keydown input.name" : "keyboardActions"   

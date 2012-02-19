@@ -1,10 +1,5 @@
 @import "boilerplate";
 
-@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
-@import "mobile";
-}
-
-
 /* forms.css from blueprint */
 input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
 input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus {border-color:#666;}
@@ -42,7 +37,7 @@ select, input, textarea, button {
 
 header {
     border-bottom: 1px dashed #C2B8B7;
-
+    position: relative;
     h1 {
         font-size: 28px;
         text-align: center;
@@ -51,14 +46,15 @@ header {
     }
     .createNew {
         /*  Disable for now */
-        display: none;
+        display: block;
         width: 32px;
         height: 32px;
         text-align: center;
         cursor: pointer;
-        position: relative;
+        position: absolute;
         float: right;
-        top: -32px;
+        top: 0;
+        right: 0;
     }
 }
 
@@ -79,23 +75,26 @@ ul.fmn-todos {
     .todo {
         height: 40px;
         margin: 5px 0;
+        padding: 0;
+        width: 100%;
         > * {
             display: inline-block;
         }
         .status {
-            margin-right: 15px;
-        }
-        .delete {
-            width: 32px;
-            height: 32px;
-            float: right;
-            cursor: pointer;
-        }
-        &:hover .delete {
-            background: url(../../images/delete32.png) no-repeat 100% 0;
+            width: 6%;
+            margin-right: 1%;
         }
         .name {
-            width: 85%;
+            width: 75%;
+        }
+        .delete {
+            height: 32px;
+            cursor: pointer;
+            width: 12%;
+            float: right;
+        }
+        &:hover .delete {
+            background: url(../images/delete32.png) no-repeat 100% 0;
         }
     }
 }
@@ -109,3 +108,6 @@ footer a {
     text-decoration:none;
 }
 
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+@import "mobile";
+}
