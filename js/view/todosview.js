@@ -18,15 +18,15 @@ function($, _, Backbone, Todos, TodoView) {
             if(!collection.length) {
                 collection.create();
             }
-            collection.each(this.addOne);
+            collection.each(this.addTodo);
             
-			collection.bind('add', this.addOne);
+			collection.bind('add', this.addTodo);
             collection.bind('add', function(model, collection){
-                model.view.edit();
+                // model.view.edit();
             });
         },
         
-        addOne: function(o, p) {
+        addTodo: function(o, p) {
             var view = new TodoView({model:o.todo || o});
 			this.$el.append(view.render().el);
             return view;

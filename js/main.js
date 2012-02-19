@@ -22,17 +22,18 @@ function($, _, Backbone, Todos, StatsView, TodoView, TodosView) {
     	el: "#app",
 
     	events: {
-    		'click #createNew' :       	'newTodo'
+    		'click #createNew' : 'newTodo'
     	},
         
         initialize: function(bootstrap) {
 
             Backbone.emulateJSON = true;
-
-            this.todos = new Todos(todos);
-            this.todos.view = new TodosView(this.todos);
-
-			this.stats = new StatsView(this.todos);
+            // Create Collection
+            var todos = this.todos = new Todos(json);
+            // Create Collection's View
+            new TodosView(todos);
+            // Create Stats View
+			this.stats = new StatsView(todos);
         },
 
         newTodo: function(o) {

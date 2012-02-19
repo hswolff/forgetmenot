@@ -67,8 +67,8 @@ function authenticate($user, $pass) {
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
     		<!-- #app items go here -->
-    		<script type="text/javascript" id="todos">
-    		var todos = <?php require_once('api.php'); ?>;
+    		<script type="text/javascript">
+    		var json = <?php require_once('api.php'); ?>;
     		</script>
     	</ul>
 

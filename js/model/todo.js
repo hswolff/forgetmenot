@@ -17,6 +17,9 @@ function($, _, Backbone) {
             if (!this.get("name")) {
               this.set({"name": this.defaults.name});
             }
+            if (this.isNew()) {
+                this.set('edit', true);
+            }
         },
 
 		done: function() {
