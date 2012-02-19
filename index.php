@@ -38,7 +38,6 @@ function authenticate($user, $pass) {
 }
 */ // <== remove
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -48,72 +47,35 @@ function authenticate($user, $pass) {
 	<meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-  	<title>forgetmenot todo list | A Todo List for the common forgetful-but-not-me.</title>
+  	<title>forgetmenot - a todo list</title>
     
-    <link rel="stylesheet" href="css/forgetmenot.css?v=1">
-	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="css/forgetmenot-mobile.css?v=1">
-	
-	<script src="js/json2.js"></script>
-	<script src="js/jquery-1.6.2.min.js"></script>
-	<script src="js/underscore-min.js"></script>
-	<script src="js/backbone-min.js"></script>
-	<script src="js/forgetmenot.js"></script>
+    <link rel="stylesheet" href="css/forgetmenot.css"/>
 
+	<script data-main="js/main" src="js/libs/require.js"></script>
 </head>
 <body>
 
-    <div class="container" id="todoApp">
-		<header>
-	    	<h1>forgetmenot &weierp; todo list</h1>
+    <div class="container" id="app">
+		<header class="clearfix">
+	    	<h1>forgetmenot - a todo list</h1>
 			<img src="images/new.png" value="Create New" id="createNew" class="createNew" />
 			
 			<nav id="stats" class="clearfix">
 				<!-- stats go here -->
 			</nav>
 		</header>
-		<nav class="lists ">
-			<div class="full">
-				<h2>lists &#x2192;</h2>
-				<ul id="fmn-lists">
-					<li class="active"><a href="">today</a></li>
-					<li><a href="">soon</a></li>
-					<li><a href="">later</a></li>
-				</ul>
-			</div>
-			<div class="compact">
-				<h2><a href="">l<br/>i<br/>s<br/>t<br/>s</a></h2>
-			</div>
-		</nav>
 		
     	<ul class="todoList fmn-todos" id="todoItemsList">
-			<!-- #todoApp items go here -->
+    		<!-- #app items go here -->
+    		<script type="text/javascript">
+    		var json = <?php require_once('api.php'); ?>;
+    		</script>
     	</ul>
 
     	<footer>
 			
 		</footer>
-
-
     </div>
-
-    <!-- Templates -->
-	
-	<script type="text/template" id="stats-template">
-		<span class="text"><%= done %> / <%= total %></span>
-		<span id="clearCompleted">Clear Completed</span>
-	</script>
-
-    <script type="text/template" id="item-template">
-		<div class="clearfix display <%= done == 1 ? 'done' : '' %>">
-			<input type="checkbox" class="done" <%= done == 1 ? 'checked="checked"' : '' %>>
-			<div class="content"><%= content %></div>
-			<div class="delete">&nbsp;</div>
-		</div>
-		<div class="edit">
-	        <input type="text" value="<%= content %>" class="input">
-		</div>
-    </script>
-
 
 </body>
 </html>

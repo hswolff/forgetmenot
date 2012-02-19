@@ -1,0 +1,7 @@
+<input type="checkbox" class="status" <%= status == 1 ? 'checked="checked"' : '' %>>
+<% if (edit) { %>
+<input type="text" class="name" value="<%= name %>"/>
+<% } else { %>
+<div class="name"><%= name %></div>
+<% } %>
+<div class="delete">&nbsp;</div>

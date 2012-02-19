@@ -1,346 +1,631 @@
-
-/* ==== Scroll down to find where to put your styles :) ==== */
-
-/*  HTML5 ✰ Boilerplate  */
-
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ *
+ * Detailed information about this CSS: h5bp.com/css
+ *
+ * ==|== normalize ==========================================================
+ */
+/* =============================================================================
+   HTML5 display definitions
+   ========================================================================== */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
   display: block;
 }
-
-blockquote, q { quotes: none; }
-blockquote:before, blockquote:after,
-q:before, q:after { content: ''; content: none; }
-ins { background-color: #ff9; color: #000; text-decoration: none; }
-mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
-del { text-decoration: line-through; }
-abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
-table { border-collapse: collapse; border-spacing: 0; }
-hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-input, select { vertical-align: middle; }
-
-body { font:13px/1.231 sans-serif; *font-size:small; } 
-
-pre, code, kbd, samp { font-family: monospace, sans-serif; }
-
-html { overflow-y: scroll; }
-a:hover, a:active { outline: none; }
-ul, ol { margin-left: 2em; }
-ol { list-style-type: decimal; }
-nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
-small { font-size: 85%; }
-strong, th { font-weight: bold; }
-td { vertical-align: top; }
-
-sub, sup { font-size: 75%; line-height: 0; position: relative; }
-sup { top: -0.5em; }
-sub { bottom: -0.25em; }
-
-pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 15px; }
-textarea { overflow: auto; }
-.ie6 legend, .ie7 legend { margin-left: -7px; } 
-input[type="radio"] { vertical-align: text-bottom; }
-input[type="checkbox"] { vertical-align: bottom; }
-.ie7 input[type="checkbox"] { vertical-align: baseline; }
-.ie6 input { vertical-align: text-bottom; }
-label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
-button, input, select, textarea { margin: 0; }
-input:valid, textarea:valid   {  }
-input:invalid, textarea:invalid { border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red; }
-.no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
-
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
-a:link { -webkit-tap-highlight-color: #FF5E99; }
-
-button {  width: auto; overflow: visible; }
-.ie7 img { -ms-interpolation-mode: bicubic; }
-
-body, select, input, textarea {  color: #444; }
-h1, h2, h3, h4, h5, h6 { font-weight: bold; }
-a, a:active, a:visited { color: #607890; }
-a:hover { color: #036; }
-
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]) {
+  display: none;
+}
+[hidden] {
+  display: none;
+}
+/* =============================================================================
+   Base
+   ========================================================================== */
 /*
-    // ========================================== \\
-   ||                                              ||
-   ||               Your styles !                  ||
-   ||                                              ||
-    \\ ========================================== //
-*/
-
-
-/* forms.css from blueprint */
-input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
-input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus {border-color:#666;}
-
-
-
-
-html, body {
-    height: 100%;
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ * 2. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
+ */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
-
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+  color: #222;
+}
 body {
-    background-color:#E0E0E0;
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.4;
 }
-
-body, 
-select, input, textarea, button { 
-    font-size:20px;
-	font-family:  'Times New Roman';
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+ * Also: hot pink! (or customize the background color to match your design)
+ */
+::-moz-selection {
+  background: #fe57a1;
+  color: #fff;
+  text-shadow: none;
 }
-
+::selection {
+  background: #fe57a1;
+  color: #fff;
+  text-shadow: none;
+}
+/* =============================================================================
+   Links
+   ========================================================================== */
+a {
+  color: #00e;
+}
+a:visited {
+  color: #551a8b;
+}
+a:hover {
+  color: #06e;
+}
+a:focus {
+  outline: thin dotted;
+}
+/* Improve readability when focused and hovered in all browsers: h5bp.com/h */
+a:hover,
+a:active {
+  outline: 0;
+}
+/* =============================================================================
+   Typography
+   ========================================================================== */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: bold;
+}
+blockquote {
+  margin: 1em 40px;
+}
+dfn {
+  font-style: italic;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+ins {
+  background: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+/* Redeclare monospace font family: h5bp.com/j */
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+/* Improve readability of pre-formatted text in all browsers */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+q {
+  quotes: none;
+}
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+small {
+  font-size: 85%;
+}
+/* Position subscript and superscript content without affecting line-height: h5bp.com/k */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+/* =============================================================================
+   Lists
+   ========================================================================== */
+ul,
+ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px;
+}
+dd {
+  margin: 0 0 0 40px;
+}
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+/*
+ * 1. Improve image quality when scaled in IE7: h5bp.com/d
+ * 2. Remove the gap between images and borders on image containers: h5bp.com/i/440
+ */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+/*
+ * Correct overflow not hidden in IE9
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+/* =============================================================================
+   Figures
+   ========================================================================== */
+figure {
+  margin: 0;
+}
+/* =============================================================================
+   Forms
+   ========================================================================== */
+form {
+  margin: 0;
+}
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/* Indicate that 'label' will shift focus to the associated form element */
+label {
+  cursor: pointer;
+}
+/*
+ * 1. Correct color not inheriting in IE6/7/8/9
+ * 2. Correct alignment displayed oddly in IE6/7
+ */
+legend {
+  border: 0;
+  *margin-left: -7px;
+  padding: 0;
+  white-space: normal;
+}
+/*
+ * 1. Correct font-size not inheriting in all browsers
+ * 2. Remove margins in FF3/4 S5 Chrome
+ * 3. Define consistent vertical alignment display in all browsers
+ */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+/*
+ * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ */
+button,
+input {
+  line-height: normal;
+}
+/*
+ * 1. Display hand cursor for clickable form elements
+ * 2. Allow styling of clickable form elements in iOS
+ * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
+ */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+  *overflow: visible;
+}
+/*
+ * Re-set default cursor for disabled elements
+ */
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+/*
+ * Consistent box sizing and appearance
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *width: 13px;
+  *height: 13px;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+/*
+ * Remove inner padding and border in FF3/4: h5bp.com/l
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+/*
+ * 1. Remove default vertical scrollbar in IE6/7/8/9
+ * 2. Allow only vertical resizing
+ */
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: vertical;
+}
+/* Colors for form validity */
+input:invalid,
+textarea:invalid {
+  background-color: #f0dddd;
+}
+/* =============================================================================
+   Tables
+   ========================================================================== */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td {
+  vertical-align: top;
+}
+/* =============================================================================
+   Chrome Frame Prompt
+   ========================================================================== */
+.chromeframe {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: black;
+  padding: 0.2em 0;
+}
+/* ==|== primary styles =====================================================
+   Author:
+   ========================================================================== */
+/* ==|== media queries ======================================================
+   EXAMPLE Media Query for Responsive Design.
+   This example overrides the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+/* ==|== non-semantic helper classes ========================================
+   Please define your styles before this section.
+   ========================================================================== */
+/* For image replacement */
+.ir {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+  *line-height: 0;
+}
+.ir br {
+  display: none;
+}
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible {
+  visibility: hidden;
+}
+/* Contain floats: h5bp.com/q */
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+/* ==|== print styles =======================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+  /* Black prints faster: h5bp.com/s */
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  /* Don't show links for images, or javascript/internal links */
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  /* h5bp.com/t */
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page  {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+/* forms.css from blueprint */
+input[type=text],
+input[type=password],
+input.text,
+input.title,
+textarea {
+  background-color: #fff;
+  border: 1px solid #bbb;
+}
+input[type=text]:focus,
+input[type=password]:focus,
+input.text:focus,
+input.title:focus,
+textarea:focus {
+  border-color: #666;
+}
+ul,
+ol {
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: #E0E0E0;
+}
+body,
+select,
+input,
+textarea,
+button {
+  font-size: 20px;
+  font-family: 'Times New Roman';
+}
 .container {
-    background: #FBFEFB;
-    width: 560px;
-    margin: 0 auto;
-    padding: 10px 50px;
-    position: relative;
-    min-height: 100%;
-    border: 1px solid #C2B8B7;
-    border-top: none;
-    border-bottom: none;
+  background: #FBFEFB;
+  width: 560px;
+  margin: 0 auto;
+  padding: 10px 50px;
+  position: relative;
+  min-height: 100%;
+  border: 1px solid #C2B8B7;
+  border-top: none;
+  border-bottom: none;
 }
-
 header {
-	border-bottom: 1px dashed #C2B8B7;
+  border-bottom: 1px dashed #C2B8B7;
+  position: relative;
 }
-
-	header h1 {
-	    font-size: 28px;
-	    text-align: center;
-	    font-style: italic;
-		margin: 10px 0;
-	}
-	header .createNew {
-		/*  Disable for now */
-		display: none;
-		width: 32px;
-		height: 32px;
-	    text-align: center;
-	    cursor: pointer;
-		position: relative;
-		float: right;
-		top: -32px;
-	}
-
+header h1 {
+  font-size: 28px;
+  text-align: center;
+  font-style: italic;
+  margin: 10px 0;
+}
+header .createNew {
+  display: block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  float: right;
+  top: 0;
+  right: 0;
+}
 #stats {
-	font-size: 14px;
-	margin: 15px 0 0;
+  font-size: 14px;
+  margin: 15px 0 0;
 }
-
-	#stats .text {
-		
-	}
-	
-	#stats #clearCompleted {
-		float: right;
-		cursor: pointer;
-	}
-
-nav.lists {
-    /* disable for now */
-    display:none;
-    position: absolute;
-    left: -161px;
-    width: 160px;
-    background: #DCDCDC;
-    border: 1px solid #505050;
-    border-right: none;
+#stats #clearCompleted {
+  float: right;
+  cursor: pointer;
 }
-    nav.lists .compact {
-        display:none;
-    }
-    nav.lists h2 {
-        font-size: 20px;
-        margin: 4px;
-    }
-    nav.lists ul {
-        font-size: 16px;
-    }
-        nav.lists ul li {
-            padding: 10px 0;
-            margin: 0 10px;
-            cursor: pointer;
-        }
-        nav.lists ul li.active {
-            color: #000;
-            font-weight: bold;
-        }
-        nav.lists ul li:hover,
-        nav.lists ul li:hover a,
-        nav.lists ul li:hover a:visited {
-            color: #000;
-            font-weight: bold;
-        }
-        nav.lists ul li:hover a,
-        nav.lists ul li:hover a:visited {
-            text-decoration: underline;
-        }
-        nav.lists ul li:before {
-            content: '\00bb  ';
-        }
-            nav.lists ul li a,
-            nav.lists ul li a:visited {
-                text-decoration: none;
-                color: #282828;
-            }
-            nav.lists ul li.active a,
-            nav.lists ul li.active a:visited {
-                text-decoration: none;
-                color: #000;
-            }
-
-nav.lists.hide {
-    width: 20px;
-    left: -21px;
-}
-    nav.lists.hide .full {
-        display: none;
-    }
-    nav.lists.hide .compact {
-        display: block;
-    }
-
-
 ul.fmn-todos {
-    list-style: none;
-    margin: 30px auto 0;
+  list-style: none;
+  margin: 30px auto 0;
 }
-.fmn-todos .todo {
-    margin: 10px 0 0;
-	height: 50px;
+ul.fmn-todos .todo {
+  height: 40px;
+  margin: 5px 0;
+  padding: 0;
+  width: 100%;
 }
-    .fmn-todos .todo .display {
-        border-bottom: 1px dashed #B3B3B3;
-		width: 560px;
-    }
-    .fmn-todos .todo .display.done .content {
-        text-decoration: line-through;
-    }
-	.fmn-todos .todo .display:hover {
-		background: url(../images/delete32.png) no-repeat 100% 0;
-	}
-        .fmn-todos .todo .display .done {
-            float: left;
-            margin: 17px 18px 0 0;
-        }
-        .fmn-todos .todo .display .content {
-			float: left;
-			margin: 10px 0;
-			width: 496px;
-        }
-		.fmn-todos .todo .display .delete {
-			float: right;
-		    display: block;
-		    width: 32px; height: 32px;
-		    cursor: pointer;
-		}
-
-    .fmn-todos .todo .edit {
-        display: none;
-        visibility: hidden;
-    }
-    
-.fmn-todos .todo.editing {
-    
+ul.fmn-todos .todo > * {
+  display: inline-block;
 }
-    .fmn-todos .todo.editing .display {
-        display: none;
-        visibility: hidden;
-    }
-    .fmn-todos .todo.editing .edit {
-        display: block;
-        visibility: visible;
-        border-bottom: 1px solid #B3B3B3;
-        padding: 0 0 5px 0;
-    }
-        .fmn-todos .todo.editing .edit .input {
-            padding: 10px 0;
-			text-indent: 30px;
-            width: 100%;
-            outline: none;
-        }
-/** Todo Indent Rules **/
-.fmn-todos .todo.indent-1 { padding: 0 0 0 25px; }
-.fmn-todos .todo.indent-2 { padding: 0 0 0 50px; }
-.fmn-todos .todo.indent-3 { padding: 0 0 0 75px; }
-.fmn-todos .todo.indent-4 { padding: 0 0 0 100px; }
-.fmn-todos .todo.indent-5 { padding: 0 0 0 125px; }
-.fmn-todos .todo.indent-6 { padding: 0 0 0 150px; }
-.fmn-todos .todo.indent-7 { padding: 0 0 0 175px; }
-.fmn-todos .todo.indent-8 { padding: 0 0 0 200px; }
-
-
-
+ul.fmn-todos .todo .status {
+  width: 6%;
+  margin-right: 1%;
+}
+ul.fmn-todos .todo .name {
+  width: 75%;
+}
+ul.fmn-todos .todo .delete {
+  height: 32px;
+  cursor: pointer;
+  width: 12%;
+  float: right;
+}
+ul.fmn-todos .todo:hover .delete {
+  background: url(../images/delete32.png) no-repeat 100% 0;
+}
 footer {
-    position: fixed;
-    bottom: 0;
-    margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
 }
 footer a {
-    text-decoration:none;
+  text-decoration: none;
 }
-
-
-
-
-
-
-.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
-.hidden { display: none; visibility: hidden; }
-.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
-.invisible { visibility: hidden; }
-.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
-
-
-@media all and (orientation:portrait) {
-
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  header h1 {
+    font-size: 28px;
+    text-align: center;
+    font-style: italic;
+    margin-top: 0;
+  }
+  header .createNew {
+    top: 35px;
+    right: 0;
+  }
+  .container {
+    width: 294px;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+    min-height: 100%;
+    padding-top: 0;
+  }
+  #stats {
+    width: 50%;
+    float: left;
+    margin: 0;
+  }
+  #stats .text {
+    float: left;
+  }
+  ul.fmn-todos .todo input.name {
+    width: 70%;
+  }
+  ul.fmn-todos .todo .delete {
+    background: url(../images/delete32.png) no-repeat 100% 0;
+  }
+  footer {
+    display: none;
+  }
 }
-
-@media all and (orientation:landscape) {
-
+@media all and (orientation: portrait) {
+  
 }
-
-@media screen and (max-device-width: 480px) {
-
-  /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
-}
-
-
-@media print {
-  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important;
-  -ms-filter: none !important; } 
-  a, a:visited { color: #444 !important; text-decoration: underline; }
-  a[href]:after { content: " (" attr(href) ")"; }
-  abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; }
-  tr, img { page-break-inside: avoid; }
-  @page { margin: 0.5cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3{ page-break-after: avoid; }
+@media all and (orientation: landscape) {
+  .container {
+    width: 450px;
+  }
 }

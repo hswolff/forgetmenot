@@ -1,66 +1,64 @@
-forgetmenot  (fmn)
+forgetmenot - a todo list
 ===========
 
-Clocking in at version 1.0 'cause it feels so good.
-
-Goal
-----
 Forgetmenot is a self-hosted todo list application that is accessible via web and mobile browser.
-Its datastore makes use of a SQLite database.
-The end target for forgetmenot is to become *the* de facto self-hosted todo list application, just as (I would argue) WordPress is *the* de facto self-hosted blogging application.  
 
-How to Install
+Its datastore is a SQLite database, synching via a simple API written in PHP.
+
+Features
+--------
+*  Self-hosted
+*  Accessible via modern web browser (Google Chrome, Mozilla Firefox, etc.)
+*  Accessible via modern mobile browsers (Mobile Safari, Browser, Opera, etc.)
+*  SQLite DB
+*  Basic HTTP Auth
+
+
+Future Features
+---------------
+*  Multiple lists
+*  Trash list for undos
+*  Meta-information per todo (notes, url, due date, etc.)
+*  Multi-user
+*  Native iOS Application
+*  Native Android Application
+
+
+How it looks
+--------------
+![Preview Image](https://github.com/hswolff/forgetmenot/raw/master/screenshot.png)
+
+
+Install
 ----------------
 1.  Download the [latest stable version](https://github.com/hswolff/forgetmenot/tarball/master)
-2.  Extract all the files.
-3.  Upload all the files to their own folder on your server.
-4.  Open the folder on your web browser and start todo-ing!
+2.  Extract files and upload to your web server.
 
 ### Add Basic Auth To Directory in 3 Easy Steps
 1.  Open index.php in your favorite editor
 2.  Edit the $users array to add your own user/pass combos
 3.  Remove the comments to allow the PHP code to execute
 
-Features
---------
-*  Self-hosted (who wants to rely on a 3rd-party vendor?)
-*  Accessible via modern web browser
-*  Accessible via modern mobile browsers
-*  Uses SQLite DB
-*  Basic HTTP Auth to password protect your todos
-*  Pretty to look at, pretty to use
-	* [TODO] Skin-able
-*  [TODO]  Folder/Sub-list Support
-*  [TODO]  Meta-Information Available for each ToDo
-	*  Notes
-	*  URL
-	*  Due Date
-*  [TODO]  Multi-user accounts
 
-
-How it looks
---------------
-![Preview Image](https://github.com/hswolff/forgetmenot/raw/master/preview.png)
-
-
-Dependencies
+Libraries Used
 ------------
-*  Backbone.js
-*  Underscore.js
-*  jQuery
+*  jQuery (1.7.1)
+*  Underscore.js (1.3.1)
+*  Backbone.js (0.9.1)
+*  LESS (1.2.1)
+*  require.js (1.0.6)
 
 
-Tested On
------------
-* Google Chrome (~v12+)
-* Mozilla Firefox 3.6.18
-* Mozilla Firefox 5.0.1
-* Safari (5.1)
-* Mobile Safari (iOS 4.2.9)
+Development
+--------
+Forgetmenot requires [LESS](http://lesscss.org/#-server-side-usage) and [require.js](http://requirejs.org/docs/node.html#3) to be installed for development.  Once they are installed run the following two lines in the projects root directory to compile your production ready version of forgetmenot:
+
+*  `lessc css/less/forgetmenot.less > css/forgetmenot.css`
+*  `r.js -o js/main.build.js`
+
+This will first compile your CSS files and then your JavaScript files.  It will create a build directory alongside your development directory named `forgetmenot-build`.
 
 
-Credits
+License
 -------
-Thank you Jérôme Gravel-Niquet for your great [ToDo List example application](http://documentcloud.github.com/backbone/examples/todos/index.html)
-As well as Jeremy Ashkenas for the most excellent [Backbone.js](http://github.com/documentcloud/backbone/) and [Underscore.js](http://github.com/documentcloud/underscore/) libraries. 
-
+MIT.  Have fun.
