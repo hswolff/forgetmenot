@@ -3,31 +3,6 @@
 require_once("api/database.php");
 require_once("api/todo.php");
 
-// API Paths
-
-// example path: forgetmenot/api/?/ideas/2?status=done
-$url = parse_url($_SERVER['QUERY_STRING']);
-// var_dump($url);
-$path = explode('/', $url['path']);
-// Normalize resource path to remove empty values
-foreach ($path as $key => $value) {
-	if (!$value) {
-		unset($path[$key]);
-		continue;
-	}
-}
-// Normalize array back to 0-index
-$path = array_values($path);
-// var_dump($path);
-
-if (isset($url['query'])) {
-	parse_str($url['query'], $query);
-}
-// var_dump($query);
-
-// die();
-
-
 $todo = new Todo();
 
 switch($_SERVER['REQUEST_METHOD'])  {		
@@ -54,6 +29,5 @@ switch($_SERVER['REQUEST_METHOD'])  {
 		$todo->delete($id);
 		break;
 }
-
 
 ?>

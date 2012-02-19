@@ -18,10 +18,10 @@ if (authenticate($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 	$_SESSION['auth'] = true;
 	pass;
 } else if (!isset($_SERVER['PHP_AUTH_USER']) || !$_SESSION['auth']) {
-    header('WWW-Authenticate: Basic realm="Forgetmenot"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'Wrong credentials!  Try again!';
-    exit;
+	header('WWW-Authenticate: Basic realm="Forgetmenot"');
+	header('HTTP/1.0 401 Unauthorized');
+	echo 'Wrong credentials!  Try again!';
+	exit;
 } else {
 	echo 'Wrong credentials!  Try again!';
 	exit;
@@ -42,22 +42,22 @@ function authenticate($user, $pass) {
 <html lang="en">
 
 <head>
-  	<meta charset="UTF-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-  	<title>forgetmenot - a todo list</title>
-    
-    <link rel="stylesheet" href="css/forgetmenot.css"/>
+	<title>forgetmenot - a todo list</title>
+	
+	<link rel="stylesheet" href="css/forgetmenot.css"/>
 
 	<script data-main="js/main" src="js/libs/require.js"></script>
 </head>
 <body>
 
-    <div class="container" id="app">
+	<div class="container" id="app">
 		<header class="clearfix">
-	    	<h1>forgetmenot - a todo list</h1>
+			<h1>forgetmenot - a todo list</h1>
 			<img src="images/new.png" value="Create New" id="createNew" class="createNew" />
 			
 			<nav id="stats" class="clearfix">
@@ -65,17 +65,17 @@ function authenticate($user, $pass) {
 			</nav>
 		</header>
 		
-    	<ul class="todoList fmn-todos" id="todoItemsList">
-    		<!-- #app items go here -->
-    		<script type="text/javascript">
-    		var json = <?php require_once('api.php'); ?>;
-    		</script>
-    	</ul>
+		<ul class="todoList fmn-todos" id="todoItemsList">
+			<!-- #app items go here -->
+			<script type="text/javascript">
+			var json = <?php require_once('api.php'); ?>;
+			</script>
+		</ul>
 
-    	<footer>
+		<footer>
 			
 		</footer>
-    </div>
+	</div>
 
 </body>
 </html>

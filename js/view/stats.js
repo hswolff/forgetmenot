@@ -7,11 +7,11 @@ function($, _, Backbone, stats) {
 	// Stats Template
 	var StatsView = Backbone.View.extend({
 		el: '#stats',
-        template: _.template(stats),
+		template: _.template(stats),
 
-        events: {
-    		'click #clearCompleted' : 	'clearCompleted'
-    	},
+		events: {
+			'click #clearCompleted' : 	'clearCompleted'
+		},
 
 		initialize: function(collection) {
 			_.bindAll(this)
@@ -20,11 +20,11 @@ function($, _, Backbone, stats) {
 			var self = this;
 			this.collection.bind('change:status', function(model, status) {
 				self.render(model.collection.length, model.collection.done().length);
-            });
+			});
 
-            this.render(this.collection.length, this.collection.done().length);
+			this.render(this.collection.length, this.collection.done().length);
 
-            this.collection.bind('add remove', this.render)
+			this.collection.bind('add remove', this.render)
 		},
 		
 		render: function(total, done) {

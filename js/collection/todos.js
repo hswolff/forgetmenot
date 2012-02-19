@@ -5,7 +5,7 @@ define(['jquery',
 function($, _, Backbone, Todo) {
 	
 	var Todos = Backbone.Collection.extend({
-        model: Todo,
+		model: Todo,
 		url: "api.php?",
 
 		initialize: function() {
@@ -34,7 +34,7 @@ function($, _, Backbone, Todo) {
 			return this.filter(function(todo){ return todo.get('status') == 1; });
 		}
 		
-    });
+	});
 
-    return Todos;
+	return Todos;
 });

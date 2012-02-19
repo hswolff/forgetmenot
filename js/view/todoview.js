@@ -5,46 +5,46 @@ define(['jquery',
 function($, _, Backbone, todo) {
 	
 	var TodoView = Backbone.View.extend({
-        tagName: "li",
-        template: _.template(todo),
-        
-        events: {
-            "click .name": "edit",
+		tagName: "li",
+		template: _.template(todo),
+		
+		events: {
+			"click .name": "edit",
 			"click input.status" : "status",
-            "click .delete" : "delete",
+			"click .delete" : "delete",
 			"keydown input.name" : "keyboardActions"   
-        },
-        
-        initialize: function() {
-            _.bindAll(this);
-            this.model.view = this;
+		},
+		
+		initialize: function() {
+			_.bindAll(this);
+			this.model.view = this;
 
-            this.el.className = 'clearfix todo';
+			this.el.className = 'clearfix todo';
 			this.el.id = this.model.cid;
 
 			this.model.bind('change', this.render);			
 			this.model.bind('destroy', this.remove);
-        },
-        
-        render: function(model) {
-            this.$el.html(this.template(this.model.toJSON()));
-            if (model && model.get('edit')) {
+		},
+		
+		render: function(model) {
+			this.$el.html(this.template(this.model.toJSON()));
+			if (model && model.get('edit')) {
 				this.$input = this.$("input.name");
-        		this.$input.bind('blur', this.close);
+				this.$input.bind('blur', this.close);
 				this.$input.focus();
 			}
-            return this;
-        },
-        
-        edit: function() {
-            this.$el.addClass("editing");
-            this.model.set('edit', true);
-        },
-        
-        close: function() {
-        	this.$el.removeClass("editing");
+			return this;
+		},
+		
+		edit: function() {
+			this.$el.addClass("editing");
+			this.model.set('edit', true);
+		},
+		
+		close: function() {
+			this.$el.removeClass("editing");
 			var $inputVal = this.$input.val();
-            this.model.save({ 
+			this.model.save({ 
 				name: ($inputVal == '' ? this.model.defaults.name : $inputVal),
 				edit: false
 			});
@@ -53,8 +53,8 @@ function($, _, Backbone, todo) {
 		delete: function() {
 			this.model.destroy();
 		},
-        
-        keyboardActions: function(e) {
+		
+		keyboardActions: function(e) {
 	
 			// Enter button
 			if (e.keyCode == 13) {
@@ -101,12 +101,12 @@ function($, _, Backbone, todo) {
 				}
 			}
 			
-        },
+		},
 
 		status: function() {
 			this.model.done();
 		}
-    });
+	});
 
 	return TodoView;
 });
