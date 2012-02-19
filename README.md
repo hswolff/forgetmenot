@@ -53,6 +53,7 @@ Libraries Used
 Development
 --------
 Forgetmenot requires [LESS](http://lesscss.org/#-server-side-usage) and [require.js](http://requirejs.org/docs/node.html#3) to be installed for development.  Once they are installed run the following two lines in the projects root directory to compile your production ready version of forgetmenot:
+
 *  `lessc css/less/forgetmenot.less > css/forgetmenot.css`
 *  `r.js -o js/main.build.js`
 
