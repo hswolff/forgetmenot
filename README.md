@@ -33,7 +33,6 @@ Install
 ----------------
 1.  Download the [latest stable version](https://github.com/hswolff/forgetmenot/tarball/master)
 2.  Extract files and upload to your web server.
-4.  Start not forgetting!
 
 ### Add Basic Auth To Directory in 3 Easy Steps
 1.  Open index.php in your favorite editor
