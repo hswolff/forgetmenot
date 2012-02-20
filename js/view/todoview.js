@@ -21,14 +21,21 @@ function($, _, Backbone, todo) {
 
 			this.el.className = 'clearfix todo';
 			this.el.id = this.model.cid;
-
+			
+			this.state = new Backbone.Model({edit: false});
+			if (this.model.isNew()) {
+				this.state.set('edit', true);
+			}
+			this.state.bind('change', this.render);
+			
 			this.model.bind('change', this.render);			
 			this.model.bind('destroy', this.remove);
 		},
 		
 		render: function(model) {
-			this.$el.html(this.template(this.model.toJSON()));
-			if (model && model.get('edit')) {
+			var view = _.extend(this.state.toJSON(), this.model.toJSON());
+			this.$el.html(this.template(view));
+			if (this.state.get('edit')) {
 				this.$input = this.$("input.name");
 				this.$input.bind('blur', this.close);
 				this.$input.focus();
@@ -38,16 +45,18 @@ function($, _, Backbone, todo) {
 		
 		edit: function() {
 			this.$el.addClass("editing");
-			this.model.set('edit', true);
+			this.state.set('edit', true);
 		},
 		
 		close: function() {
 			this.$el.removeClass("editing");
 			var $inputVal = this.$input.val();
-			this.model.save({ 
-				name: ($inputVal == '' ? this.model.defaults.name : $inputVal),
-				edit: false
-			});
+			if ($inputVal !== this.model.get('name')) {
+				this.model.save({ 
+					name: ($inputVal == '' ? this.model.defaults.name : $inputVal)
+				});
+			}
+			this.state.set('edit', false);
 		},
 		
 		delete: function() {

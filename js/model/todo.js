@@ -8,17 +8,12 @@ function($, _, Backbone) {
 			list_id: 1,
 			parent_id: 0,
 			position: 0,
-			status: 0,
-			// View states
-			edit: false
+			status: 0
 		},
 		
 		initialize: function() {
 			if (!this.get("name")) {
 			  this.set({"name": this.defaults.name});
-			}
-			if (this.isNew()) {
-				this.set('edit', true);
 			}
 		},
 
