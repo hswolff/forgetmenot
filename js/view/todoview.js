@@ -44,12 +44,10 @@ function($, _, Backbone, todo) {
 		},
 		
 		edit: function() {
-			this.$el.addClass("editing");
 			this.state.set('edit', true);
 		},
 		
 		close: function() {
-			this.$el.removeClass("editing");
 			var $inputVal = this.$input.val();
 			if ($inputVal !== this.model.get('name')) {
 				this.model.save({ 

@@ -21,6 +21,13 @@ function($, _, Backbone, Todos, TodoView) {
 			collection.each(this.addTodo);
 			
 			collection.bind('add', this.addTodo);
+
+			collection.bind('change', function(model, attr) {
+				model.view.$el.addClass('syncing');
+			});
+			collection.bind('sync', function(model, attr) {
+				model.view.$el.removeClass('syncing');
+			});
 		},
 		
 		addTodo: function(o, p) {
