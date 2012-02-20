@@ -16,7 +16,7 @@ function($, _, Backbone, todo) {
 		},
 		
 		initialize: function() {
-			_.bindAll(this);
+			_.bindAll(this, 'render', 'close', 'remove');
 			this.model.view = this;
 
 			this.el.className = 'clearfix todo';

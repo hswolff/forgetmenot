@@ -10,7 +10,7 @@ function($, _, Backbone, Todos, TodoView) {
 		el: "#todoItemsList",
 		
 		initialize: function(collection) {
-			_.bindAll(this);
+			_.bindAll(this, 'addTodo');
 
 			// this.addAll(collection);
 			this.$el.empty();
@@ -21,9 +21,6 @@ function($, _, Backbone, Todos, TodoView) {
 			collection.each(this.addTodo);
 			
 			collection.bind('add', this.addTodo);
-			collection.bind('add', function(model, collection){
-				// model.view.edit();
-			});
 		},
 		
 		addTodo: function(o, p) {
